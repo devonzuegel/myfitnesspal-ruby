@@ -2,7 +2,7 @@ require 'bundler/setup'
 require 'rspec'
 require 'colorize'
 
-require 'binary_object'
+require 'binary/object'
 
 RSpec.describe Binary::Object do
   let(:obj) { Binary::Object.new }
