@@ -1,6 +1,5 @@
 require 'bundler/setup'
 require 'rspec'
-require 'colorize'
 
 require 'binary/packet'
 
@@ -39,7 +38,8 @@ RSpec.describe Binary::Packet do
 
   describe '#write_packet_to_codec' do
     it 'should be an abstract method' do
-      expect { packet.write_packet_to_codec }.to raise_error AbstractMethodCalled
+      codec = nil
+      expect { packet.write_packet_to_codec(codec) }.to raise_error AbstractMethodCalled
     end
   end
 end

@@ -1,6 +1,5 @@
 require 'bundler/setup'
 require 'rspec'
-require 'colorize'
 
 require 'binary/object'
 require 'string'
