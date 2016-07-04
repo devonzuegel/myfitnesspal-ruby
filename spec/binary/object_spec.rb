@@ -28,6 +28,7 @@ RSpec.describe Binary::Object do
   describe '#repr' do
     it 'should be an abstract method' do
       expect { obj.repr }.to raise_error AbstractMethodCalled
+      puts Binary::Object.name.snakecase
     end
   end
 end
