@@ -11,6 +11,10 @@ module Binary
 
     ATTR_NAMES = nil
 
+    def initialize
+      set_default_values
+    end
+
     def to_json
       fail NotImplementedError if ATTR_NAMES.nil?
 
