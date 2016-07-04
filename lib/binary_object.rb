@@ -1,3 +1,4 @@
+require 'bundler/setup'
 require 'abstract_method'
 
 module Binary

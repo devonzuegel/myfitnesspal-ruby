@@ -1,5 +1,7 @@
+require 'bundler/setup'
 require 'rspec'
 require 'colorize'
+
 require 'binary_object'
 
 RSpec.describe Binary::Object do
