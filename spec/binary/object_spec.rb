@@ -25,10 +25,9 @@ RSpec.describe Binary::Object do
     end
   end
 
-  describe '#repr' do
+  describe '#to_json' do
     it 'should be an abstract method' do
-      expect { obj.repr }.to raise_error AbstractMethodCalled
-      puts Binary::Object.name.snakecase
+      expect { obj.to_json }.to raise_error NotImplementedError
     end
   end
 end
