@@ -5,6 +5,7 @@ GEM
     adamantium (0.2.0)
       ice_nine (~> 0.11.0)
       memoizable (~> 0.4.0)
+    awesome_print (1.6.1)
     coderay (1.1.1)
     colorize (0.7.7)
     concord (0.1.5)
@@ -74,6 +75,7 @@ PLATFORMS
 
 DEPENDENCIES
   abstract_method
+  awesome_print
   colorize
   concord
   fuubar

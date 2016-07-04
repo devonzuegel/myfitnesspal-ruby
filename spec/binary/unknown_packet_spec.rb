@@ -21,7 +21,12 @@ RSpec.describe Binary::UnknownPacket do
 
   describe '#to_json' do
     it 'should be an abstract method' do
-      expect { packet.to_json }.to raise_error NotImplementedError
+      expected = {
+        '@bytes'         => '',
+        '@packet_length' => nil,
+        '@packet_start'  => nil
+      }
+      expect(JSON.parse(packet.to_json)).to eq expected
     end
   end
 
