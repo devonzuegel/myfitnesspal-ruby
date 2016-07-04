@@ -1,9 +1,11 @@
 require 'bundler/setup'
 require 'abstract_method'
 
+require 'binary/type'
+
 module Binary
   class SyncRequest < Binary::Packet
-    PACKET_TYPE = 1
+    PACKET_TYPE = Binary::Type::SYNC_REQUEST
 
     def set_default_values
       @api_version        = 6
