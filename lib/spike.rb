@@ -2,7 +2,6 @@ require 'http'
 require 'awesome_print'
 require 'pathname'
 require 'securerandom'
-require 'colorize'
 
 module RequestParams
   URL  = 'https://www.myfitnesspal.com/iphone_api/synchronize'

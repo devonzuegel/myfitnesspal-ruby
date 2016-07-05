@@ -2,10 +2,15 @@ GEM
   remote: https://rubygems.org/
   specs:
     abstract_method (1.2.1)
+    abstract_type (0.0.7)
     adamantium (0.2.0)
       ice_nine (~> 0.11.0)
       memoizable (~> 0.4.0)
     addressable (2.4.0)
+    anima (0.3.0)
+      abstract_type (~> 0.0.7)
+      adamantium (~> 0.2)
+      equalizer (~> 0.0.11)
     awesome_print (1.6.1)
     coderay (1.1.1)
     colorize (0.7.7)
@@ -90,6 +95,7 @@ PLATFORMS
 
 DEPENDENCIES
   abstract_method (= 1.2.1)
+  anima (= 0.3.0)
   awesome_print (= 1.6.1)
   colorize (= 0.7.7)
   concord (= 0.1.5)

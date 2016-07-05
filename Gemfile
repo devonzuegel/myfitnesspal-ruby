@@ -9,3 +9,4 @@ gem 'concord',          '0.1.5'
 gem 'guard',            '2.13.0'
 gem 'guard-rspec',      '4.6.4',  :require => false
 gem 'http',             '~> 2.0'
+gem 'anima',            '0.3.0'
