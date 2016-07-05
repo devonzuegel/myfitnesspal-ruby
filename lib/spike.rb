@@ -31,13 +31,16 @@ module RequestParams
 end
 
 class Spike
-  def call
-    response =
-      HTTP
-        .headers(RequestParams.headers)
-        .post(RequestParams::URL, body: RequestParams.body)
+  def response
+    @response ||= HTTP.headers(RequestParams.headers)
+                      .post(RequestParams::URL, body: RequestParams.body)
+  end
 
-    puts "#{response.status}".blue
-    puts "#{response.to_str.length}".blue
+  def status
+    response.status
+  end
+
+  def response_body
+    response.to_str
   end
 end
