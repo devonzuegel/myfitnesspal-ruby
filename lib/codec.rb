@@ -1,9 +1,14 @@
 require 'anima'
+require 'struct'
+
+require 'binary/packet'
+require 'binary/sync_request'
 
 # Encodes and decodes MyFitnessPal binary objects.
 class Codec
   include Anima.new(
     :original_str,
+    :remainder,
     :expected_packet_count,
     :packet_count,
     :position
@@ -12,6 +17,7 @@ class Codec
   def initialize(original_str)
     super(
       original_str:          original_str,
+      remainder:             original_str,
       expected_packet_count: nil,
       packet_count:          0,
       position:              0
@@ -19,21 +25,15 @@ class Codec
   end
 
   def read_packet
-    packet_start  = position
-    packet_header = read_packet_header
+    length = packet_header.fetch(:length)
+    type   = packet_header.fetch(:type)
+    # expected_packet_end = position + length
 
-    packet_length = packet_header.fetch('length')
+    fail NotImplementedError unless supported_types.include?(type)
 
-    # Calculate the expected end position of this packet. This will be
-    # checked after decoding the packet.
-    expected_packet_end = packet_start + packet_length
+    packet = supported_types.fetch(type).new(position, length)
 
-    if supported_types.include?(packet_header['type'])
-    else
-      fail NotImplementedError
-    end
-
-    [[true, false, false, false].sample, 'BLAH']
+    [[true, false, false, false].sample, packet]
   end
 
   def read_packets
@@ -53,49 +53,41 @@ class Codec
     expected_packet_count.nil? || expected_packet_count == packet_count
   end
 
-  def read_packet_header
-    magic_number = read_2_byte_int
-    length       = read_4_byte_int
-    unknown1     = read_2_byte_int
-    packet_type  = read_2_byte_int
+  def packet_header
+    @header ||= {
+      magic_number: read_2_byte_int,
+      length:       read_4_byte_int,
+      unknown1:     read_2_byte_int,
+      type:         read_2_byte_int
+    }
 
-    if magic_number != Binary::Packet::MAGIC
-      fail TypeError, "Unexpected magic number #{magic_number}"
+    if @header.fetch(:magic_number) != Binary::Packet::MAGIC
+      fail TypeError, "Unexpected magic number #{@header.fetch(:magic_number)}"
     end
 
-    {
-      'WARNING!!!!' => 'this entire hash is a dummy!', # TODO
-
-      'magic_number' => magic_number,
-      'length'       => length,
-      'unknown1'     => unknown1,
-      'type'         => packet_type
-    }
+    @header
   end
 
   def supported_types
     type_name_pairs = [
-      Binary::SyncRequest,
-      Binary::SyncResult
-    ].map { |klass| [klass::PACKET_TYPE, klass.name ] }
+      Binary::SyncRequest
+    ].map { |klass| [klass::PACKET_TYPE, klass] }
     Hash[type_name_pairs]
   end
 
+  private
+
   def read_2_byte_int
-    read_bytes(2).unpack('s>')
+    read_bytes(2, 's>')
   end
 
   def read_4_byte_int
-    read_bytes(4).unpack('l>')
+    read_bytes(4, 'l>')
   end
 
-  # Return a decoded 2-byte big-endian integer.
-  def read_bytes(num_bytes)
-    bytes = original_str.byteslice(position, num_bytes)
-    @position += num_bytes
-
-    fail EOFError if bytes.length < num_bytes
-
+  def read_bytes(n_bytes, pack_directive)
+    parsed = Struct.parse(remainder, n_bytes, pack_directive)
+    bytes, @remainder = parsed
     bytes
   end
 end

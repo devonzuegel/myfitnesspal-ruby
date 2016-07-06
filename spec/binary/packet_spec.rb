@@ -4,7 +4,7 @@ require 'rspec'
 require 'binary/packet'
 
 RSpec.describe Binary::Packet do
-  let(:packet) { Binary::Packet.new }
+  let(:packet) { Binary::Packet.new(123, 1, 5) }
 
   describe '#new' do
     it 'should raise an AbstractMethodCalled error' do

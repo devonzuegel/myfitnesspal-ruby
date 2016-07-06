@@ -1,10 +1,9 @@
 require 'bundler/setup'
 require 'rspec'
 
-require 'binary/object'
 require 'string'
 
-RSpec.describe Binary::Object do
+RSpec.describe String do
   describe '#snakecase' do
     it 'should underscore camelcase' do
       expect('HelloWorld'.snakecase).to eq 'hello_world'

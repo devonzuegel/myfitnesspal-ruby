@@ -1,11 +1,29 @@
 require 'bundler/setup'
 require 'abstract_method'
 
+require 'binary/packet'
 require 'binary/type'
 
 module Binary
   class SyncRequest < Binary::Packet
     PACKET_TYPE = Binary::Type::SYNC_REQUEST
+
+    def initialize(packet_start, packet_length)
+      super(PACKET_TYPE, packet_start, packet_length)
+    end
+
+    def to_json
+      super.merge(
+        api_version:        @api_version,
+        svn_revision:       @svn_revision,
+        unknown1:           @unknown1,
+        username:           @username,
+        password:           @password,
+        flags:              @flags,
+        installation_uuid:  @installation_uuid,
+        last_sync_pointers: @last_sync_pointers
+      )
+    end
 
     def set_default_values
       @api_version        = 6
