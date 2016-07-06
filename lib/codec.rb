@@ -1,8 +1,10 @@
 require 'anima'
 require 'struct'
+require 'colorize'
 
 require 'binary/packet'
 require 'binary/sync_request'
+require 'binary/sync_result'
 
 # Encodes and decodes MyFitnessPal binary objects.
 class Codec
@@ -29,9 +31,8 @@ class Codec
   def read_packet
     type               = packet_header.fetch(:type)
     length             = packet_header.fetch(:length)
-    expected_remainder = remainder[length, -1]
+    expected_remainder = remainder[length, remainder.length - 1]
     fail NotImplementedError unless supported_types.include?(type)
-
 
     klass  = supported_types.fetch(type)
     packet = klass.new(position, length)
@@ -39,30 +40,30 @@ class Codec
     packet.read_body_from_codec(self)
     update_packet_count(packet)
 
-    changeme = [true, false, false, false]
-    return [changeme.sample, packet] if remainder != expected_remainder
+    check_unexpected_remainder!(expected_remainder)
 
-    fail Error <<~HEREDOC
-      Packet read finished with remainder "#{remainder}", but expected it to
-      to be "#{expected_remainder}"
-    HEREDOC
+    [remainder.empty?, packet]
+  end
+
+  def read_map(int, str1, str2)
+    tmp = remainder
+    @remainder = ''
+    tmp
   end
 
   def read_packets
     loop do
       eof, packet = read_packet
-      break if eof
       yield packet
+      break if eof
     end
+  end
 
-    return if expected_packet_count?
+  def check_packet_count!
+    return if expected_packet_count.nil? || expected_packet_count == packet_count
 
     msg = "Expected #{expected_packet_count} objects, received #{packet_count}"
     fail Exception msg
-  end
-
-  def expected_packet_count?
-    expected_packet_count.nil? || expected_packet_count == packet_count
   end
 
   def packet_header
@@ -72,11 +73,7 @@ class Codec
       unknown1:     read_2_byte_int,
       type:         read_2_byte_int
     }
-
-    if @header.fetch(:magic_number) != Binary::Packet::MAGIC
-      fail TypeError, "Unexpected magic number #{@header.fetch(:magic_number)}"
-    end
-
+    check_magic_number!(@header.fetch(:magic_number))
     @header
   end
 
@@ -115,10 +112,26 @@ class Codec
   end
 
   def update_packet_count(packet)
-    if packet.class == Binary::SyncRequest
+    if packet.class == Binary::SyncResult
       @expected_packet_count = packet.expected_packet_count
     else
       @packet_count += 1
     end
+  end
+
+  def check_unexpected_remainder!(expected_remainder)
+    return if remainder == expected_remainder
+
+    message = <<-HEREDOC
+      Packet read finished with remainder "#{remainder}", but expected it to
+      to be "#{expected_remainder}"
+    HEREDOC
+
+    fail TypeError, message
+  end
+
+  def check_magic_number!(magic_number)
+    return if magic_number == Binary::Packet::MAGIC
+    fail TypeError, "Unexpected magic number #{magic_number}"
   end
 end

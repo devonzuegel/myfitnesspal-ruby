@@ -7,11 +7,11 @@ require 'binary/packet'
 require 'mocks/packet_mocks'
 
 RSpec.describe Codec do
-  let(:codec) { Codec.new(PacketMocks::Raw::SYNC_REQUEST) }
+  let(:codec) { Codec.new(PacketMocks::Raw.sync_request) }
 
   describe '#initialize' do
     it 'should set raw packet to be passed in value' do
-      expect(codec.original_str).to eq PacketMocks::Raw::SYNC_REQUEST
+      expect(codec.original_str).to eq PacketMocks::Raw.sync_request
     end
   end
 
@@ -25,7 +25,7 @@ RSpec.describe Codec do
 
   describe '#read_packet' do
     it 'require the header to contain the correct magic number' do
-      expect { Codec.new(PacketMocks::Raw::BAD_MAGIC).read_packet }.to raise_error TypeError
+      expect { Codec.new(PacketMocks::Raw::BAD_HEADER).read_packet }.to raise_error TypeError
     end
   end
 

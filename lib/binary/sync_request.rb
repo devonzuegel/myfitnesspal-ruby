@@ -7,8 +7,6 @@ require 'colorize'
 
 module Binary
   class SyncRequest < Binary::Packet
-    attr_reader :expected_packet_count
-
     PACKET_TYPE = Binary::Type::SYNC_REQUEST
 
     def initialize(packet_start, packet_length)
@@ -24,8 +22,7 @@ module Binary
         password:               @password,
         flags:                  @flags,
         installation_uuid:      @installation_uuid,
-        last_sync_pointers:     @last_sync_pointers,
-        expected_packet_count:  expected_packet_count
+        last_sync_pointers:     @last_sync_pointers
       )
     end
 
@@ -37,7 +34,7 @@ module Binary
       @password           = ''
       @flags              = 0x5
       @installation_uuid  = SecureRandom.uuid
-      @last_sync_pointers = {}
+      @last_sync_pointers = 'last_sync_pointers'
     end
 
     def read_body_from_codec(codec)
@@ -48,7 +45,8 @@ module Binary
       @password           = codec.read_string
       @flags              = codec.read_2_byte_int
       @installation_uuid  = codec.read_uuid
-      puts 'ADD LAST_SYNC_POINTERS'.red
+      @last_sync_pointers = codec.read_map(1, 2, 3)
+
       # @last_sync_pointers = codec.read_map(
       #   codec.read_2_byte_int,
       #   codec.read_string,
@@ -57,19 +55,20 @@ module Binary
     end
 
     def write_body_to_codec(codec)
-      codec.write_2_byte_int(@api_version)
-      codec.write_4_byte_int(@svn_revision)
-      codec.write_2_byte_int(@unknown1)
-      codec.write_string(@username)
-      codec.write_string(@password)
-      codec.write_2_byte_int(@flags)
-      codec.write_uuid(@installation_uuid)
-      codec.write_2_byte_int(@last_sync_pointers.length)
-      codec.write_map(
-        codec.write_string,
-        codec.write_string,
-        @last_sync_pointers
-      )
+      fail NotImplementedError
+      # codec.write_2_byte_int(@api_version)
+      # codec.write_4_byte_int(@svn_revision)
+      # codec.write_2_byte_int(@unknown1)
+      # codec.write_string(@username)
+      # codec.write_string(@password)
+      # codec.write_2_byte_int(@flags)
+      # codec.write_uuid(@installation_uuid)
+      # codec.write_2_byte_int(@last_sync_pointers.length)
+      # codec.write_map(
+      #   codec.write_string,
+      #   codec.write_string,
+      #   @last_sync_pointers
+      # )
     end
   end
 end
