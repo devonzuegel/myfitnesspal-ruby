@@ -5,8 +5,6 @@ require 'binary/unknown_packet'
 require 'mocks/fake_codec'
 
 RSpec.describe Binary::UnknownPacket do
-  it 'should be implemented'
-
   # let(:packet) { Binary::UnknownPacket.new }
 
   # describe '#read_body_from_codec' do

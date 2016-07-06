@@ -1,6 +1,7 @@
 require 'anima'
 require 'struct'
 require 'colorize'
+require 'awesome_print'
 
 require 'binary/packet'
 require 'binary/sync_request'
@@ -31,7 +32,8 @@ class Codec
   def read_packet
     type               = packet_header.fetch(:type)
     length             = packet_header.fetch(:length)
-    expected_remainder = remainder[length, remainder.length - 1]
+    expected_remainder = remainder.slice(length, remainder.length)
+
     fail NotImplementedError unless supported_types.include?(type)
 
     klass  = supported_types.fetch(type)
@@ -45,10 +47,17 @@ class Codec
     [remainder.empty?, packet]
   end
 
-  def read_map(int, str1, str2)
-    tmp = remainder
-    @remainder = ''
-    tmp
+  def read_map(read_key: -> { read_2_byte_int }, read_value: -> { read_string })
+    count = read_2_byte_int
+    items = {}
+
+    count.times do
+      key        = read_key.call
+      value      = read_value.call
+      items[key] = value
+    end
+
+    items
   end
 
   def read_packets
@@ -57,6 +66,7 @@ class Codec
       yield packet
       break if eof
     end
+    @remainder = original_str # Reset for future read
   end
 
   def check_packet_count!
@@ -78,9 +88,10 @@ class Codec
   end
 
   def supported_types
-    type_name_pairs = [
-      Binary::SyncRequest
-    ].map { |klass| [klass::PACKET_TYPE, klass] }
+    type_name_pairs =
+      [
+        Binary::SyncRequest
+      ].map { |klass| [klass::PACKET_TYPE, klass] }
     Hash[type_name_pairs]
   end
 
@@ -98,8 +109,8 @@ class Codec
 
   def read_string(str_length = nil)
     str_length ||= read_2_byte_int
-    str          = remainder[0..str_length]
-    @remainder   = remainder[str_length..remainder.length]
+    str          = remainder.slice(0, str_length)
+    @remainder   = remainder.slice(str_length, remainder.length)
 
     str
   end

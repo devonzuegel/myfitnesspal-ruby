@@ -10,6 +10,8 @@ module Binary
     # appropriate `BinaryPacket` subclass. A packet header lists its type.
     include Concord.new(:packet_type, :packet_start, :packet_length)
 
+    UUID_LENGTH = 16
+
     abstract_method :set_default_values
     abstract_method :read_body_from_codec
     abstract_method :write_body_to_codec
@@ -42,6 +44,10 @@ module Binary
       packet_end = codec.temporary_position(@packet_start + 2)
       @packet_length = packet_end - @packet_start
       codec.write_4_byte_int(@packet_length) # Length
+    end
+
+    def self.generate_uuid
+      SecureRandom.hex(UUID_LENGTH / 2)
     end
   end
 end

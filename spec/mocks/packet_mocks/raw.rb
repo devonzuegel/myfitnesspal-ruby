@@ -12,30 +12,38 @@ module PacketMocks
 
     PACKED_MAGIC = [Binary::Packet::MAGIC].pack('s>')
 
+    SIMPLE_MAP = [
+      # Binary representation of { 2 => 'foobar' }
+      "\x00\x01", # sync_pointer_count = 1
+      "\x00\x02", # key = 2
+      "\x00\x06", # String length = 6
+      'foobar'
+    ].join
+
     def self.from_json(json)
       body    = body_from_json(json)
       headers = headers_from_json(json, body.length)
       "#{headers}#{body}"
     end
 
-    def self.sync_request
+    def self.sync_request_default
       from_json(PacketMocks::Json::SYNC_REQUEST_DEFAULT.merge(packet_type: 1))
     end
 
-    def self.body_from_json(attrs)
-      username = 'original_username'
-      password = 'original_password'
-      uuid     = 'sample_uuid'
+    def self.sync_request_updated
+      from_json(PacketMocks::Json::SYNC_REQUEST_UPDATED.merge(packet_type: 1))
+    end
 
+    def self.body_from_json(attrs)
       [
-        [attrs.fetch(:api_version)].pack('s>'),
-        [attrs.fetch(:svn_revision)].pack('l>'),
-        [attrs.fetch(:unknown1)].pack('s>'),
-        "#{[username.length].pack('s>')}#{username}",
-        "#{[password.length].pack('s>')}#{password}",
-        [attrs.fetch(:flags)].pack('s>'),
-        "#{[uuid.length].pack('s>')}#{uuid}",
-        'old_last_sync_pointers'
+        Struct.pack_short(attrs.fetch(:api_version)),
+        Struct.pack_long(attrs.fetch(:svn_revision)),
+        Struct.pack_short(attrs.fetch(:unknown1)),
+        Struct.pack_string(attrs.fetch(:username)),
+        Struct.pack_string(attrs.fetch(:password)),
+        Struct.pack_short(attrs.fetch(:flags)),
+        attrs.fetch(:installation_uuid),
+        Struct.pack_hash(attrs[:last_sync_pointers])
       ].join
     end
     private_class_method(:body_from_json)
@@ -43,9 +51,9 @@ module PacketMocks
     def self.headers_from_json(attrs, length)
       [
         PACKED_MAGIC,
-        [length].pack('l>'),
-        [attrs.fetch(:unknown1)].pack('s>'),
-        [attrs.fetch(:packet_type)].pack('s>')
+        Struct.pack_long(length),
+        Struct.pack_short(attrs.fetch(:unknown1)),
+        Struct.pack_short(attrs.fetch(:packet_type)),
       ].join
     end
     private_class_method(:headers_from_json)

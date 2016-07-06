@@ -4,14 +4,16 @@ module PacketMocks
   # Contains mocks for json-serialized packets of each type
   module Json
     SYNC_REQUEST_DEFAULT = {
+      packet_type:        1,
       api_version:        6,
       svn_revision:       237,
       unknown1:           2,
       username:           '',
       password:           '',
       flags:              0x5,
-      installation_uuid:  SecureRandom.uuid,
-      last_sync_pointers: 'last_sync_pointers'
+      installation_uuid:  Binary::Packet.generate_uuid,
+      last_sync_pointers: {},
+      packet_length:      32
     }.freeze
 
     SYNC_REQUEST_UPDATED = SYNC_REQUEST_DEFAULT.merge(
@@ -21,8 +23,10 @@ module PacketMocks
       flags:              1,
       username:           'hello_world',
       password:           'hello_world',
-      installation_uuid:  'this_is_a_uuid',
-      last_sync_pointers: 'codec_map'
+      last_sync_pointers: {
+        'key1' => 'value1',
+        'key2' => 'value2'
+      }
     )
   end
 end

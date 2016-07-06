@@ -33,8 +33,8 @@ module Binary
       @username           = ''
       @password           = ''
       @flags              = 0x5
-      @installation_uuid  = SecureRandom.uuid
-      @last_sync_pointers = 'last_sync_pointers'
+      @installation_uuid  = Binary::Packet.generate_uuid
+      @last_sync_pointers = {}
     end
 
     def read_body_from_codec(codec)
@@ -45,13 +45,7 @@ module Binary
       @password           = codec.read_string
       @flags              = codec.read_2_byte_int
       @installation_uuid  = codec.read_uuid
-      @last_sync_pointers = codec.read_map(1, 2, 3)
-
-      # @last_sync_pointers = codec.read_map(
-      #   codec.read_2_byte_int,
-      #   codec.read_string,
-      #   codec.read_string
-      # )
+      @last_sync_pointers = codec.read_map(read_key: -> { codec.read_string })
     end
 
     def write_body_to_codec(_codec)

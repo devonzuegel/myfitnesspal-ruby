@@ -28,7 +28,7 @@ RSpec.describe Binary::SyncRequest do
 
   before do
     allow(SecureRandom)
-      .to receive(:uuid)
+      .to receive(:hex)
       .and_return(initial_json.fetch(:installation_uuid))
   end
 

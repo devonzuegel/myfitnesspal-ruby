@@ -33,14 +33,17 @@ class FakeCodec
   end
 
   def read_uuid
-    'this_is_a_uuid'
+    Binary::Packet.generate_uuid
   end
 
-  def read_map(int, str1, str2)
-    'codec_map'
+  def read_map(_int)
+    {
+      'key1' => 'value1',
+      'key2' => 'value2'
+    }
   end
 
-  def write_map(int, str1, str2)
-    'codec_map'
+  def write_map(_int, _str1, _str2)
+    fail NotImplementedError
   end
 end
