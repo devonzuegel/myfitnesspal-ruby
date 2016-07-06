@@ -54,7 +54,7 @@ module Binary
       # )
     end
 
-    def write_body_to_codec(codec)
+    def write_body_to_codec(_codec)
       fail NotImplementedError
       # codec.write_2_byte_int(@api_version)
       # codec.write_4_byte_int(@svn_revision)

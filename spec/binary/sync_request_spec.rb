@@ -5,7 +5,7 @@ require 'awesome_print'
 
 require 'binary/sync_request'
 require 'mocks/fake_codec'
-require 'mocks/packet_mocks'
+require 'mocks/packet_mocks/json'
 
 RSpec.describe Binary::SyncRequest do
   let(:sync_req) { Binary::SyncRequest.new(0, 30) }

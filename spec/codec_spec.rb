@@ -4,7 +4,8 @@ require 'rspec'
 require 'codec'
 require 'binary/type'
 require 'binary/packet'
-require 'mocks/packet_mocks'
+require 'mocks/packet_mocks/json'
+require 'mocks/packet_mocks/raw'
 
 RSpec.describe Codec do
   let(:codec) { Codec.new(PacketMocks::Raw.sync_request) }
