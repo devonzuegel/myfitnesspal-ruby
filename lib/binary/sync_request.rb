@@ -3,9 +3,12 @@ require 'abstract_method'
 
 require 'binary/packet'
 require 'binary/type'
+require 'colorize'
 
 module Binary
   class SyncRequest < Binary::Packet
+    attr_reader :expected_packet_count
+
     PACKET_TYPE = Binary::Type::SYNC_REQUEST
 
     def initialize(packet_start, packet_length)
@@ -14,14 +17,15 @@ module Binary
 
     def to_json
       super.merge(
-        api_version:        @api_version,
-        svn_revision:       @svn_revision,
-        unknown1:           @unknown1,
-        username:           @username,
-        password:           @password,
-        flags:              @flags,
-        installation_uuid:  @installation_uuid,
-        last_sync_pointers: @last_sync_pointers
+        api_version:            @api_version,
+        svn_revision:           @svn_revision,
+        unknown1:               @unknown1,
+        username:               @username,
+        password:               @password,
+        flags:                  @flags,
+        installation_uuid:      @installation_uuid,
+        last_sync_pointers:     @last_sync_pointers,
+        expected_packet_count:  expected_packet_count
       )
     end
 
@@ -44,11 +48,12 @@ module Binary
       @password           = codec.read_string
       @flags              = codec.read_2_byte_int
       @installation_uuid  = codec.read_uuid
-      @last_sync_pointers = codec.read_map(
-        codec.read_2_byte_int,
-        codec.read_string,
-        codec.read_string
-      )
+      puts 'ADD LAST_SYNC_POINTERS'.red
+      # @last_sync_pointers = codec.read_map(
+      #   codec.read_2_byte_int,
+      #   codec.read_string,
+      #   codec.read_string
+      # )
     end
 
     def write_body_to_codec(codec)

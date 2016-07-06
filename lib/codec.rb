@@ -14,6 +14,8 @@ class Codec
     :position
   )
 
+  UUID_LENGTH = 16
+
   def initialize(original_str)
     super(
       original_str:          original_str,
@@ -25,15 +27,25 @@ class Codec
   end
 
   def read_packet
-    length = packet_header.fetch(:length)
-    type   = packet_header.fetch(:type)
-    # expected_packet_end = position + length
-
+    type               = packet_header.fetch(:type)
+    length             = packet_header.fetch(:length)
+    expected_remainder = remainder[length, -1]
     fail NotImplementedError unless supported_types.include?(type)
 
-    packet = supported_types.fetch(type).new(position, length)
 
-    [[true, false, false, false].sample, packet]
+    klass  = supported_types.fetch(type)
+    packet = klass.new(position, length)
+
+    packet.read_body_from_codec(self)
+    update_packet_count(packet)
+
+    changeme = [true, false, false, false]
+    return [changeme.sample, packet] if remainder != expected_remainder
+
+    fail Error <<~HEREDOC
+      Packet read finished with remainder "#{remainder}", but expected it to
+      to be "#{expected_remainder}"
+    HEREDOC
   end
 
   def read_packets
@@ -75,8 +87,6 @@ class Codec
     Hash[type_name_pairs]
   end
 
-  private
-
   def read_2_byte_int
     read_bytes(2, 's>')
   end
@@ -85,9 +95,30 @@ class Codec
     read_bytes(4, 'l>')
   end
 
+  def read_uuid
+    read_string(UUID_LENGTH)
+  end
+
+  def read_string(str_length = nil)
+    str_length ||= read_2_byte_int
+    str          = remainder[0..str_length]
+    @remainder   = remainder[str_length..remainder.length]
+
+    str
+  end
+
+  private
+
   def read_bytes(n_bytes, pack_directive)
-    parsed = Struct.parse(remainder, n_bytes, pack_directive)
-    bytes, @remainder = parsed
+    bytes, @remainder = Struct.parse(remainder, n_bytes, pack_directive)
     bytes
+  end
+
+  def update_packet_count(packet)
+    if packet.class == Binary::SyncRequest
+      @expected_packet_count = packet.expected_packet_count
+    else
+      @packet_count += 1
+    end
   end
 end

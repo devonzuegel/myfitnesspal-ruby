@@ -4,31 +4,14 @@ require 'rspec'
 require 'codec'
 require 'binary/type'
 require 'binary/packet'
+require 'mocks/packet_mocks'
 
 RSpec.describe Codec do
-  let(:original_str) do
-    [
-      [Binary::Packet::MAGIC].pack('s>'),
-      [500].pack('l>'),
-      [1].pack('s>'),
-      [1].pack('s>')
-    ].join
-  end
-
-  let(:bad_magic) do
-    [
-      [1].pack('s>'),
-      [500].pack('l>'),
-      [1].pack('s>'),
-      [1].pack('s>')
-    ].join
-  end
-
-  let(:codec) { Codec.new(original_str) }
+  let(:codec) { Codec.new(PacketMocks::Raw::SYNC_REQUEST) }
 
   describe '#initialize' do
-    it 'should set original_str to be passed in value' do
-      expect(codec.original_str).to eq original_str
+    it 'should set raw packet to be passed in value' do
+      expect(codec.original_str).to eq PacketMocks::Raw::SYNC_REQUEST
     end
   end
 
@@ -42,7 +25,7 @@ RSpec.describe Codec do
 
   describe '#read_packet' do
     it 'require the header to contain the correct magic number' do
-      expect { Codec.new(bad_magic).read_packet }.to raise_error TypeError
+      expect { Codec.new(PacketMocks::Raw::BAD_MAGIC).read_packet }.to raise_error TypeError
     end
   end
 
