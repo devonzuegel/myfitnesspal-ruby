@@ -1,11 +1,11 @@
 require 'bundler/setup'
 require 'rspec'
 
-require 'binary/sync_result'
+require 'binary/sync_response'
 # require 'mocks/fake_codec'
 
-RSpec.describe Binary::SyncResult do
-  let(:sync_res) { Binary::SyncResult.new }
+RSpec.describe Binary::SyncResponse do
+  let(:sync_res) { Binary::SyncResponse.new }
 
   # describe '#to_json' do
   #   it 'should serialize the starting attributes' do
@@ -13,14 +13,14 @@ RSpec.describe Binary::SyncResult do
   #   end
   # end
 
-  # describe '#read_body_from_codec' do
-  #   it 'should be an abstract method' do
-  #     expect { sync_req.read_body_from_codec(FakeCodec.new) }
-  #       .to change { JSON.parse(sync_req.to_json) }
-  #       .from(DEFAULT_VALUES)
-  #       .to(UPDATED_VALUES)
-  #   end
-  # end
+  describe '#read_body_from_codec' do
+    it '...' do
+      # expect { sync_req.read_body_from_codec(FakeCodec.new) }
+      #   .to change { JSON.parse(sync_req.to_json) }
+      #   .from(DEFAULT_VALUES)
+      #   .to(UPDATED_VALUES)
+    end
+  end
 
   # it { should respond_to(:write_body_to_codec) }
 

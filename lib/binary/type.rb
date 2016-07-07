@@ -2,7 +2,7 @@ module Binary
   # Module containing TYPE values for each BinaryPacket type.
   module Type
     SYNC_REQUEST               = 1
-    SYNC_RESULT                = 2
+    SYNC_RESPONSE              = 2
     FOOD                       = 3
     EXERCISE                   = 4
     FOOD_ENTRY                 = 5
@@ -27,7 +27,7 @@ module Binary
         type_name_pairs =
           [
             Binary::SyncRequest,
-            Binary::SyncResult
+            Binary::SyncResponse
           ].map { |klass| [klass::PACKET_TYPE, klass] }
         Hash[type_name_pairs]
     end

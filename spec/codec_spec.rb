@@ -5,11 +5,11 @@ require 'mocks/packet_mocks/json'
 require 'mocks/packet_mocks/raw'
 
 RSpec.describe Codec do
-  let(:codec) { Codec.new(PacketMocks::Raw.sync_request_default) }
+  let(:codec) { Codec.new(PacketMocks::Raw.sync_request_default * 2) }
 
   describe '#initialize' do
     it 'should set raw packet to be passed in value' do
-      expect(codec.original_str).to eq PacketMocks::Raw.sync_request_default
+      expect(codec.original_str).to eq PacketMocks::Raw.sync_request_default * 2
     end
   end
 

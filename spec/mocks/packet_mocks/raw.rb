@@ -48,10 +48,10 @@ module PacketMocks
     end
     private_class_method(:body_from_json)
 
-    def self.headers_from_json(attrs, length)
+    def self.headers_from_json(attrs, body_length)
       [
         PACKED_MAGIC,
-        Struct.pack_long(length),
+        Struct.pack_long(body_length + Codec::PACKET_HEADER_SIZE),
         Struct.pack_short(attrs.fetch(:unknown1)),
         Struct.pack_short(attrs.fetch(:packet_type)),
       ].join

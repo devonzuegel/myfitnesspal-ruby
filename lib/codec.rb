@@ -6,7 +6,7 @@ require 'awesome_print'
 require 'binary/type'
 require 'binary/packet'
 require 'binary/sync_request'
-require 'binary/sync_result'
+require 'binary/sync_response'
 
 # Encodes and decodes MyFitnessPal binary objects.
 class Codec
@@ -17,7 +17,8 @@ class Codec
     :packet_count
   )
 
-  UUID_LENGTH = 16
+  UUID_LENGTH        = 16
+  PACKET_HEADER_SIZE = 10
 
   def initialize(original_str)
     super(
@@ -30,24 +31,27 @@ class Codec
 
   def read_packet
     type               = packet_header.fetch(:type)
-    length             = packet_header.fetch(:length)
-    expected_remainder = remainder.slice(length, remainder.length)
+    body_length        = packet_header.fetch(:length) - PACKET_HEADER_SIZE
+    expected_remainder = remainder.slice(body_length, remainder.length)
 
-    fail NotImplementedError unless Binary::Type.supported_types.include?(type)
+    fail NotImplementedError, "Type #{type} is not supported" unless Binary::Type.supported_types.include?(type)
+    # puts "Type #{type}: #{Binary::Type.supported_types.fetch(type)}".black
 
     klass  = Binary::Type.supported_types.fetch(type)
-    packet = klass.new(length)
+    packet = klass.new(packet_header.fetch(:length))
+    # puts "#{packet.to_json}".blue
 
     packet.read_body_from_codec(self)
     update_packet_count(packet)
 
     check_unexpected_remainder!(expected_remainder)
 
+    @header = nil
     [remainder.empty?, packet]
   end
 
-  def read_map(read_key: -> { read_2_byte_int }, read_value: -> { read_string })
-    count = read_2_byte_int
+  def read_map(count: nil, read_key: -> { read_2_byte_int }, read_value: -> { read_string })
+    count ||= read_2_byte_int
     items = {}
 
     count.times do
@@ -115,7 +119,7 @@ class Codec
   end
 
   def update_packet_count(packet)
-    if packet.class == Binary::SyncResult
+    if packet.class == Binary::SyncResponse
       @expected_packet_count = packet.expected_packet_count
     else
       @packet_count += 1
@@ -125,10 +129,16 @@ class Codec
   def check_unexpected_remainder!(expected_remainder)
     return if remainder == expected_remainder
 
+    puts "TODO!!!!!!!!".red
     message = <<-HEREDOC
-      Packet read finished with remainder "#{remainder}", but expected it to
-      to be "#{expected_remainder}"
+      Packet read finished with remainder "#{remainder.length}", but expected it to
+      to be "#{expected_remainder.length}"
     HEREDOC
+
+    # Pathname.new(__dir__)
+    #   .join('../spec/fixtures/remainder.bin')
+    #   .expand_path
+    #   .write(remainder.slice(0, 1000))
 
     fail TypeError, message
   end

@@ -1,3 +1,4 @@
+require 'codec'
 require 'binary/packet'
 
 module PacketMocks
@@ -13,7 +14,7 @@ module PacketMocks
       flags:              0x5,
       installation_uuid:  Binary::Packet.generate_uuid,
       last_sync_pointers: {},
-      packet_length:      32
+      packet_length:      32 + Codec::PACKET_HEADER_SIZE
     }.freeze
 
     SYNC_REQUEST_UPDATED = SYNC_REQUEST_DEFAULT.merge(
