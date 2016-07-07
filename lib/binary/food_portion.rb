@@ -7,13 +7,13 @@ module Binary
     end
 
     def to_json
-      super.merge(
+      {
         amount:       @amount,
         gram_weight:  @gram_weight,
         description:  @description,
         fraction_int: @fraction_int,
         is_fraction:  @is_fraction
-      )
+      }
     end
 
     def set_default_values

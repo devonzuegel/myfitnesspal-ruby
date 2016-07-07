@@ -1,12 +1,13 @@
 require 'bundler/setup'
 require 'rspec'
 
+require 'binary/type'
 require 'binary/sync_request'
 require 'binary/sync_response'
 require 'binary/user_property_update'
 require 'binary/measurement_types'
 require 'binary/food'
-require 'binary/type'
+require 'binary/meal_ingredients'
 
 RSpec.describe Binary::Type do
 
@@ -19,6 +20,7 @@ RSpec.describe Binary::Type do
         Binary::Type::USER_PROPERTY_UPDATE  => Binary::UserPropertyUpdate,
         Binary::Type::MEASUREMENT_TYPES     => Binary::MeasurementTypes,
         Binary::Type::FOOD                  => Binary::Food,
+        Binary::Type::MEAL_INGREDIENTS      => Binary::MealIngredients,
       )
     end
 

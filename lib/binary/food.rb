@@ -29,7 +29,7 @@ module Binary
         grams:                @grams,
         type:                 @type,
         is_meal:              @is_meal,
-        portions:             @portions,
+        portions:             @portions.map(&:to_json)
       )
     end
 

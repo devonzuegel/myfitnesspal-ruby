@@ -10,6 +10,7 @@ require 'binary/sync_response'
 require 'binary/user_property_update'
 require 'binary/measurement_types'
 require 'binary/food'
+require 'binary/meal_ingredients'
 
 # Encodes and decodes MyFitnessPal binary objects.
 class Codec
