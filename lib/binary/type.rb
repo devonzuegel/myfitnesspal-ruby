@@ -28,7 +28,8 @@ module Binary
           [
             Binary::SyncRequest,
             Binary::SyncResponse,
-            Binary::UserPropertyUpdate
+            Binary::UserPropertyUpdate,
+            Binary::MeasurementTypes,
           ].map { |klass| [klass::PACKET_TYPE, klass] }
         Hash[type_name_pairs]
     end

@@ -8,6 +8,7 @@ require 'binary/packet'
 require 'binary/sync_request'
 require 'binary/sync_response'
 require 'binary/user_property_update'
+require 'binary/measurement_types'
 
 # Encodes and decodes MyFitnessPal binary objects.
 class Codec
