@@ -66,14 +66,8 @@ class Codec
       yield packet
       break if eof
     end
+    check_packet_count!
     @remainder = original_str # Reset for future read
-  end
-
-  def check_packet_count!
-    return if expected_packet_count.nil? || expected_packet_count == packet_count
-
-    msg = "Expected #{expected_packet_count} objects, received #{packet_count}"
-    fail Exception msg
   end
 
   def packet_header
@@ -116,6 +110,13 @@ class Codec
   end
 
   private
+
+  def check_packet_count!
+    return if expected_packet_count.nil? || expected_packet_count == packet_count
+
+    msg = "Expected #{expected_packet_count} objects, received #{packet_count}"
+    fail TypeError, msg
+  end
 
   def read_bytes(n_bytes, pack_directive)
     bytes, @remainder = Struct.parse(remainder, n_bytes, pack_directive)
