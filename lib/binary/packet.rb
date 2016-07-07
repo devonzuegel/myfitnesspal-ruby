@@ -8,7 +8,7 @@ module Binary
   class Packet
     # :packet_type is an integer used to associate the packet with the
     # appropriate `BinaryPacket` subclass. A packet header lists its type.
-    include Concord.new(:packet_type, :packet_start, :packet_length)
+    include Concord.new(:packet_type, :packet_length)
 
     UUID_LENGTH = 16
 
@@ -20,30 +20,20 @@ module Binary
     # Magic number, marks the beginning of a packet.
     MAGIC = 0x04D3
 
-    def initialize(packet_type, packet_start, packet_length)
+    def initialize(packet_type, packet_length)
       set_default_values
-      super(packet_type, packet_start, packet_length)
+      super(packet_type, packet_length)
     end
 
     def to_json
       {
         packet_type:   packet_type,
-        packet_start:  packet_start,
         packet_length: packet_length
       }
     end
 
     def write_packet_to_codec(codec)
-      @packet_start = codec.position
-      codec.write_2_byte_int(MAGIC)       # Magic number
-      codec.write_4_byte_int(0)           # Length placeholder
-      codec.write_2_byte_int(1)           # Unknown
-      codec.write_2_byte_int(packet_type) # Packet type
-      write_body_to_codec(codec)
-
-      packet_end = codec.temporary_position(@packet_start + 2)
-      @packet_length = packet_end - @packet_start
-      codec.write_4_byte_int(@packet_length) # Length
+      fail NotImplementedError
     end
 
     def self.generate_uuid

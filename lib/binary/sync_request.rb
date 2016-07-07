@@ -9,8 +9,8 @@ module Binary
   class SyncRequest < Binary::Packet
     PACKET_TYPE = Binary::Type::SYNC_REQUEST
 
-    def initialize(packet_start, packet_length)
-      super(PACKET_TYPE, packet_start, packet_length)
+    def initialize(packet_length)
+      super(PACKET_TYPE, packet_length)
     end
 
     def to_json

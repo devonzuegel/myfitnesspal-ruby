@@ -8,7 +8,7 @@ RSpec.describe Spike do
     expect(spike.response_body.length).to be >= 213_000
   end
 
-  # it 'does something' do
+  # it '...' do
   #   response_fixture = Pathname.new(__dir__)
   #     .join('fixtures/response.bin')
   #     .expand_path

@@ -7,12 +7,11 @@ require 'mocks/fake_codec'
 require 'mocks/packet_mocks/json'
 
 RSpec.describe Binary::SyncRequest do
-  let(:sync_req) { Binary::SyncRequest.new(0, 30) }
+  let(:sync_req) { Binary::SyncRequest.new(30) }
 
   let(:initial_json) do
     PacketMocks::Json::SYNC_REQUEST_DEFAULT.merge(
       packet_type:   1,
-      packet_start:  0,
       packet_length: 30
     )
   end
@@ -20,7 +19,6 @@ RSpec.describe Binary::SyncRequest do
   let(:updated_json) do
     PacketMocks::Json::SYNC_REQUEST_UPDATED.merge(
       packet_type:   1,
-      packet_start:  0,
       packet_length: 30
     )
   end

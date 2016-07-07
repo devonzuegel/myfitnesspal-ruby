@@ -21,7 +21,7 @@ RSpec.describe Codec do
     it 'yields Binary::Packet-subclassed objects' do
       codec.read_packets do |packet|
         expect(packet.class).to eq Binary::SyncRequest
-        expect(packet.to_json).to eq PacketMocks::Json::SYNC_REQUEST_DEFAULT.merge(packet_start: 0)
+        expect(packet.to_json).to eq PacketMocks::Json::SYNC_REQUEST_DEFAULT
       end
     end
   end

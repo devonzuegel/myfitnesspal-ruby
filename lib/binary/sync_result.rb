@@ -28,8 +28,6 @@ module Binary
     unless status_messages.keys.include?(value)
       fail ValueError "Unknown status message #{value}"
     end
-
-
   end
 
   private

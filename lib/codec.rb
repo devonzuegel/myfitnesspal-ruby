@@ -14,8 +14,7 @@ class Codec
     :original_str,
     :remainder,
     :expected_packet_count,
-    :packet_count,
-    :position
+    :packet_count
   )
 
   UUID_LENGTH = 16
@@ -25,8 +24,7 @@ class Codec
       original_str:          original_str,
       remainder:             original_str,
       expected_packet_count: nil,
-      packet_count:          0,
-      position:              0
+      packet_count:          0
     )
   end
 
@@ -35,10 +33,10 @@ class Codec
     length             = packet_header.fetch(:length)
     expected_remainder = remainder.slice(length, remainder.length)
 
-    fail NotImplementedError, "Type #{type} is not yet supported" unless Binary::Type.supported_types.include?(type)
+    fail NotImplementedError unless Binary::Type.supported_types.include?(type)
 
     klass  = Binary::Type.supported_types.fetch(type)
-    packet = klass.new(position, length)
+    packet = klass.new(length)
 
     packet.read_body_from_codec(self)
     update_packet_count(packet)

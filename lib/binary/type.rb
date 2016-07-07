@@ -26,7 +26,8 @@ module Binary
     def self.supported_types
         type_name_pairs =
           [
-            Binary::SyncRequest
+            Binary::SyncRequest,
+            Binary::SyncResult
           ].map { |klass| [klass::PACKET_TYPE, klass] }
         Hash[type_name_pairs]
     end
