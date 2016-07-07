@@ -1,7 +1,3 @@
-require 'bundler/setup'
-require 'rspec'
-require 'awesome_print'
-
 require 'codec'
 require 'binary/type'
 require 'binary/packet'
@@ -34,16 +30,6 @@ RSpec.describe Codec do
     it 'require the header to contain the correct magic number' do
       expect { Codec.new(PacketMocks::Raw::BAD_HEADER).read_packet }.to raise_error TypeError
     end
-  end
-
-  describe '#supported_types' do
-    it 'should support the expected types' do
-      expect(codec.supported_types).to eq(
-        Binary::Type::SYNC_REQUEST => Binary::SyncRequest
-      )
-    end
-
-    it 'supports all types'
   end
 
   describe '#read_map' do

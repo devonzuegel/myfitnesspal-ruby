@@ -1,7 +1,6 @@
 require 'bundler/setup'
 require 'rspec'
 require 'json'
-require 'awesome_print'
 
 require 'binary/sync_request'
 require 'mocks/fake_codec'

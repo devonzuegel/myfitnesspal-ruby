@@ -1,7 +1,3 @@
-require 'bundler/setup'
-require 'rspec'
-require 'colorize'
-
 require 'struct'
 require 'mocks/packet_mocks/raw'
 

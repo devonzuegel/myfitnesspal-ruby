@@ -22,5 +22,13 @@ module Binary
     FAILED_ITEM_CREATION       = 20
     ADD_DELETED_MOST_USED_FOOD = 21
     DIARY_NOTE                 = 23
+
+    def self.supported_types
+        type_name_pairs =
+          [
+            Binary::SyncRequest
+          ].map { |klass| [klass::PACKET_TYPE, klass] }
+        Hash[type_name_pairs]
+    end
   end
 end

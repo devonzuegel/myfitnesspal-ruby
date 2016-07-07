@@ -3,6 +3,7 @@ require 'struct'
 require 'colorize'
 require 'awesome_print'
 
+require 'binary/type'
 require 'binary/packet'
 require 'binary/sync_request'
 require 'binary/sync_result'
@@ -34,9 +35,9 @@ class Codec
     length             = packet_header.fetch(:length)
     expected_remainder = remainder.slice(length, remainder.length)
 
-    fail NotImplementedError unless supported_types.include?(type)
+    fail NotImplementedError, "Type #{type} is not yet supported" unless Binary::Type.supported_types.include?(type)
 
-    klass  = supported_types.fetch(type)
+    klass  = Binary::Type.supported_types.fetch(type)
     packet = klass.new(position, length)
 
     packet.read_body_from_codec(self)
@@ -79,14 +80,6 @@ class Codec
     }
     check_magic_number!(@header.fetch(:magic_number))
     @header
-  end
-
-  def supported_types
-    type_name_pairs =
-      [
-        Binary::SyncRequest
-      ].map { |klass| [klass::PACKET_TYPE, klass] }
-    Hash[type_name_pairs]
   end
 
   def read_2_byte_int
