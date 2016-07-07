@@ -1,6 +1,3 @@
-require 'bundler/setup'
-require 'abstract_method'
-
 require 'binary/packet'
 require 'binary/type'
 

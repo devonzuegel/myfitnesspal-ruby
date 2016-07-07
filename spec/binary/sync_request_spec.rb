@@ -51,14 +51,4 @@ RSpec.describe Binary::SyncRequest do
       expect(sync_req).to respond_to(:write_body_to_codec)
     end
   end
-
-  describe '#write_packet_to_codec' do
-    it 'should be an abstract method'
-    # do
-    #   expect { sync_req.write_packet_to_codec(FakeCodec.new) }
-    #     .to change { sync_req.to_json }
-    #     .from(initial_json)
-    #     .to(updated_json)
-    # end
-  end
 end

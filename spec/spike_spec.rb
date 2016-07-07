@@ -11,10 +11,11 @@ RSpec.describe Spike do
 
   it '...' do
     expect do
-      Codec.new(response_fixture).read_packets do |p|
-        next #ap p.to_json
-      end
-    end.to raise_error NotImplementedError, "Type #{Binary::Type::USER_PROPERTY_UPDATE} is not supported"
+    Codec.new(response_fixture).read_packets do |p|
+      next #puts JSON.pretty_generate(p.to_json)
+    end
+    end
+    .to raise_error NotImplementedError, "Type #{Binary::Type::MEASUREMENT_TYPES} is not supported"
   end
 
   it 'Request should retrieve expected response (SKIPPED BY DEFAULT)', :skip do
