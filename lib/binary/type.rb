@@ -30,6 +30,7 @@ module Binary
             Binary::SyncResponse,
             Binary::UserPropertyUpdate,
             Binary::MeasurementTypes,
+            Binary::Food,
           ].map { |klass| [klass::PACKET_TYPE, klass] }
         Hash[type_name_pairs]
     end

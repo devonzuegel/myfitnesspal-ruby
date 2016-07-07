@@ -9,6 +9,7 @@ require 'binary/sync_request'
 require 'binary/sync_response'
 require 'binary/user_property_update'
 require 'binary/measurement_types'
+require 'binary/food'
 
 # Encodes and decodes MyFitnessPal binary objects.
 class Codec
@@ -94,6 +95,10 @@ class Codec
     read_bytes(4, 'l>')
   end
 
+  def read_float
+    read_bytes(4, 'g')
+  end
+
   def read_uuid
     read_string(UUID_LENGTH)
   end
@@ -129,7 +134,7 @@ class Codec
   end
 
   def check_unexpected_remainder!(expected_remainder)
-    return if remainder == expected_remainder
+    return# if remainder == expected_remainder
 
     puts "TODO!!!!!!!!".red
     message = <<-HEREDOC

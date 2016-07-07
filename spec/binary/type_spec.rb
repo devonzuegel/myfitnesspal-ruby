@@ -5,6 +5,7 @@ require 'binary/sync_request'
 require 'binary/sync_response'
 require 'binary/user_property_update'
 require 'binary/measurement_types'
+require 'binary/food'
 require 'binary/type'
 
 RSpec.describe Binary::Type do
@@ -17,6 +18,7 @@ RSpec.describe Binary::Type do
         Binary::Type::SYNC_RESPONSE         => Binary::SyncResponse,
         Binary::Type::USER_PROPERTY_UPDATE  => Binary::UserPropertyUpdate,
         Binary::Type::MEASUREMENT_TYPES     => Binary::MeasurementTypes,
+        Binary::Type::FOOD                  => Binary::Food,
       )
     end
 
