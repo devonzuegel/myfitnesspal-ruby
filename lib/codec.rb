@@ -43,7 +43,7 @@ class Codec
 
     klass  = Binary::Type.supported_types.fetch(type)
     packet = klass.new(packet_header.fetch(:length))
-    # puts "#{packet.to_json}".blue
+    # puts "#{packet.to_h}".blue
 
     packet.read_body_from_codec(self)
     update_packet_count(packet)

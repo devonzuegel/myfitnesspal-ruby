@@ -20,21 +20,21 @@ module PacketMocks
       'foobar'
     ].join
 
-    def self.from_json(json)
-      body    = body_from_json(json)
-      headers = headers_from_json(json, body.length)
+    def self.from_hash(json)
+      body    = body_from_hash(json)
+      headers = headers_from_hash(json, body.length)
       "#{headers}#{body}"
     end
 
     def self.sync_request_default
-      from_json(PacketMocks::Json::SYNC_REQUEST_DEFAULT.merge(packet_type: 1))
+      from_hash(PacketMocks::Hash::SYNC_REQUEST_DEFAULT.merge(packet_type: 1))
     end
 
     def self.sync_request_updated
-      from_json(PacketMocks::Json::SYNC_REQUEST_UPDATED.merge(packet_type: 1))
+      from_hash(PacketMocks::Hash::SYNC_REQUEST_UPDATED.merge(packet_type: 1))
     end
 
-    def self.body_from_json(attrs)
+    def self.body_from_hash(attrs)
       [
         Struct.pack_short(attrs.fetch(:api_version)),
         Struct.pack_long(attrs.fetch(:svn_revision)),
@@ -46,9 +46,9 @@ module PacketMocks
         Struct.pack_hash(attrs[:last_sync_pointers])
       ].join
     end
-    private_class_method(:body_from_json)
+    private_class_method(:body_from_hash)
 
-    def self.headers_from_json(attrs, body_length)
+    def self.headers_from_hash(attrs, body_length)
       [
         PACKED_MAGIC,
         Struct.pack_long(body_length + Codec::PACKET_HEADER_SIZE),
@@ -56,6 +56,6 @@ module PacketMocks
         Struct.pack_short(attrs.fetch(:packet_type)),
       ].join
     end
-    private_class_method(:headers_from_json)
+    private_class_method(:headers_from_hash)
   end
 end

@@ -13,7 +13,7 @@ module Binary
       super(PACKET_TYPE, packet_length)
     end
 
-    def to_json
+    def to_h
       super.merge(
         api_version:            @api_version,
         svn_revision:           @svn_revision,

@@ -1,7 +1,7 @@
 require 'codec'
 require 'binary/type'
 require 'binary/packet'
-require 'mocks/packet_mocks/json'
+require 'mocks/packet_mocks/deserialized'
 require 'mocks/packet_mocks/raw'
 
 RSpec.describe Codec do
@@ -21,7 +21,7 @@ RSpec.describe Codec do
     it 'yields Binary::Packet-subclassed objects' do
       codec.read_packets do |packet|
         expect(packet.class).to eq Binary::SyncRequest
-        expect(packet.to_json).to eq PacketMocks::Json::SYNC_REQUEST_DEFAULT
+        expect(packet.to_h).to eq PacketMocks::Hash::SYNC_REQUEST_DEFAULT
       end
     end
   end

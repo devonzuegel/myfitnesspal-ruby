@@ -19,14 +19,14 @@ RSpec.describe Binary::UnknownPacket do
   #   end
   # end
 
-  # describe '#to_json' do
+  # describe '#to_h' do
   #   it 'should be an abstract method' do
   #     expected = {
   #       '@bytes'         => '',
   #       '@packet_length' => nil,
   #       '@packet_start'  => nil
   #     }
-  #     expect(JSON.parse(packet.to_json)).to eq expected
+  #     expect(JSON.parse(packet.to_h)).to eq expected
   #   end
   # end
 

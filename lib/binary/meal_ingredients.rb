@@ -10,8 +10,8 @@ module Binary
       super(PACKET_TYPE, packet_length)
     end
 
-    def to_json
-      super.merge(ingredients: @ingredients.map(&:to_json))
+    def to_h
+      super.merge(ingredients: @ingredients.map(&:to_h))
     end
 
     def set_default_values

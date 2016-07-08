@@ -2,8 +2,8 @@ require 'codec'
 require 'binary/packet'
 
 module PacketMocks
-  # Contains mocks for json-serialized packets of each type
-  module Json
+  # Contains mocks for deserialized packets of each type
+  module Hash
     SYNC_REQUEST_DEFAULT = {
       packet_type:        1,
       api_version:        6,

@@ -7,16 +7,16 @@ require 'binary/sync_response'
 RSpec.describe Binary::SyncResponse do
   let(:sync_res) { Binary::SyncResponse.new }
 
-  # describe '#to_json' do
+  # describe '#to_h' do
   #   it 'should serialize the starting attributes' do
-  #     expect(JSON.parse(sync_req.to_json)).to eq DEFAULT_VALUES
+  #     expect(JSON.parse(sync_req.to_h)).to eq DEFAULT_VALUES
   #   end
   # end
 
   describe '#read_body_from_codec' do
     it '...' do
       # expect { sync_req.read_body_from_codec(FakeCodec.new) }
-      #   .to change { JSON.parse(sync_req.to_json) }
+      #   .to change { JSON.parse(sync_req.to_h) }
       #   .from(DEFAULT_VALUES)
       #   .to(UPDATED_VALUES)
     end
@@ -27,7 +27,7 @@ RSpec.describe Binary::SyncResponse do
   # describe '#write_packet_to_codec' do
   #   it 'should be an abstract method' do
   #     expect { sync_req.write_packet_to_codec(FakeCodec.new) }
-  #       .to change { JSON.parse(sync_req.to_json) }
+  #       .to change { JSON.parse(sync_req.to_h) }
   #       .from(DEFAULT_VALUES)
   #       .to(DEFAULT_VALUES.merge(
   #         '@packet_start'  => 1,

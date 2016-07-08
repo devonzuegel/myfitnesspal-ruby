@@ -15,7 +15,7 @@ module Binary
     abstract_method :set_default_values
     abstract_method :read_body_from_codec
     abstract_method :write_body_to_codec
-    abstract_method :to_json
+    abstract_method :to_h
 
     # Magic number, marks the beginning of a packet.
     MAGIC = 0x04D3
@@ -25,7 +25,7 @@ module Binary
       super(packet_type, packet_length)
     end
 
-    def to_json
+    def to_h
       {
         packet_type:   packet_type,
         packet_length: packet_length

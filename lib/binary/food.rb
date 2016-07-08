@@ -15,7 +15,7 @@ module Binary
       super(PACKET_TYPE, packet_length)
     end
 
-    def to_json
+    def to_h
       super.merge(
         master_food_id:       @master_food_id,
         owner_user_master_id: @owner_user_master_id,
@@ -29,7 +29,7 @@ module Binary
         grams:                @grams,
         type:                 @type,
         is_meal:              @is_meal,
-        portions:             @portions.map(&:to_json)
+        portions:             @portions.map(&:to_h)
       )
     end
 

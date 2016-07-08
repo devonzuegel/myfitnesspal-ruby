@@ -30,9 +30,9 @@ RSpec.describe Binary::Packet do
     end
   end
 
-  describe '#to_json' do
+  describe '#to_h' do
     it 'should be an abstract method' do
-      expect { packet.to_json }.to raise_error AbstractMethodCalled
+      expect { packet.to_h }.to raise_error AbstractMethodCalled
     end
   end
 

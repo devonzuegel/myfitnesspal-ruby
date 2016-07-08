@@ -6,7 +6,7 @@ module Binary
       set_default_values
     end
 
-    def to_json
+    def to_h
       {
         master_ingredient_id: @master_ingredient_id,
         master_food_id:       @master_food_id,

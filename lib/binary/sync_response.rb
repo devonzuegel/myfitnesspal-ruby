@@ -11,7 +11,7 @@ module Binary
       super(PACKET_TYPE, packet_length)
     end
 
-    def to_json
+    def to_h
       super.merge(
         status_code:            @status_code,
         status_message:         @status_message,

@@ -6,7 +6,7 @@ module Binary
       set_default_values
     end
 
-    def to_json
+    def to_h
       {
         amount:       @amount,
         gram_weight:  @gram_weight,
