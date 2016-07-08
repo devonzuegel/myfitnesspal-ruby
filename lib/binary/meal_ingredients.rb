@@ -19,8 +19,8 @@ module Binary
     end
 
     def read_body_from_codec(codec)
-      @master_food_id  = codec.read_4_byte_int
-      @ingredients     = retrieve_ingredients(codec)
+      @master_food_id = codec.read_4_byte_int
+      @ingredients    = retrieve_ingredients(codec)
     end
 
     def retrieve_ingredients(codec)

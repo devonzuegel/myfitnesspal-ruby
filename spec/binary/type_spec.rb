@@ -8,6 +8,7 @@ require 'binary/user_property_update'
 require 'binary/measurement_types'
 require 'binary/food'
 require 'binary/meal_ingredients'
+require 'binary/food_entry'
 
 RSpec.describe Binary::Type do
 
@@ -21,6 +22,7 @@ RSpec.describe Binary::Type do
         Binary::Type::MEASUREMENT_TYPES     => Binary::MeasurementTypes,
         Binary::Type::FOOD                  => Binary::Food,
         Binary::Type::MEAL_INGREDIENTS      => Binary::MealIngredients,
+        Binary::Type::FOOD_ENTRY            => Binary::FoodEntry,
       )
     end
 

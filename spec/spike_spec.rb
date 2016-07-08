@@ -15,7 +15,7 @@ RSpec.describe Spike do
       # puts '---------------------------'.black; ap p.to_h
     end
     end
-    .to raise_error NotImplementedError, "Type 5 is not supported"
+    .to raise_error NotImplementedError, "Type 4 is not supported"
   end
 
   it 'Request should retrieve expected response (SKIPPED BY DEFAULT)', :skip do

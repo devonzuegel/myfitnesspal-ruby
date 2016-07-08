@@ -32,6 +32,7 @@ module Binary
             Binary::MeasurementTypes,
             Binary::Food,
             Binary::MealIngredients,
+            Binary::FoodEntry,
           ].map { |klass| [klass::PACKET_TYPE, klass] }
         Hash[type_name_pairs]
     end

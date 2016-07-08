@@ -11,6 +11,7 @@ require 'binary/user_property_update'
 require 'binary/measurement_types'
 require 'binary/food'
 require 'binary/meal_ingredients'
+require 'binary/food_entry'
 
 # Encodes and decodes MyFitnessPal binary objects.
 class Codec
@@ -96,8 +97,19 @@ class Codec
     read_bytes(4, 'l>')
   end
 
+  def read_8_byte_int
+    read_bytes(8, 'q>')
+  end
+
   def read_float
     read_bytes(4, 'g')
+  end
+
+  def read_date
+    length_of_date = 10
+    unparsed_date = remainder.slice(0, length_of_date)
+    @remainder = remainder.slice(length_of_date, remainder.length)
+    Date::iso8601(unparsed_date)
   end
 
   def read_uuid
