@@ -6,11 +6,12 @@ RSpec.describe Spike do
     Pathname.new(__dir__).join('fixtures/response.bin').expand_path.read.b
   end
 
-  it '...' do
+  it 'should create the expected count of each packet type' do
     packet_types = Hash.new(0)
-    Codec.new(response_fixture).read_packets do |p|
+    Codec.new(response_fixture).each_packet do |p|
       packet_types[Binary::Type.supported_types.fetch(p.packet_type)] += 1
     end
+
     expect(packet_types).to eq(
       Binary::Exercise           => 1,
       Binary::Food               => 54,

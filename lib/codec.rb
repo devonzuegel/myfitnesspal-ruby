@@ -23,9 +23,6 @@ class Codec
     :packet_count
   )
 
-  UUID_LENGTH        = 16
-  PACKET_HEADER_SIZE = 10
-
   def initialize(original_str)
     super(
       original_str:          original_str,
@@ -35,57 +32,44 @@ class Codec
     )
   end
 
-  def read_packet
-    type               = packet_header.fetch(:type)
-    body_length        = packet_header.fetch(:length) - PACKET_HEADER_SIZE
-    expected_remainder = remainder.slice(body_length, remainder.length)
+  def raw_packets
+    @packets = []
+    @packets << read_raw_packet until remainder.empty?
+    @packets
+  end
 
-    fail NotImplementedError, "Type #{type} is not supported" unless Binary::Type.supported_types.include?(type)
+  def read_raw_packet
+    header      = packet_header
+    body_length = header.fetch(:length) - Binary::Packet::HEADER_SIZE
+    body, @remainder = split(remainder, body_length)
+    header.merge(body: body)
+  end
 
+  def read_packet(raw_packet)
+    type   = retrieve_type(raw_packet)
     klass  = Binary::Type.supported_types.fetch(type)
-    packet = klass.new(packet_header.fetch(:length))
+    packet = klass.new(raw_packet.fetch(:length)) # TODO: remove me!
 
-    packet.read_body_from_codec(self)
-    update_packet_count(packet)
-
-    check_unexpected_remainder!(expected_remainder)
-
-    @header = nil
-    [remainder.empty?, packet]
+    packet.read_body_from_codec(Codec.new(raw_packet.fetch(:body)))
+    packet
   end
 
-  def read_map(count: nil, read_key: -> { read_2_byte_int }, read_value: -> { read_string })
-    count ||= read_2_byte_int
-    items = {}
-
-    count.times do
-      key        = read_key.call
-      value      = read_value.call
-      items[key] = value
-    end
-
-    items
-  end
-
-  def read_packets
-    loop do
-      eof, packet = read_packet
-      yield packet
-      break if eof
-    end
-    check_packet_count!
-    @remainder = original_str # Reset for future read
+  def each_packet
+    raw_packets.each { |raw_packet| yield read_packet(raw_packet) }
   end
 
   def packet_header
-    @header ||= {
-      magic_number: read_2_byte_int,
+    {
+      magic_number: read_magic_number,
       length:       read_4_byte_int,
       unknown1:     read_2_byte_int,
       type:         read_2_byte_int
     }
-    check_magic_number!(@header.fetch(:magic_number))
-    @header
+  end
+
+  def read_map(count: nil, read_key: -> { read_2_byte_int }, read_value: -> { read_string })
+    count ||= read_2_byte_int
+    count.times.map { [read_key.call, read_value.call] }.to_h
   end
 
   def read_2_byte_int
@@ -105,31 +89,27 @@ class Codec
   end
 
   def read_date
-    length_of_date = 10
-    unparsed_date = remainder.slice(0, length_of_date)
-    @remainder = remainder.slice(length_of_date, remainder.length)
-    Date::iso8601(unparsed_date)
+    unparsed_date = remainder.slice(0, Binary::Packet::DATE_SIZE)
+    @remainder = remainder.slice(Binary::Packet::DATE_SIZE, remainder.length)
+    Date.iso8601(unparsed_date)
   end
 
   def read_uuid
-    read_string(UUID_LENGTH)
+    read_string(Binary::Packet::UUID_LENGTH)
   end
 
   def read_string(str_length = nil)
     str_length ||= read_2_byte_int
-    str          = remainder.slice(0, str_length)
-    @remainder   = remainder.slice(str_length, remainder.length)
-
+    str, @remainder = split(remainder, str_length)
     str
   end
 
   private
 
-  def check_packet_count!
-    return if expected_packet_count.nil? || expected_packet_count == packet_count
-
-    msg = "Expected #{expected_packet_count} objects, received #{packet_count}"
-    fail TypeError, msg
+  def split(str, str1_len)
+    str1 = str.slice(0, str1_len)
+    str2 = str.slice(str1_len, str.length) || ''
+    [str1, str2]
   end
 
   def read_bytes(n_bytes, pack_directive)
@@ -137,33 +117,15 @@ class Codec
     bytes
   end
 
-  def update_packet_count(packet)
-    if packet.class == Binary::SyncResponse
-      @expected_packet_count = packet.expected_packet_count
-    else
-      @packet_count += 1
-    end
-  end
-
-  def check_unexpected_remainder!(expected_remainder)
-    return# if remainder == expected_remainder
-
-    puts "TODO!!!!!!!!".red
-    message = <<-HEREDOC
-      Packet read finished with remainder "#{remainder.length}", but expected it to
-      to be "#{expected_remainder.length}"
-    HEREDOC
-
-    # Pathname.new(__dir__)
-    #   .join('../spec/fixtures/remainder.bin')
-    #   .expand_path
-    #   .write(remainder.slice(0, 1000))
-
-    fail TypeError, message
-  end
-
-  def check_magic_number!(magic_number)
-    return if magic_number == Binary::Packet::MAGIC
+  def read_magic_number
+    magic_number = read_2_byte_int
+    return magic_number if magic_number == Binary::Packet::MAGIC
     fail TypeError, "Unexpected magic number #{magic_number}"
+  end
+
+  def retrieve_type(raw_packet)
+    type = raw_packet.fetch(:type)
+    return type if Binary::Type.supported_types.include?(type)
+    fail NotImplementedError, "Type #{type} is not supported"
   end
 end

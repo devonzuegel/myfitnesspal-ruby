@@ -13,22 +13,43 @@ RSpec.describe Codec do
     end
   end
 
-  describe '#read_packets' do
+  describe '#raw_packets' do
+    let(:expected_body) do
+      PacketMocks::Raw.sync_request_default.slice(0, Binary::Packet::HEADER_SIZE)
+    end
+
+    it 'splits the stream of packets into individual raw packets based on the header' do
+      expect(codec.raw_packets.length).to eq 2
+      codec.raw_packets.each do |raw_packet|
+        expect(raw_packet).to eq(
+          body:         expected_body,
+          body_length:  32,
+          length:       42,
+          magic_number: Binary::Packet::MAGIC,
+          type:         1,
+          unknown1:     2
+        )
+      end
+    end
+  end
+
+  describe '#each_packet' do
     it 'is an iterator' do
-      expect { |b| codec.read_packets(&b) }.to yield_control
+      expect { |b| codec.each_packet(&b) }.to yield_control
     end
 
     it 'yields Binary::Packet-subclassed objects' do
-      codec.read_packets do |packet|
+      codec.each_packet do |packet|
         expect(packet.class).to eq Binary::SyncRequest
         expect(packet.to_h).to eq PacketMocks::Hash::SYNC_REQUEST_DEFAULT
       end
     end
   end
 
-  describe '#read_packet' do
+  describe '#read_raw_packet' do
     it 'require the header to contain the correct magic number' do
-      expect { Codec.new(PacketMocks::Raw::BAD_HEADER).read_packet }.to raise_error TypeError
+      expect { Codec.new(PacketMocks::Raw::BAD_HEADER).read_raw_packet }
+        .to raise_error TypeError
     end
   end
 

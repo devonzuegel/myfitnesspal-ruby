@@ -51,7 +51,7 @@ module PacketMocks
     def self.headers_from_hash(attrs, body_length)
       [
         PACKED_MAGIC,
-        Struct.pack_long(body_length + Codec::PACKET_HEADER_SIZE),
+        Struct.pack_long(body_length + Binary::Packet::HEADER_SIZE),
         Struct.pack_short(attrs.fetch(:unknown1)),
         Struct.pack_short(attrs.fetch(:packet_type)),
       ].join

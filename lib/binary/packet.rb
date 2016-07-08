@@ -12,15 +12,15 @@ module Binary
 
     attr_reader :packet_type
 
-    UUID_LENGTH = 16
-
     abstract_method :set_default_values
     abstract_method :read_body_from_codec
     abstract_method :write_body_to_codec
     abstract_method :to_h
 
-    # Magic number, marks the beginning of a packet.
-    MAGIC = 0x04D3
+    MAGIC       = 0x04D3 # Magic number, marks the beginning of a packet.
+    UUID_LENGTH = 16
+    HEADER_SIZE = 10
+    DATE_SIZE   = 10
 
     def initialize(packet_type, packet_length)
       set_default_values
