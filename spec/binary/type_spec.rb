@@ -9,6 +9,7 @@ require 'binary/measurement_types'
 require 'binary/food'
 require 'binary/meal_ingredients'
 require 'binary/food_entry'
+require 'binary/exercise'
 
 RSpec.describe Binary::Type do
 
@@ -23,6 +24,7 @@ RSpec.describe Binary::Type do
         Binary::Type::FOOD                  => Binary::Food,
         Binary::Type::MEAL_INGREDIENTS      => Binary::MealIngredients,
         Binary::Type::FOOD_ENTRY            => Binary::FoodEntry,
+        Binary::Type::EXERCISE              => Binary::Exercise
       )
     end
 

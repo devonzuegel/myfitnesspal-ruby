@@ -10,6 +10,8 @@ module Binary
     # appropriate `BinaryPacket` subclass. A packet header lists its type.
     include Concord.new(:packet_type, :packet_length)
 
+    attr_reader :packet_type
+
     UUID_LENGTH = 16
 
     abstract_method :set_default_values

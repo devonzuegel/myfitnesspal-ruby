@@ -10,12 +10,15 @@ RSpec.describe Spike do
   end
 
   it '...' do
-    expect do
-    Codec.new(response_fixture).read_packets do |p|
-      # puts '---------------------------'.black; ap p.to_h
-    end
-    end
-    .to raise_error NotImplementedError, "Type 4 is not supported"
+    # expect do
+      Codec.new(response_fixture).read_packets do |p|
+        type = p.packet_type
+        puts "Type #{type}: #{Binary::Type.supported_types.fetch(type)}".black
+
+        # puts '---------------------------'.black; ap p.to_h
+      end
+    # end
+    # .to raise_error NotImplementedError, "Type 4 is not supported"
   end
 
   it 'Request should retrieve expected response (SKIPPED BY DEFAULT)', :skip do

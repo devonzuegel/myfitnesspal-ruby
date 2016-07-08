@@ -12,6 +12,7 @@ require 'binary/measurement_types'
 require 'binary/food'
 require 'binary/meal_ingredients'
 require 'binary/food_entry'
+require 'binary/exercise'
 
 # Encodes and decodes MyFitnessPal binary objects.
 class Codec
@@ -40,11 +41,9 @@ class Codec
     expected_remainder = remainder.slice(body_length, remainder.length)
 
     fail NotImplementedError, "Type #{type} is not supported" unless Binary::Type.supported_types.include?(type)
-    # puts "Type #{type}: #{Binary::Type.supported_types.fetch(type)}".black
 
     klass  = Binary::Type.supported_types.fetch(type)
     packet = klass.new(packet_header.fetch(:length))
-    # puts "#{packet.to_h}".blue
 
     packet.read_body_from_codec(self)
     update_packet_count(packet)
