@@ -16,6 +16,7 @@ module Binary
     abstract_method :read_body_from_codec
     abstract_method :write_body_to_codec
     abstract_method :to_h
+    abstract_method :write_packet_to_codec
 
     MAGIC       = 0x04D3 # Magic number, marks the beginning of a packet.
     UUID_LENGTH = 16
@@ -32,10 +33,6 @@ module Binary
         packet_type:   packet_type,
         packet_length: packet_length
       }
-    end
-
-    def write_packet_to_codec(codec)
-      fail NotImplementedError
     end
 
     def self.generate_uuid
