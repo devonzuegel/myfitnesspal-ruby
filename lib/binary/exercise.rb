@@ -5,8 +5,8 @@ module Binary
   class Exercise < Binary::Packet
     PACKET_TYPE = Binary::Type::EXERCISE
 
-    def initialize(packet_length)
-      super(PACKET_TYPE, packet_length)
+    def initialize
+      super(PACKET_TYPE)
     end
 
     def to_h

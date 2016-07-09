@@ -7,12 +7,12 @@ RSpec.describe Spike do
   end
 
   it 'should create the expected count of each packet type' do
-    packet_types = Hash.new(0)
+    packet_type_counts = Hash.new(0)
     Codec.new(response_fixture).each_packet do |p|
-      packet_types[Binary::Type.supported_types.fetch(p.packet_type)] += 1
+      packet_type_counts[Binary::Type.supported_types.fetch(p.packet_type)] += 1
     end
 
-    expect(packet_types).to eq(
+    expect(packet_type_counts).to eq(
       Binary::Exercise           => 1,
       Binary::Food               => 54,
       Binary::FoodEntry          => 848,

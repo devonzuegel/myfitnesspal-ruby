@@ -13,8 +13,7 @@ module PacketMocks
       password:           '',
       flags:              0x5,
       installation_uuid:  Binary::Packet.generate_uuid,
-      last_sync_pointers: {},
-      packet_length:      32 + Binary::Packet::HEADER_SIZE
+      last_sync_pointers: {}
     }.freeze
 
     SYNC_REQUEST_UPDATED = SYNC_REQUEST_DEFAULT.merge(

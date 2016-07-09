@@ -5,8 +5,8 @@ module Binary
   class FoodEntry < Binary::Packet
     PACKET_TYPE = Binary::Type::FOOD_ENTRY
 
-    def initialize(packet_length)
-      super(PACKET_TYPE, packet_length)
+    def initialize
+      super(PACKET_TYPE)
     end
 
     def to_h
@@ -32,7 +32,7 @@ module Binary
     def read_body_from_codec(codec)
       @master_food_id = codec.read_8_byte_int
 
-      @food           = Binary::Food.new(nil)
+      @food           = Binary::Food.new
       @food.read_body_from_codec(codec)
 
       @date           = codec.read_date

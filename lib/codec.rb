@@ -48,7 +48,7 @@ class Codec
   def read_packet(raw_packet)
     type   = retrieve_type(raw_packet)
     klass  = Binary::Type.supported_types.fetch(type)
-    packet = klass.new(raw_packet.fetch(:length)) # TODO: remove me!
+    packet = klass.new
 
     packet.read_body_from_codec(Codec.new(raw_packet.fetch(:body)))
     packet

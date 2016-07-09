@@ -5,8 +5,8 @@ module Binary
   class UserPropertyUpdate < Binary::Packet
     PACKET_TYPE = Binary::Type::USER_PROPERTY_UPDATE
 
-    def initialize(packet_length)
-      super(PACKET_TYPE, packet_length)
+    def initialize
+      super(PACKET_TYPE)
     end
 
     def to_h

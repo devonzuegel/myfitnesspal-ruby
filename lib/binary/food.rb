@@ -11,8 +11,8 @@ module Binary
       sodium potassium carbohydrates fiber sugar protein vitamin_a vitamin_c calcium iron
     )
 
-    def initialize(packet_length)
-      super(PACKET_TYPE, packet_length)
+    def initialize
+      super(PACKET_TYPE)
     end
 
     def to_h

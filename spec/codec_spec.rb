@@ -23,8 +23,6 @@ RSpec.describe Codec do
       codec.raw_packets.each do |raw_packet|
         expect(raw_packet).to eq(
           body:         expected_body,
-          body_length:  32,
-          length:       42,
           magic_number: Binary::Packet::MAGIC,
           type:         1,
           unknown1:     2

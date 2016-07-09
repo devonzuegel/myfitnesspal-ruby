@@ -7,20 +7,14 @@ require 'mocks/fake_codec'
 require 'mocks/packet_mocks/deserialized'
 
 RSpec.describe Binary::SyncRequest do
-  let(:sync_req) { Binary::SyncRequest.new(30) }
+  let(:sync_req) { Binary::SyncRequest.new }
 
   let(:initial_hash) do
-    PacketMocks::Hash::SYNC_REQUEST_DEFAULT.merge(
-      packet_type:   1,
-      packet_length: 30
-    )
+    PacketMocks::Hash::SYNC_REQUEST_DEFAULT.merge(packet_type: 1)
   end
 
   let(:updated_hash) do
-    PacketMocks::Hash::SYNC_REQUEST_UPDATED.merge(
-      packet_type:   1,
-      packet_length: 30
-    )
+    PacketMocks::Hash::SYNC_REQUEST_UPDATED.merge(packet_type: 1)
   end
 
   before do

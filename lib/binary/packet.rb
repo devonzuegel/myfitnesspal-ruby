@@ -8,7 +8,7 @@ module Binary
   class Packet
     # :packet_type is an integer used to associate the packet with the
     # appropriate `BinaryPacket` subclass. A packet header lists its type.
-    include Concord.new(:packet_type, :packet_length)
+    include Concord.new(:packet_type)
 
     attr_reader :packet_type
 
@@ -23,15 +23,14 @@ module Binary
     HEADER_SIZE = 10
     DATE_SIZE   = 10
 
-    def initialize(packet_type, packet_length)
+    def initialize(packet_type)
       set_default_values
-      super(packet_type, packet_length)
+      super(packet_type)
     end
 
     def to_h
       {
-        packet_type:   packet_type,
-        packet_length: packet_length
+        packet_type: packet_type
       }
     end
 
