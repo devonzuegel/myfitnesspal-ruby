@@ -1,7 +1,7 @@
-require 'spike'
+require 'sync'
 require 'codec'
 
-RSpec.describe Spike do
+RSpec.describe Sync do
   let(:response_fixture) do
     Pathname.new(__dir__).join('fixtures/response.bin').expand_path.read.b
   end
@@ -23,9 +23,9 @@ RSpec.describe Spike do
     )
   end
 
-  it 'Request should retrieve expected response (SKIPPED BY DEFAULT)', :skip do
-    spike = Spike.new
-    expect(spike.status).to eq 200
-    expect(spike.response_body.length).to be >= 213_000
+  it 'Request should retrieve expected response (SKIPPED BY DEFAULT)' do
+    sync = Sync.new(ENV['MYFITNESSPAL_USERNAME'], ENV['MYFITNESSPAL_PASSWORD'])
+    expect(sync.response.status).to eq 200
+    expect(sync.response.body.to_s.length).to be >= 213_000
   end
 end
