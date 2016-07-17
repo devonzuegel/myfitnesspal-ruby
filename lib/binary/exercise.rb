@@ -2,8 +2,8 @@ require 'binary/packet'
 require 'binary/type'
 
 module Binary
-  class Exercise < Binary::Packet
-    PACKET_TYPE = Binary::Type::EXERCISE
+  class Exercise < Packet
+    PACKET_TYPE = Type::EXERCISE
 
     def initialize
       super(PACKET_TYPE)
