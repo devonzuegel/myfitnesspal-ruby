@@ -46,8 +46,35 @@ RSpec.describe MFP::Codec do
 
   describe '#read_raw_packet' do
     it 'require the header to contain the correct magic number' do
-      expect { described_class.new(PacketMocks::Raw::BAD_HEADER).read_raw_packet }
-        .to raise_error TypeError
+      codec = described_class.new(PacketMocks::Raw::BAD_HEADER)
+      expect { codec.read_raw_packet }.to raise_error TypeError
+    end
+
+    it 'separates the body from the header data' do
+      body = "I am the body"*10
+      sync_request =
+        "\x04\xD3" \
+        "\x00\x00\x00\x2a" \
+        "\x00\x02" \
+        "\x00\x01" \
+        "#{body}"
+
+      codec = described_class.new(sync_request)
+      expect(codec.read_raw_packet).to eql(
+        magic_number: 1235,
+        length:       42,
+        unknown1:     2,
+        type:         1,
+        body:         body.slice(0,32)
+      )
+    end
+  end
+
+  describe '#read_date' do
+    it 'parses an iso8601 date' do
+      codec = described_class.new('1993-10-07JUNK')
+      expect(codec.read_date).to eql(Date.new(1993, 10, 7))
+      expect(codec.remainder).to eql('JUNK')
     end
   end
 
