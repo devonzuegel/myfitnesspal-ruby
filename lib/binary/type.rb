@@ -24,18 +24,18 @@ module Binary
     DIARY_NOTE                 = 23
 
     def self.supported_types
-        type_name_pairs =
-          [
-            Binary::SyncRequest,
-            Binary::SyncResponse,
-            Binary::UserPropertyUpdate,
-            Binary::MeasurementTypes,
-            Binary::Food,
-            Binary::MealIngredients,
-            Binary::FoodEntry,
-            Binary::Exercise,
-          ].map { |klass| [klass::PACKET_TYPE, klass] }
-        Hash[type_name_pairs]
+      type_name_pairs =
+        [
+          Binary::SyncRequest,
+          Binary::SyncResponse,
+          Binary::UserPropertyUpdate,
+          Binary::MeasurementTypes,
+          Binary::Food,
+          Binary::MealIngredients,
+          Binary::FoodEntry,
+          Binary::Exercise,
+        ].map { |klass| [klass::PACKET_TYPE, klass] }
+      Hash[type_name_pairs]
     end
   end
 end

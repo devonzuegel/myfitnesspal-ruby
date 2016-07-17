@@ -41,17 +41,17 @@ module Binary
     end
 
     def read_body_from_codec(codec)
-        @status_code            = codec.read_2_byte_int
-        @error_message          = codec.read_string
-        @optional_extra_message = codec.read_string
-        @master_id              = codec.read_4_byte_int
-        @flags                  = codec.read_2_byte_int
-        last_sync_pointer_count = codec.read_2_byte_int
-        @expected_packet_count  = codec.read_4_byte_int
-        @last_sync_pointers     = codec.read_map(
-          count:    last_sync_pointer_count,
-          read_key: -> { codec.read_string }
-        )
+      @status_code            = codec.read_2_byte_int
+      @error_message          = codec.read_string
+      @optional_extra_message = codec.read_string
+      @master_id              = codec.read_4_byte_int
+      @flags                  = codec.read_2_byte_int
+      last_sync_pointer_count = codec.read_2_byte_int
+      @expected_packet_count  = codec.read_4_byte_int
+      @last_sync_pointers     = codec.read_map(
+        count:    last_sync_pointer_count,
+        read_key: -> { codec.read_string }
+      )
     end
 
     def status_message
