@@ -18,9 +18,9 @@ module Binary
     end
 
     def read_body_from_codec(codec)
-        @properties = codec.read_map(
-          read_key: -> { codec.read_string }
-        )
+      @properties = codec.read_map(
+        read_key: -> { codec.read_string }
+      )
     end
   end
 end
