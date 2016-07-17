@@ -7,10 +7,22 @@ module Binary
   # series of packets.
   class Packet
     # :packet_type is an integer used to associate the packet with the
-    # appropriate `BinaryPacket` subclass. A packet header lists its type.
-    include Concord.new(:packet_type)
+    # appropriate `Binary::Packet` subclass. A packet header lists its type.
+    include Concord::Public.new(:packet_type), AbstractType
 
-    attr_reader :packet_type
+    MAGIC       = 0x04D3 # Magic number, marks the beginning of a packet.
+    UUID_LENGTH = 16
+    HEADER_SIZE = 10
+    DATE_SIZE   = 10
+
+    def self.generate_uuid
+      SecureRandom.hex(UUID_LENGTH / 2)
+    end
+
+    def initialize(packet_type)
+      set_default_values
+      super(packet_type)
+    end
 
     abstract_method :set_default_values
     abstract_method :read_body_from_codec
@@ -18,24 +30,10 @@ module Binary
     abstract_method :to_h
     abstract_method :write_packet_to_codec
 
-    MAGIC       = 0x04D3 # Magic number, marks the beginning of a packet.
-    UUID_LENGTH = 16
-    HEADER_SIZE = 10
-    DATE_SIZE   = 10
-
-    def initialize(packet_type)
-      set_default_values
-      super(packet_type)
-    end
-
     def to_h
       {
         packet_type: packet_type
       }
-    end
-
-    def self.generate_uuid
-      SecureRandom.hex(UUID_LENGTH / 2)
     end
   end
 end
