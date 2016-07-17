@@ -1,5 +1,5 @@
 require 'bundler/setup'
-require 'abstract_method'
+require 'abstract_type'
 require 'concord'
 
 module Binary
