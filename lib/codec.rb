@@ -1,7 +1,5 @@
 require 'anima'
 require 'struct'
-require 'colorize'
-require 'awesome_print'
 
 require 'binary/type'
 require 'binary/packet'
@@ -16,19 +14,13 @@ require 'binary/exercise'
 
 # Encodes and decodes MyFitnessPal binary objects.
 class Codec
-  include Anima.new(
-    :original_str,
-    :remainder,
-    :expected_packet_count,
-    :packet_count
-  )
+  include Anima.new(:original_str, :remainder, :expected_packet_count)
 
   def initialize(original_str)
     super(
       original_str:          original_str,
       remainder:             original_str,
-      expected_packet_count: nil,
-      packet_count:          0
+      expected_packet_count: nil
     )
   end
 
@@ -39,7 +31,7 @@ class Codec
   end
 
   def read_raw_packet
-    header      = packet_header
+    header      = read_packet_header
     body_length = header.fetch(:length) - Binary::Packet::HEADER_SIZE
     body, @remainder = split(remainder, body_length)
     header.merge(body: body)
@@ -53,10 +45,14 @@ class Codec
   end
 
   def each_packet
-    raw_packets.each { |raw_packet| yield read_packet(raw_packet) }
+    packets.each { |packet| yield packet }
   end
 
-  def packet_header
+  def packets
+    raw_packets.map { |raw_packet| read_packet(raw_packet) }
+  end
+
+  def read_packet_header
     {
       magic_number: read_magic_number,
       length:       read_4_byte_int,

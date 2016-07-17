@@ -1,6 +1,5 @@
 require 'concord'
 require 'http'
-require 'pathname'
 require 'securerandom'
 
 class Sync
