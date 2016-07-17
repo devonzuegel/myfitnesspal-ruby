@@ -11,3 +11,4 @@ gem 'guard-rspec',      '4.6.4',  :require => false
 gem 'http',             '~> 2.0'
 gem 'anima',            '0.3.0'
 gem 'rubocop',          '~> 0.41'
+gem 'reek',             '~> 4.1'
