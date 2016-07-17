@@ -12,7 +12,7 @@ module PacketMocks
       username:           '',
       password:           '',
       flags:              0x5,
-      installation_uuid:  Binary::Packet.generate_uuid,
+      installation_uuid:  MFP::Binary::Packet.generate_uuid,
       last_sync_pointers: {}
     }.freeze
 
