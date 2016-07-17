@@ -1,7 +1,8 @@
 # Retrieve contents of local file
 class LocalFile
+  ROOT = Pathname.new(__dir__).parent.expand_path.freeze
+
   def self.read(path)
-    full_path = Pathname.new(__dir__).join("../#{path}").expand_path
-    File.read(full_path).force_encoding('ASCII-8BIT')
+    ROOT.join(path).read.b
   end
 end
