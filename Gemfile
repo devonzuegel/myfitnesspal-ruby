@@ -12,3 +12,5 @@ gem 'http',             '~> 2.0'
 gem 'anima',            '0.3.0'
 gem 'rubocop',          '~> 0.41'
 gem 'reek',             '~> 4.1'
+gem 'mutant-rspec', git: 'https://github.com/mbj/mutant.git'
+
