@@ -10,7 +10,7 @@ module PacketMocks
       [1].pack('s>')
     ].join
 
-    PACKED_MAGIC = [Binary::Packet::MAGIC].pack('s>')
+    PACKED_MAGIC = [MFP::Binary::Packet::MAGIC].pack('s>')
 
     SIMPLE_MAP = [
       # Binary representation of { 2 => 'foobar' }
@@ -36,14 +36,14 @@ module PacketMocks
 
     def self.body_from_hash(attrs)
       [
-        Struct.pack_short(attrs.fetch(:api_version)),
-        Struct.pack_long(attrs.fetch(:svn_revision)),
-        Struct.pack_short(attrs.fetch(:unknown1)),
-        Struct.pack_string(attrs.fetch(:username)),
-        Struct.pack_string(attrs.fetch(:password)),
-        Struct.pack_short(attrs.fetch(:flags)),
+        MFP::Struct.pack_short(attrs.fetch(:api_version)),
+        MFP::Struct.pack_long(attrs.fetch(:svn_revision)),
+        MFP::Struct.pack_short(attrs.fetch(:unknown1)),
+        MFP::Struct.pack_string(attrs.fetch(:username)),
+        MFP::Struct.pack_string(attrs.fetch(:password)),
+        MFP::Struct.pack_short(attrs.fetch(:flags)),
         attrs.fetch(:installation_uuid),
-        Struct.pack_hash(attrs[:last_sync_pointers])
+        MFP::Struct.pack_hash(attrs[:last_sync_pointers])
       ].join
     end
     private_class_method(:body_from_hash)
@@ -51,9 +51,9 @@ module PacketMocks
     def self.headers_from_hash(attrs, body_length)
       [
         PACKED_MAGIC,
-        Struct.pack_long(body_length + Binary::Packet::HEADER_SIZE),
-        Struct.pack_short(attrs.fetch(:unknown1)),
-        Struct.pack_short(attrs.fetch(:packet_type)),
+        MFP::Struct.pack_long(body_length + MFP::Binary::Packet::HEADER_SIZE),
+        MFP::Struct.pack_short(attrs.fetch(:unknown1)),
+        MFP::Struct.pack_short(attrs.fetch(:packet_type)),
       ].join
     end
     private_class_method(:headers_from_hash)
