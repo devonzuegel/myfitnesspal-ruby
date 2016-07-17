@@ -19,34 +19,16 @@ module MFP
     end
 
     def self.pack_string(str)
-      [
-        [str.length].pack('s>'),
-        str
-      ].join
+      [pack_short(str.length), str].join
     end
 
-    def self.pack_hash(hash, key_type: 'short')
-      result = [
-        [hash.length].pack('s>')
-      ]
+    def self.pack_hash(hash)
+      packed =
+        hash.map do |key, value|
+          [pack_short(key), pack_string(value)]
+        end
 
-      hash.each do |key, value|
-        result += [
-          pack_method(key_type).call(key),
-          pack_string(value)
-        ]
-      end
-
-      result.join
-    end
-
-    def self.pack_method(key_type)
-      case key_type
-        when 'short'  then -> (val) { pack_short(val)  }
-        when 'long'   then -> (val) { pack_long(val)   }
-        when 'string' then -> (val) { pack_string(val) }
-        else fail NotImplementedError
-      end
+      [pack_short(hash.length), packed].join
     end
   end
 end

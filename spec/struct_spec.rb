@@ -49,32 +49,8 @@ RSpec.describe MFP::Struct do
   end
 
   describe '.pack_hash' do
-    it "packs the hash into MyFitnessPal's proprietary binary format" do
-      expect(described_class.pack_hash({ 2 => 'foobar' })).to eq PacketMocks::Raw::SIMPLE_MAP
-    end
-  end
-
-  describe '.pack_method' do
-    it 'detects the appropriate pack method for a string' do
-      expect(described_class.pack_method('string').call('dummystr')).to eq(
-        -> (val) { described_class.pack_string(val) }.call('dummystr')
-      )
-    end
-
-    it 'detects the appropriate pack method for a string' do
-      expect(described_class.pack_method('short').call(3)).to eq(
-        -> (val) { described_class.pack_short(val) }.call(3)
-      )
-    end
-
-    it 'detects the appropriate pack method for a string' do
-      expect(described_class.pack_method('long').call(123)).to eq(
-        -> (val) { described_class.pack_long(val) }.call(123)
-      )
-    end
-
-    it 'detects the appropriate pack method for a string' do
-      expect { described_class.pack_method('blah') }.to raise_error NotImplementedError
+    it 'packs string values' do
+      expect(described_class.pack_hash(2 => 'foobar')).to eql("\x00\x01\x00\x02\x00\x06foobar".b)
     end
   end
 end
