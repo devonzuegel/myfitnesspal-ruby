@@ -10,7 +10,7 @@ RSpec.describe MFP::Sync do
     expect(sync.response.body.to_s.length).to be >= 213_000
   end
 
-  it 'should sync all pages, not just the first' do
-
+  it 'should sync all pages, not just the first', :focus do
+    sync.get_packets
   end
 end
