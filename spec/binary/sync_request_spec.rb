@@ -1,13 +1,16 @@
 require 'bundler/setup'
 require 'rspec'
 require 'json'
+require 'awesome_print'
 
 require 'binary/sync_request'
 require 'mocks/fake_codec'
 require 'mocks/packet_mocks/deserialized'
 
 RSpec.describe MFP::Binary::SyncRequest do
-  let(:sync_req) { MFP::Binary::SyncRequest.new }
+  let(:sync_req) do
+    described_class.new(username: 'fake_username', password: 'fake_password')
+  end
 
   let(:initial_hash) do
     PacketMocks::Hash::SYNC_REQUEST_DEFAULT.merge(packet_type: 1)
@@ -18,8 +21,7 @@ RSpec.describe MFP::Binary::SyncRequest do
   end
 
   before do
-    allow(SecureRandom)
-      .to receive(:hex)
+    allow(SecureRandom).to receive(:hex)
       .and_return(initial_hash.fetch(:installation_uuid))
   end
 
@@ -40,9 +42,14 @@ RSpec.describe MFP::Binary::SyncRequest do
     it 'should correctly read the @last_sync_pointers with the codec'
   end
 
-  describe '#write_body_to_codec' do
-    it do
-      expect(sync_req).to respond_to(:write_body_to_codec)
+  describe '#packed' do
+    it 'packs the request into binary format' do
+      packed_request =
+        "\x00\x06\x00\x00\x00\xED\x00\x02\x00\rfake_username" \
+        "\x00\rfake_password\x00\x05\x00\x10"                 \
+        "#{sync_req.to_h.fetch(:installation_uuid)}\x00\x00\x00\x00".b
+
+      expect(sync_req.packed).to eq packed_request
     end
   end
 end

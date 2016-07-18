@@ -3,14 +3,18 @@ require 'abstract_method'
 
 require 'binary/packet'
 require 'binary/type'
+require 'struct'
 
 module MFP
   module Binary
     class SyncRequest < Binary::Packet
       PACKET_TYPE = Binary::Type::SYNC_REQUEST
 
-      def initialize
+      def initialize(username: '', password: '', last_sync_pointers: {})
         super(PACKET_TYPE)
+        @username = username
+        @password = password
+        @last_sync_pointers = last_sync_pointers
       end
 
       def to_h
@@ -48,22 +52,23 @@ module MFP
         @last_sync_pointers = codec.read_map(read_key: -> { codec.read_string })
       end
 
-      def write_body_to_codec(_codec)
-        fail NotImplementedError
-        # codec.write_2_byte_int(@api_version)
-        # codec.write_4_byte_int(@svn_revision)
-        # codec.write_2_byte_int(@unknown1)
-        # codec.write_string(@username)
-        # codec.write_string(@password)
-        # codec.write_2_byte_int(@flags)
-        # codec.write_uuid(@installation_uuid)
-        # codec.write_2_byte_int(@last_sync_pointers.length)
-        # codec.write_map(
-        #   codec.write_string,
-        #   codec.write_string,
-        #   @last_sync_pointers
-        # )
+      def packed
+        [
+          MFP::Struct.pack_short(@api_version),
+          MFP::Struct.pack_long(@svn_revision),
+          MFP::Struct.pack_short(@unknown1),
+          MFP::Struct.pack_string(@username),
+          MFP::Struct.pack_string(@password),
+          MFP::Struct.pack_short(@flags),
+          MFP::Struct.pack_string(@installation_uuid),
+          MFP::Struct.pack_short(@last_sync_pointers.length),
+          MFP::Struct.pack_hash(@last_sync_pointers, pack_key: -> (str) { pack_string(str) })
+        ].join
       end
     end
+
+    private
+
+    attr_reader :username, :password
   end
 end

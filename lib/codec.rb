@@ -64,7 +64,7 @@ module MFP
 
     def read_map(count: nil, read_key: -> { read_2_byte_int }, read_value: -> { read_string })
       count ||= read_2_byte_int
-      count.times.map { [read_key.call, read_value.call] }.to_h
+      Array.new(count) { [read_key.call, read_value.call] }.to_h
     end
 
     def read_2_byte_int
