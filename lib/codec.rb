@@ -1,5 +1,5 @@
 require 'anima'
-require 'struct'
+require 'struct/reader'
 
 require 'binary/type'
 require 'binary/packet'
@@ -105,7 +105,7 @@ module MFP
     end
 
     def read_bytes(n_bytes, pack_directive)
-      bytes, @remainder = Struct.parse(remainder, n_bytes, pack_directive)
+      bytes, @remainder = Struct::Reader.parse(remainder, n_bytes, pack_directive)
       bytes
     end
 

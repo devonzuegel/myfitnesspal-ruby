@@ -1,7 +1,7 @@
-require 'struct'
+require 'struct/reader'
 require 'mocks/packet_mocks/raw'
 
-RSpec.describe MFP::Struct do
+RSpec.describe MFP::Struct::Reader do
   describe '.parse' do
     let(:packed) do
       "\x00\x01\x00\x00\x00\x14JUNK".b
