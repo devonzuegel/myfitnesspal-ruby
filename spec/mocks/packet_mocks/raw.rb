@@ -36,14 +36,14 @@ module PacketMocks
 
     def self.body_from_hash(attrs)
       [
-        MFP::Struct.pack_short(attrs.fetch(:api_version)),
-        MFP::Struct.pack_long(attrs.fetch(:svn_revision)),
-        MFP::Struct.pack_short(attrs.fetch(:unknown1)),
-        MFP::Struct.pack_string(attrs.fetch(:username)),
-        MFP::Struct.pack_string(attrs.fetch(:password)),
-        MFP::Struct.pack_short(attrs.fetch(:flags)),
+        MFP::Struct::Reader.pack_short(attrs.fetch(:api_version)),
+        MFP::Struct::Reader.pack_long(attrs.fetch(:svn_revision)),
+        MFP::Struct::Reader.pack_short(attrs.fetch(:unknown1)),
+        MFP::Struct::Reader.pack_string(attrs.fetch(:username)),
+        MFP::Struct::Reader.pack_string(attrs.fetch(:password)),
+        MFP::Struct::Reader.pack_short(attrs.fetch(:flags)),
         attrs.fetch(:installation_uuid),
-        MFP::Struct.pack_hash(attrs[:last_sync_pointers])
+        MFP::Struct::Reader.pack_hash(attrs[:last_sync_pointers])
       ].join
     end
     private_class_method(:body_from_hash)
@@ -51,9 +51,9 @@ module PacketMocks
     def self.headers_from_hash(attrs, body_length)
       [
         PACKED_MAGIC,
-        MFP::Struct.pack_long(body_length + MFP::Binary::Packet::HEADER_SIZE),
-        MFP::Struct.pack_short(attrs.fetch(:unknown1)),
-        MFP::Struct.pack_short(attrs.fetch(:packet_type)),
+        MFP::Struct::Reader.pack_long(body_length + MFP::Binary::Packet::HEADER_SIZE),
+        MFP::Struct::Reader.pack_short(attrs.fetch(:unknown1)),
+        MFP::Struct::Reader.pack_short(attrs.fetch(:packet_type)),
       ].join
     end
     private_class_method(:headers_from_hash)
