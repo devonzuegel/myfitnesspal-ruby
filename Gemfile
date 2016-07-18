@@ -10,3 +10,7 @@ gem 'guard',            '2.13.0'
 gem 'guard-rspec',      '4.6.4',  :require => false
 gem 'http',             '~> 2.0'
 gem 'anima',            '0.3.0'
+gem 'rubocop',          '~> 0.41'
+gem 'reek',             '~> 4.1'
+gem 'mutant-rspec', git: 'https://github.com/mbj/mutant.git'
+

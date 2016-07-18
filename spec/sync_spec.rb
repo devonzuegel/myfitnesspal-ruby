@@ -7,22 +7,22 @@ RSpec.describe Sync do
 
   it 'should create the expected count of each packet type' do
     packet_type_counts = Hash.new(0)
-    Codec.new(response_fixture).each_packet do |p|
-      packet_type_counts[Binary::Type.supported_types.fetch(p.packet_type)] += 1
+    MFP::Codec.new(response_fixture).each_packet do |p|
+      packet_type_counts[MFP::Binary::Type.supported_types.fetch(p.packet_type)] += 1
     end
 
     expect(packet_type_counts).to eq(
-      Binary::Exercise           => 1,
-      Binary::Food               => 54,
-      Binary::FoodEntry          => 848,
-      Binary::MealIngredients    => 10,
-      Binary::MeasurementTypes   => 1,
-      Binary::SyncResponse       => 1,
-      Binary::UserPropertyUpdate => 1
+      MFP::Binary::Exercise           => 1,
+      MFP::Binary::Food               => 54,
+      MFP::Binary::FoodEntry          => 848,
+      MFP::Binary::MealIngredients    => 10,
+      MFP::Binary::MeasurementTypes   => 1,
+      MFP::Binary::SyncResponse       => 1,
+      MFP::Binary::UserPropertyUpdate => 1
     )
   end
 
-  it 'retrieves expected response' do
+  xit 'retrieves expected response' do
     expect(ENV['MYFITNESSPAL_USERNAME']).to_not eq nil
     expect(ENV['MYFITNESSPAL_PASSWORD']).to_not eq nil
 

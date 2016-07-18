@@ -6,8 +6,8 @@ require 'binary/sync_request'
 require 'mocks/fake_codec'
 require 'mocks/packet_mocks/deserialized'
 
-RSpec.describe Binary::SyncRequest do
-  let(:sync_req) { Binary::SyncRequest.new }
+RSpec.describe MFP::Binary::SyncRequest do
+  let(:sync_req) { MFP::Binary::SyncRequest.new }
 
   let(:initial_hash) do
     PacketMocks::Hash::SYNC_REQUEST_DEFAULT.merge(packet_type: 1)
