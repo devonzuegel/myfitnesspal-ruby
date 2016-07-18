@@ -15,7 +15,7 @@ require 'binary/exercise'
 # Encodes and decodes MyFitnessPal binary objects.
 module MFP
   class Codec
-    include Anima.new(:original_str, :remainder)
+    include Anima.new(:original_str, :remainder), Struct::Reader
 
     def initialize(str)
       super(original_str: str, remainder: str)
@@ -105,7 +105,7 @@ module MFP
     end
 
     def read_bytes(n_bytes, pack_directive)
-      bytes, @remainder = Struct::Reader.parse(remainder, n_bytes, pack_directive)
+      bytes, @remainder = parse(remainder, n_bytes, pack_directive)
       bytes
     end
 
