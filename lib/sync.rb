@@ -2,6 +2,9 @@ require 'concord'
 require 'http'
 require 'securerandom'
 
+require 'binary/sync_request'
+require 'http_request_params'
+
 module MFP
   class Sync
     include Concord.new(:username, :password)
@@ -13,19 +16,20 @@ module MFP
     end
 
     def get_packets
-      sync_request = Binary::SyncRequest.new(username: username, password: password)
-      http_request_params = HttpRequestParams(sync_request.packed)
+      File.write('blahhhhh.bin', request_body.b)
+      # sync_request = Binary::SyncRequest.new(username: username, password: password)
+      # http_request_params = HttpRequestParams(sync_request.packed)
 
       # HTTP
       #   .headers(http_request_params.headers)
-      #   .post(http_request_params.url, body: http_request_params.body)
+      #   .post(http_request_params.url, body: request_body)
     end
 
     private
 
-    def headers
-      { 'Content-Type' => "multipart/form-data; boundary=#{boundary}" }
-    end
+    # def headers
+    #   { 'Content-Type' => "multipart/form-data; boundary=#{boundary}" }
+    # end
 
     def request_body
       <<~HEREDOC

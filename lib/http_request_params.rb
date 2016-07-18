@@ -10,15 +10,12 @@ module MFP
     end
 
     def body
-      <<~HEREDOC
-        --#{mime_boundary}\r\n
-        Content-Disposition: form-data; name="syncdata"; filename="syncdata.dat"\r\n
-        Content-Type: application/octet-stream\r\n
-        \r\n
-        #{data}
-        \r\n
-        --#{mime_boundary}--\r\n
-      HEREDOC
+      "--#{mime_boundary}\r\n\n" \
+      'Content-Disposition: form-data; name="syncdata"; ' \
+      "filename=\"syncdata.dat\"\r\n\n"                   \
+      "Content-Type: application/octet-stream\r\n\n"      \
+      "\r\n\n#{data}\n\r\n\n"                             \
+      "--#{mime_boundary}--\r\n\n"
     end
 
     def headers
