@@ -3,7 +3,7 @@ require 'abstract_method'
 
 require 'binary/packet'
 require 'binary/type'
-require 'struct'
+require 'struct/reader'
 
 module MFP
   module Binary
@@ -54,15 +54,15 @@ module MFP
 
       def packed
         [
-          MFP::Struct.pack_short(@api_version),
-          MFP::Struct.pack_long(@svn_revision),
-          MFP::Struct.pack_short(@unknown1),
-          MFP::Struct.pack_string(@username),
-          MFP::Struct.pack_string(@password),
-          MFP::Struct.pack_short(@flags),
-          MFP::Struct.pack_string(@installation_uuid),
-          MFP::Struct.pack_short(@last_sync_pointers.length),
-          MFP::Struct.pack_hash(@last_sync_pointers, pack_key: -> (str) { pack_string(str) })
+          MFP::Struct::Reader.pack_short(@api_version),
+          MFP::Struct::Reader.pack_long(@svn_revision),
+          MFP::Struct::Reader.pack_short(@unknown1),
+          MFP::Struct::Reader.pack_string(@username),
+          MFP::Struct::Reader.pack_string(@password),
+          MFP::Struct::Reader.pack_short(@flags),
+          MFP::Struct::Reader.pack_string(@installation_uuid),
+          MFP::Struct::Reader.pack_short(@last_sync_pointers.length),
+          MFP::Struct::Reader.pack_hash(@last_sync_pointers, pack_key: -> (str) { pack_string(str) })
         ].join
       end
     end
