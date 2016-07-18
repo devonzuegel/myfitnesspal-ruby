@@ -15,14 +15,10 @@ require 'binary/exercise'
 # Encodes and decodes MyFitnessPal binary objects.
 module MFP
   class Codec
-    include Anima.new(:original_str, :remainder, :expected_packet_count)
+    include Anima.new(:original_str, :remainder)
 
-    def initialize(original_str)
-      super(
-        original_str:          original_str,
-        remainder:             original_str,
-        expected_packet_count: nil
-      )
+    def initialize(str)
+      super(original_str: str, remainder: str)
     end
 
     def raw_packets
@@ -102,9 +98,10 @@ module MFP
     private
 
     def split(str, str1_len)
-      str1 = str.slice(0, str1_len)
-      str2 = str.slice(str1_len, str.length) || ''
-      [str1, str2]
+      [
+        str.slice(0, str1_len),
+        str.slice(str1_len, str.length) || ''
+      ]
     end
 
     def read_bytes(n_bytes, pack_directive)
