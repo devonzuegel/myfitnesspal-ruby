@@ -22,10 +22,10 @@ module MFP
       [pack_short(str.length), str].join
     end
 
-    def self.pack_hash(hash)
+    def self.pack_hash(hash, pack_key: -> (val) { pack_short(val) })
       packed =
         hash.map do |key, value|
-          [pack_short(key), pack_string(value)]
+          [pack_key.call(key), pack_string(value)]
         end
 
       [pack_short(hash.length), packed].join

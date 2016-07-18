@@ -10,6 +10,6 @@ RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
 
   config.around(:each) do |test|
-    Timeout.timeout(1, &test)
+    Timeout.timeout(3, &test)
   end
 end
