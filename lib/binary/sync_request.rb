@@ -8,6 +8,8 @@ require 'struct/reader'
 module MFP
   module Binary
     class SyncRequest < Binary::Packet
+      include Struct::Reader
+
       PACKET_TYPE = Binary::Type::SYNC_REQUEST
 
       def initialize(username: '', password: '', last_sync_pointers: {})
@@ -54,15 +56,15 @@ module MFP
 
       def packed
         [
-          MFP::Struct::Reader.pack_short(@api_version),
-          MFP::Struct::Reader.pack_long(@svn_revision),
-          MFP::Struct::Reader.pack_short(@unknown1),
-          MFP::Struct::Reader.pack_string(@username),
-          MFP::Struct::Reader.pack_string(@password),
-          MFP::Struct::Reader.pack_short(@flags),
-          MFP::Struct::Reader.pack_string(@installation_uuid),
-          MFP::Struct::Reader.pack_short(@last_sync_pointers.length),
-          MFP::Struct::Reader.pack_hash(@last_sync_pointers, pack_key: -> (str) { pack_string(str) })
+          pack_short(@api_version),
+          pack_long(@svn_revision),
+          pack_short(@unknown1),
+          pack_string(@username),
+          pack_string(@password),
+          pack_short(@flags),
+          pack_string(@installation_uuid),
+          pack_short(@last_sync_pointers.length),
+          pack_hash(@last_sync_pointers, pack_key: -> (str) { pack_string(str) })
         ].join
       end
     end
