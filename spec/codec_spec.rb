@@ -71,20 +71,6 @@ RSpec.describe MFP::Codec do
     end
   end
 
-  describe '#read_date' do
-    it 'parses an iso8601 date' do
-      codec = described_class.new('1993-10-07JUNK')
-      expect(codec.read_date).to eql(Date.new(1993, 10, 7))
-      expect(codec.remainder).to eql('JUNK')
-    end
-  end
-
-  describe '#read_map' do
-    it 'extracts the values from an encoded map' do
-      expect(described_class.new(PacketMocks::Raw::SIMPLE_MAP).read_map).to eq(2 => 'foobar')
-    end
-  end
-
   describe 'integration test' do
     let(:response_fixture) { LocalFile.read('spec/fixtures/response.bin') }
 

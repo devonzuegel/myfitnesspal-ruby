@@ -1,5 +1,6 @@
 require 'anima'
 require 'struct/reader'
+require 'struct/packer'
 
 require 'binary/type'
 require 'binary/packet'
@@ -15,10 +16,18 @@ require 'binary/exercise'
 # Encodes and decodes MyFitnessPal binary objects.
 module MFP
   class Codec
-    include Anima.new(:original_str, :remainder), Struct::Reader
+    include Anima.new(:original_str, :remainder), Struct::Reader, Struct::Packer
 
     def initialize(str)
       super(original_str: str, remainder: str)
+    end
+
+    def each_packet
+      packets.each { |packet| yield packet }
+    end
+
+    def packets
+      raw_packets.map { |raw_packet| read_packet(raw_packet) }
     end
 
     def raw_packets
@@ -34,19 +43,18 @@ module MFP
       header.merge(body: body)
     end
 
+    def read_date
+      date, @remainder = super(remainder)
+      date
+    end
+
+    private
+
     def read_packet(raw_packet)
       type   = retrieve_type(raw_packet)
       packet = Binary::Type.supported_types.fetch(type).new
       packet.read_body_from_codec(Codec.new(raw_packet.fetch(:body)))
       packet
-    end
-
-    def each_packet
-      packets.each { |packet| yield packet }
-    end
-
-    def packets
-      raw_packets.map { |raw_packet| read_packet(raw_packet) }
     end
 
     def read_packet_header
@@ -56,57 +64,6 @@ module MFP
         unknown1:     read_2_byte_int,
         type:         read_2_byte_int
       }
-    end
-
-    def read_map(count: nil, read_key: -> { read_2_byte_int }, read_value: -> { read_string })
-      count ||= read_2_byte_int
-      Array.new(count) { [read_key.call, read_value.call] }.to_h
-    end
-
-    def read_2_byte_int
-      read_bytes(2, 's>')
-    end
-
-    def read_4_byte_int
-      read_bytes(4, 'l>')
-    end
-
-    def read_8_byte_int
-      read_bytes(8, 'q>')
-    end
-
-    def read_float
-      read_bytes(4, 'g')
-    end
-
-    def read_date
-      unparsed_date = remainder.slice(0, Binary::Packet::DATE_SIZE)
-      @remainder = remainder.slice(Binary::Packet::DATE_SIZE, remainder.length)
-      Date.iso8601(unparsed_date)
-    end
-
-    def read_uuid
-      read_string(Binary::Packet::UUID_LENGTH)
-    end
-
-    def read_string(str_length = nil)
-      str_length ||= read_2_byte_int
-      str, @remainder = split(remainder, str_length)
-      str
-    end
-
-    private
-
-    def split(str, str1_len)
-      [
-        str.slice(0, str1_len),
-        str.slice(str1_len, str.length) || ''
-      ]
-    end
-
-    def read_bytes(n_bytes, pack_directive)
-      bytes, @remainder = parse(remainder, n_bytes, pack_directive)
-      bytes
     end
 
     def read_magic_number
@@ -119,6 +76,11 @@ module MFP
       type = raw_packet.fetch(:type)
       return type if Binary::Type.supported_types.include?(type)
       fail NotImplementedError, "Type #{type} is not supported"
+    end
+
+    def parse(n_bytes, pack_directive)
+      bytes, @remainder = super(remainder, n_bytes, pack_directive)
+      bytes
     end
   end
 end
