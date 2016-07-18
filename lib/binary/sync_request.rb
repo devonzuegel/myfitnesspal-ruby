@@ -3,7 +3,6 @@ require 'abstract_method'
 
 require 'binary/packet'
 require 'binary/type'
-require 'colorize'
 
 module MFP
   module Binary
@@ -16,14 +15,14 @@ module MFP
 
       def to_h
         super.merge(
-          api_version:            @api_version,
-          svn_revision:           @svn_revision,
-          unknown1:               @unknown1,
-          username:               @username,
-          password:               @password,
-          flags:                  @flags,
-          installation_uuid:      @installation_uuid,
-          last_sync_pointers:     @last_sync_pointers
+          api_version:        @api_version,
+          svn_revision:       @svn_revision,
+          unknown1:           @unknown1,
+          username:           @username,
+          password:           @password,
+          flags:              @flags,
+          installation_uuid:  @installation_uuid,
+          last_sync_pointers: @last_sync_pointers
         )
       end
 
