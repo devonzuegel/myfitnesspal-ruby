@@ -13,7 +13,7 @@ class FakeCodec
   end
 
   def read_uuid
-    Binary::Packet.generate_uuid
+    MFP::Binary::Packet.generate_uuid
   end
 
   def read_map(_int)

@@ -1,4 +1,4 @@
-command = 'bundle exec rspec --format Fuubar --color --require spec_helper'
+command = 'bundle exec rspec --format documentation --color --require spec_helper'
 
 guard :rspec, cmd: command do
   watch(%r{^spec/.+_spec\.rb$})

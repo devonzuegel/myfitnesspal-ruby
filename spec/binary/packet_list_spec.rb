@@ -2,8 +2,8 @@ require 'binary/packet_list'
 require 'mocks/packet_mocks/deserialized'
 require 'mocks/packet_mocks/raw'
 
-RSpec.describe Binary::PacketList do
-  let(:packet_list) { Binary::PacketList.new(PacketMocks::Raw.sync_request_default * 2) }
+RSpec.describe MFP::Binary::PacketList do
+  let(:packet_list) { described_class.new(PacketMocks::Raw.sync_request_default * 2) }
 
   describe '#initialize' do
     it 'should set raw packet to be passed in value' do
@@ -18,7 +18,7 @@ RSpec.describe Binary::PacketList do
 
     it 'yields Binary::Packet-subclassed objects' do
       packet_list.each do |packet|
-        expect(packet.class).to eq Binary::SyncRequest
+        expect(packet.class).to eq MFP::Binary::SyncRequest
         expect(packet.to_h).to eq PacketMocks::Hash::SYNC_REQUEST_DEFAULT
       end
     end

@@ -4,8 +4,8 @@ require 'rspec'
 require 'binary/sync_response'
 # require 'mocks/fake_codec'
 
-RSpec.describe Binary::SyncResponse do
-  let(:sync_res) { Binary::SyncResponse.new }
+RSpec.describe MFP::Binary::SyncResponse do
+  let(:sync_res) { MFP::Binary::SyncResponse.new }
 
   # describe '#to_h' do
   #   it 'should serialize the starting attributes' do
