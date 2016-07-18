@@ -5,6 +5,10 @@ module MFP
   class HttpRequestParams
     include Concord.new(:data)
 
+    def url
+      'https://www.myfitnesspal.com/iphone_api/synchronize'
+    end
+
     def body
       <<~HEREDOC
         --#{mime_boundary}\r\n
@@ -26,8 +30,6 @@ module MFP
     end
 
     private
-
-    URL = 'https://www.myfitnesspal.com/iphone_api/synchronize'.freeze
 
     def mime_boundary
       @mime_boundary ||= 78.times.map { [*('a'..'z')].sample }.join
