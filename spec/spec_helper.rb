@@ -1,5 +1,7 @@
 require 'bundler/setup'
 require 'rspec'
+require 'awesome_print'
+require 'colorize'
 
 RSpec.configure do |config|
   config.filter_run_excluding skip: true
