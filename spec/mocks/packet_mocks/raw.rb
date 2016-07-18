@@ -1,9 +1,10 @@
 require 'binary/packet'
+require 'struct/packer'
 
 module PacketMocks
   # Contains mocks for raw packets of each type
   module Raw
-    extend MFP::Struct::Reader
+    extend MFP::Struct::Packer
 
     BAD_HEADER = [
       [1].pack('s>'),
