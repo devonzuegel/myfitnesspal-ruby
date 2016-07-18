@@ -50,7 +50,8 @@ RSpec.describe MFP::Struct do
 
   describe '.pack_hash' do
     it 'packs string values' do
-      expect(described_class.pack_hash(2 => 'foobar')).to eql("\x00\x01\x00\x02\x00\x06foobar".b)
+      expect(described_class.pack_hash(2 => 'foobar'))
+        .to eql("\x00\x01\x00\x02\x00\x06foobar".b)
     end
   end
 end

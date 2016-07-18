@@ -1,3 +1,4 @@
+require 'local_file'
 require 'codec'
 require 'binary/type'
 require 'binary/packet'
@@ -81,6 +82,28 @@ RSpec.describe MFP::Codec do
   describe '#read_map' do
     it 'extracts the values from an encoded map' do
       expect(described_class.new(PacketMocks::Raw::SIMPLE_MAP).read_map).to eq(2 => 'foobar')
+    end
+  end
+
+  describe 'integration test' do
+    let(:response_fixture) { LocalFile.read('spec/fixtures/response.bin') }
+
+    it 'should create the expected count of each packet type' do
+      packet_type_counts = Hash.new(0)
+      MFP::Codec.new(response_fixture).each_packet do |p|
+        type = MFP::Binary::Type.supported_types.fetch(p.packet_type)
+        packet_type_counts[type] += 1
+      end
+
+      expect(packet_type_counts).to eq(
+        MFP::Binary::Exercise           => 1,
+        MFP::Binary::Food               => 54,
+        MFP::Binary::FoodEntry          => 848,
+        MFP::Binary::MealIngredients    => 10,
+        MFP::Binary::MeasurementTypes   => 1,
+        MFP::Binary::SyncResponse       => 1,
+        MFP::Binary::UserPropertyUpdate => 1
+      )
     end
   end
 end
