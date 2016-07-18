@@ -14,6 +14,7 @@ module MFP
 
     def get_packets
       sync_request = Binary::SyncRequest.new(username: username, password: password)
+      http_request_params = HttpRequestParams(sync_request.packed)
     end
 
     private
