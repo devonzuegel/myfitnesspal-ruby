@@ -3,12 +3,12 @@ require 'abstract_method'
 
 require 'binary/packet'
 require 'binary/type'
-require 'struct/reader'
+require 'struct/packer'
 
 module MFP
   module Binary
     class SyncRequest < Binary::Packet
-      include Struct::Reader
+      include Struct::Packer
 
       PACKET_TYPE = Binary::Type::SYNC_REQUEST
 
