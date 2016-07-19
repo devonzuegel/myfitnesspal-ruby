@@ -11,7 +11,7 @@ module MFP
       end
 
       def to_h
-        {
+        super.merge(
           master_exercise_id: @master_exercise_id,
           exercise:           @exercise,
           date:               @date,
@@ -19,7 +19,7 @@ module MFP
           sets:               @sets,
           weight:             @weight,
           calories:           @calories
-        }
+        )
       end
 
       def set_default_values
