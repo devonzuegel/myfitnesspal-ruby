@@ -1,17 +1,14 @@
 require 'sync'
 
 RSpec.describe MFP::Sync do
-  let(:sync) do
-    described_class.new(ENV['MYFITNESSPAL_USERNAME'], ENV['MYFITNESSPAL_PASSWORD'])
-  end
+  let(:sync) { described_class.new(ENV['MFP_USERNAME'], ENV['MFP_PASSWORD']) }
 
-  it 'retrieves expected response', :skip do
+  it 'should sync all pages, not just the first' do
     expect(sync.response.status).to eq 200
     expect(sync.response.body.to_s.length).to be >= 213_000
   end
 
-  it 'should sync all pages, not just the first', :skip do
-    sync.get_packets
-    # puts "#{sync.get_packets}".yellow
+  it 'test stubbed' do
+    skip
   end
 end

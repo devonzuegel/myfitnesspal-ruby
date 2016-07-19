@@ -2,6 +2,8 @@ require 'bundler/setup'
 require 'abstract_type'
 require 'concord'
 
+require 'struct/packer'
+
 module MFP
   module Binary
     # Base class for `Codec` packets. Sync API requests and responses are a
@@ -9,7 +11,7 @@ module MFP
     class Packet
       # :packet_type is an integer used to associate the packet with the
       # appropriate `Binary::Packet` subclass. A packet header lists its type.
-      include Concord::Public.new(:packet_type), AbstractType
+      include Concord::Public.new(:packet_type), AbstractType, Struct::Packer
 
       MAGIC       = 0x04D3 # Magic number, marks the beginning of a packet.
       UUID_LENGTH = 16
@@ -35,6 +37,15 @@ module MFP
         {
           packet_type: packet_type
         }
+      end
+
+      def packed
+        [
+          pack_short(MAGIC),
+          pack_long(1111), # TODO
+          pack_short(0),
+          pack_short(packet_type)
+        ].join
       end
     end
   end
