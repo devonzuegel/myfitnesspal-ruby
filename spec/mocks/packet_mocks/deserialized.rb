@@ -9,8 +9,8 @@ module PacketMocks
       api_version:        6,
       svn_revision:       237,
       unknown1:           2,
-      username:           'fake_username',
-      password:           'fake_password',
+      username:           'uname',
+      password:           'passw0rd',
       flags:              0x5,
       installation_uuid:  MFP::Binary::Packet.generate_uuid,
       last_sync_pointers: {}

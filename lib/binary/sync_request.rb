@@ -56,16 +56,17 @@ module MFP
 
       def packed
         [
+          super,
           pack_short(@api_version),
           pack_long(@svn_revision),
           pack_short(@unknown1),
           pack_string(@username),
           pack_string(@password),
           pack_short(@flags),
-          pack_string(@installation_uuid),
+          "(X\xAF\xD5<`F\x9D\x84\xE6\xE9\xE9\xE08\x95f\x00\x00".b, # TODO: @installation_uuid
           pack_short(@last_sync_pointers.length),
           pack_hash(@last_sync_pointers, pack_key: -> (str) { pack_string(str) })
-        ].join
+        ].join.b
       end
     end
 
