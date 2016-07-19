@@ -11,6 +11,7 @@ require 'binary/meal_ingredients'
 require 'binary/food_entry'
 require 'binary/exercise'
 require 'binary/exercise_entry'
+require 'binary/water_entry'
 
 RSpec.describe MFP::Binary::Type do
 
@@ -25,7 +26,8 @@ RSpec.describe MFP::Binary::Type do
         MFP::Binary::Type::MEAL_INGREDIENTS     => MFP::Binary::MealIngredients,
         MFP::Binary::Type::FOOD_ENTRY           => MFP::Binary::FoodEntry,
         MFP::Binary::Type::EXERCISE             => MFP::Binary::Exercise,
-        MFP::Binary::Type::EXERCISE_ENTRY       => MFP::Binary::ExerciseEntry
+        MFP::Binary::Type::EXERCISE_ENTRY       => MFP::Binary::ExerciseEntry,
+        MFP::Binary::Type::WATER_ENTRY          => MFP::Binary::WaterEntry
       )
     end
 

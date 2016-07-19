@@ -13,7 +13,7 @@ RSpec.describe MFP::Sync do
   end
 
   it '...' do
-    skip
+    # skip
     puts "#{sync.all_packets.length}".yellow
   end
 end

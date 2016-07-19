@@ -35,7 +35,8 @@ module MFP
             MealIngredients,
             FoodEntry,
             Exercise,
-            ExerciseEntry
+            ExerciseEntry,
+            WaterEntry
           ].map { |klass| [klass::PACKET_TYPE, klass] }
         Hash[type_name_pairs]
       end
