@@ -6,7 +6,7 @@ module MFP
     class SyncResponse < Binary::Packet
       PACKET_TYPE = Binary::Type::SYNC_RESPONSE
 
-      attr_reader :expected_packet_count
+      attr_reader :last_sync_pointers
 
       def initialize
         super(PACKET_TYPE)
