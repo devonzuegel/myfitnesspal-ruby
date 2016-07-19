@@ -20,6 +20,7 @@ module MFP
 
       def self.generate_uuid
         SecureRandom.hex(UUID_LENGTH / 2)
+        # TODO: SecureRandom.uuid
       end
 
       def initialize(packet_type)
@@ -29,9 +30,8 @@ module MFP
 
       abstract_method :set_default_values
       abstract_method :read_body_from_codec
-      abstract_method :write_body_to_codec
       abstract_method :to_h
-      abstract_method :write_packet_to_codec
+      abstract_method :packed_body
 
       def to_h
         {
@@ -40,10 +40,16 @@ module MFP
       end
 
       def packed
+        [packed_header, packed_body].join
+      end
+
+      private
+
+      def packed_header
         [
           pack_short(MAGIC),
-          pack_long(1111), # TODO
-          pack_short(0),
+          pack_long(packed_body.length + HEADER_SIZE),
+          pack_short(1), # Unknown
           pack_short(packet_type)
         ].join
       end
