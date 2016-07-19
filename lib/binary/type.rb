@@ -27,14 +27,15 @@ module MFP
       def self.supported_types
         type_name_pairs =
           [
-            Binary::SyncRequest,
-            Binary::SyncResponse,
-            Binary::UserPropertyUpdate,
-            Binary::MeasurementTypes,
-            Binary::Food,
-            Binary::MealIngredients,
-            Binary::FoodEntry,
-            Binary::Exercise,
+            SyncRequest,
+            SyncResponse,
+            UserPropertyUpdate,
+            MeasurementTypes,
+            Food,
+            MealIngredients,
+            FoodEntry,
+            Exercise,
+            ExerciseEntry
           ].map { |klass| [klass::PACKET_TYPE, klass] }
         Hash[type_name_pairs]
       end

@@ -32,14 +32,12 @@ module MFP
 
       def read_body_from_codec(codec)
         @master_food_id = codec.read_8_byte_int
-
         @food           = Binary::Food.new
         @food.read_body_from_codec(codec)
-
-        @date           = codec.read_date
-        @meal_name      = codec.read_string
-        @quantity       = codec.read_float
-        @weight_index   = codec.read_4_byte_int
+        @date         = codec.read_date
+        @meal_name    = codec.read_string
+        @quantity     = codec.read_float
+        @weight_index = codec.read_4_byte_int
       end
     end
   end
