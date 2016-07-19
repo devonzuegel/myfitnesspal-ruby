@@ -13,6 +13,7 @@ require 'binary/meal_ingredients'
 require 'binary/food_entry'
 require 'binary/exercise'
 require 'binary/exercise_entry'
+require 'binary/water_entry'
 
 # Encodes and decodes MyFitnessPal binary objects.
 module MFP
