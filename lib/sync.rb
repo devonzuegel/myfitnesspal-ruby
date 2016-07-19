@@ -23,12 +23,14 @@ module MFP
     end
 
     def all_packets
-      packets = []
+      return @packets unless @packets.nil?
+
+      @packets = []
       loop do
         packet_count = 0
 
         Codec.new(response.body.to_s).each_packet do |packet|
-          packets << packet.to_h
+          @packets << packet.to_h
           if packet.class == Binary::SyncResponse
             @last_sync_pointers = packet.last_sync_pointers
           else
@@ -36,12 +38,11 @@ module MFP
           end
         end
 
-        return packets if packet_count == 0
+        return @packets if packet_count == 0
 
-        puts 'last packet:'.black
-        p packets.last.to_h
-
-        puts
+        # puts 'last packet:'.black
+        # p @packets.last.to_h
+        # puts
       end
     end
 
