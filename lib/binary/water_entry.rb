@@ -10,11 +10,9 @@ module MFP
         super(PACKET_TYPE)
       end
 
-      def set_default_values
-      end
+      def set_default_values; end
 
-      def read_body_from_codec(codec)
-      end
+      def read_body_from_codec(codec); end
     end
   end
 end

@@ -36,7 +36,8 @@ module MFP
             FoodEntry,
             Exercise,
             ExerciseEntry,
-            WaterEntry
+            WaterEntry,
+            MeasurementValue
           ].map { |klass| [klass::PACKET_TYPE, klass] }
         Hash[type_name_pairs]
       end
