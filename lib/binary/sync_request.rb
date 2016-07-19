@@ -14,8 +14,8 @@ module MFP
 
       def initialize(username: '', password: '', last_sync_pointers: {})
         super(PACKET_TYPE)
-        @username = username
-        @password = password
+        @username           = username
+        @password           = password
         @last_sync_pointers = last_sync_pointers
       end
 
@@ -54,24 +54,22 @@ module MFP
         @last_sync_pointers = codec.read_map(read_key: -> { codec.read_string })
       end
 
-      def packed
+      private
+
+      attr_reader :username, :password
+
+      def packed_body
         [
-          super,
           pack_short(@api_version),
           pack_long(@svn_revision),
           pack_short(@unknown1),
           pack_string(@username),
           pack_string(@password),
           pack_short(@flags),
-          "(X\xAF\xD5<`F\x9D\x84\xE6\xE9\xE9\xE08\x95f\x00\x00".b, # TODO: @installation_uuid
-          pack_short(@last_sync_pointers.length),
+          ("\x00" * 16).b, # Any uuid of 16 arbitrary bytes will work
           pack_hash(@last_sync_pointers, pack_key: -> (str) { pack_string(str) })
         ].join.b
       end
     end
-
-    private
-
-    attr_reader :username, :password
   end
 end

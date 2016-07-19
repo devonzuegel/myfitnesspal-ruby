@@ -42,11 +42,9 @@ RSpec.describe MFP::Binary::SyncRequest do
   describe '#packed' do
     it 'packs the request into binary format' do
       packed_request =
-        "\x04\xD3\x00\x00\x04W\x00\x00\x00\x01\x00\x06\x00\x00\x00\xED\x00\x02" \
-        "\x00\x05uname"                                                         \
-        "\x00\bpassw0rd"                                                        \
-        "\x00\x05(X\xAF\xD5<`F\x9D\x84\xE6\xE9\xE9\xE08"                        \
-        "\x95f\x00\x00\x00\x00\x00\x00".b
+        "\x04\xD3\x00\x00\x007\x00\x01\x00\x01\x00\x06\x00\x00\x00\xED\x00\x02" \
+        "\x00\x05uname\x00\bpassw0rd"                                           \
+        "\x00\x05\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00".b
 
       expect(sync_req.packed).to eq packed_request
     end
