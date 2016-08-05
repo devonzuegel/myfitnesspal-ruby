@@ -21,7 +21,7 @@ module MFP
 
     def headers(b = nil) # TODO
       {
-        'Content-Type'   => "multipart/form-data; boundary=#{b || boundary}",
+        'Content-Type' => "multipart/form-data; boundary=#{b || boundary}"
       }
     end
   end

@@ -7,10 +7,10 @@ module MFP
     class Food < Binary::Packet
       PACKET_TYPE = Binary::Type::FOOD
 
-      NUTRIENT_NAMES = %w(
+      NUTRIENT_NAMES = %w[
         calories fat saturated_fat polyunsaturated_fat monounsaturated_fat trans_fat cholesterol
         sodium potassium carbohydrates fiber sugar protein vitamin_a vitamin_c calcium iron
-      )
+      ].freeze
 
       def initialize
         super(PACKET_TYPE)
@@ -69,11 +69,12 @@ module MFP
 
       def retrieve_portions(codec)
         num_portions = codec.read_2_byte_int
-        @portions = num_portions.times.map do
-          food_portion = Binary::FoodPortion.new
-          food_portion.read_body_from_codec(codec)
-          food_portion
-        end
+        @portions =
+          Array.new(num_portions) do
+            food_portion = Binary::FoodPortion.new
+            food_portion.read_body_from_codec(codec)
+            food_portion
+          end
       end
     end
   end
