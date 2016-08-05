@@ -26,7 +26,7 @@ module MFP
 
       def retrieve_ingredients(codec)
         ingredient_count = codec.read_4_byte_int
-        ingredient_count.times.map do
+        Array.new(ingredient_count) do
           ingredient = Binary::MealIngredient.new
           ingredient.read_body_from_codec(codec)
           ingredient
