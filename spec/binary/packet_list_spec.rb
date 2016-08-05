@@ -6,7 +6,7 @@ RSpec.describe MFP::Binary::PacketList do
   let(:packet_list) { described_class.new(PacketMocks::Raw.sync_request_default * 2) }
 
   describe '#initialize' do
-    it 'should set raw packet to be passed in value' do
+    it 'sets raw packet to be passed in value' do
       expect(packet_list.raw).to eq(PacketMocks::Raw.sync_request_default * 2)
     end
   end

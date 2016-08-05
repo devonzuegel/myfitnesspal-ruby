@@ -56,7 +56,7 @@ module PacketMocks
         PACKED_MAGIC,
         pack_long(body_length + MFP::Binary::Packet::HEADER_SIZE),
         pack_short(attrs.fetch(:unknown1)),
-        pack_short(attrs.fetch(:packet_type)),
+        pack_short(attrs.fetch(:packet_type))
       ].join
     end
     private_class_method(:headers_from_hash)
