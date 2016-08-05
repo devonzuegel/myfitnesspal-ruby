@@ -16,10 +16,9 @@ require 'binary/measurement_value'
 require 'binary/delete_item'
 
 RSpec.describe MFP::Binary::Type do
-
   describe '#supported_types' do
-    it 'should support the expected types' do
-      expect(MFP::Binary::Type.supported_types).to eq(
+    it 'supports the expected types' do
+      expect(described_class.supported_types).to eq(
         MFP::Binary::Type::SYNC_REQUEST         => MFP::Binary::SyncRequest,
         MFP::Binary::Type::SYNC_RESPONSE        => MFP::Binary::SyncResponse,
         MFP::Binary::Type::USER_PROPERTY_UPDATE => MFP::Binary::UserPropertyUpdate,

@@ -18,13 +18,13 @@ RSpec.describe MFP::Binary::Packet do
   end
 
   describe '.generate_uuid' do
-    it 'should be the expected length of a uuid' do
+    it 'is the expected length of a uuid' do
       expect(described_class.generate_uuid.length).to eql described_class::UUID_LENGTH
     end
   end
 
   describe '#to_h' do
-    it 'should generate a hash from the provided attributes' do
+    it 'generates a hash from the provided attributes' do
       expect(MyPacket.new('body').to_h).to eql(packet_type: -1)
     end
   end
