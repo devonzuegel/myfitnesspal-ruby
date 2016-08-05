@@ -9,7 +9,7 @@ RSpec.describe MFP::Codec do
   let(:codec) { described_class.new(PacketMocks::Raw.sync_request_default * 2) }
 
   describe '#initialize' do
-    it 'should set raw packet to be passed in value' do
+    it 'sets raw packet to be passed in value' do
       expect(codec.original_str).to eq PacketMocks::Raw.sync_request_default * 2
     end
   end
@@ -52,7 +52,7 @@ RSpec.describe MFP::Codec do
     end
 
     it 'separates the body from the header data' do
-      body = "I am the body"*10
+      body = 'I am the body' * 10
       sync_request =
         "\x04\xD3" \
         "\x00\x00\x00\x2a" \
@@ -66,7 +66,7 @@ RSpec.describe MFP::Codec do
         length:       42,
         unknown1:     2,
         type:         1,
-        body:         body.slice(0,32)
+        body:         body.slice(0, 32)
       )
     end
   end
@@ -74,9 +74,9 @@ RSpec.describe MFP::Codec do
   describe 'integration test' do
     let(:response_fixture) { LocalFile.read('spec/fixtures/response.bin') }
 
-    it 'should create the expected count of each packet type' do
+    it 'creates the expected count of each packet type' do
       packet_type_counts = Hash.new(0)
-      MFP::Codec.new(response_fixture).each_packet do |p|
+      described_class.new(response_fixture).each_packet do |p|
         type = MFP::Binary::Type.supported_types.fetch(p.packet_type)
         packet_type_counts[type] += 1
       end

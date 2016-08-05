@@ -23,13 +23,13 @@ RSpec.describe MFP::Binary::SyncRequest do
   end
 
   describe '#to_h' do
-    it 'should serialize the starting attributes' do
+    it 'serializes the starting attributes' do
       expect(sync_req.to_h).to eq initial_hash
     end
   end
 
   describe '#read_body_from_codec' do
-    it 'should change the values after reading from the codec' do
+    it 'changes the values after reading from the codec' do
       expect { sync_req.read_body_from_codec(FakeCodec.new) }
         .to change { sync_req.to_h }
         .from(initial_hash)
