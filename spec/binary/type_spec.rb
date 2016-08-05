@@ -13,6 +13,7 @@ require 'binary/exercise'
 require 'binary/exercise_entry'
 require 'binary/water_entry'
 require 'binary/measurement_value'
+require 'binary/delete_item'
 
 RSpec.describe MFP::Binary::Type do
 
@@ -29,7 +30,8 @@ RSpec.describe MFP::Binary::Type do
         MFP::Binary::Type::EXERCISE             => MFP::Binary::Exercise,
         MFP::Binary::Type::EXERCISE_ENTRY       => MFP::Binary::ExerciseEntry,
         MFP::Binary::Type::WATER_ENTRY          => MFP::Binary::WaterEntry,
-        MFP::Binary::Type::MEASUREMENT_VALUE    => MFP::Binary::MeasurementValue
+        MFP::Binary::Type::MEASUREMENT_VALUE    => MFP::Binary::MeasurementValue,
+        MFP::Binary::Type::DELETE_ITEM          => MFP::Binary::DeleteItem
       )
     end
 
