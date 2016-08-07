@@ -3,17 +3,22 @@ require 'sync'
 RSpec.describe MFP::Sync do
   let(:sync) { described_class.new(ENV['MFP_USERNAME'], ENV['MFP_PASSWORD']) }
 
+  before do
+    fail Exception, 'MFP_USERNAME environment variable is nil' if ENV['MFP_USERNAME'].nil?
+    fail Exception, 'MFP_PASSWORD environment variable is nil' if ENV['MFP_PASSWORD'].nil?
+  end
+
   # it 'should sync all pages, not just the first' do
   #   expect(sync.response.status).to eq 200
   #   expect(sync.response.body.to_s.length).to be >= 213_000
   # end
 
-  it 'test stubbed' do
-    skip
-  end
+  # it 'test stubbed' do
+  #   skip
+  # end
 
   it '...' do
-    skip
+    # skip
     packets = sync.all_packets
     counts = Hash.new(0)
     packets.each do |packet|
