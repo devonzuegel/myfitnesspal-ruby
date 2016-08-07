@@ -182,7 +182,7 @@ DEPENDENCIES
   reek (~> 4.1)
   rspec (= 3.5.0)
   rubocop (~> 0.41)
-  rubocop-rspec
+  rubocop-rspec (= 1.5.0)
 
 BUNDLED WITH
    1.12.5
