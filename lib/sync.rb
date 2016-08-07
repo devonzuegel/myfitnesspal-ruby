@@ -29,8 +29,9 @@ module MFP
       first_page = true
       loop do
         packet_count = 0
-
-        Codec.new(response.body.to_s).each_packet do |packet|
+        res = response
+        # puts res
+        Codec.new(res.body.to_s).each_packet do |packet|
           @packets << packet
 
           if packet.class == Binary::SyncResponse

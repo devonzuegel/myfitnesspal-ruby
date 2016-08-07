@@ -22,7 +22,7 @@ RSpec.describe MFP::Sync do
     packets = sync.all_packets
     counts = Hash.new(0)
     packets.each do |packet|
-      klass =  packet.class
+      klass = packet.class
       p packet.to_h[:date] if klass == MFP::Binary::FoodEntry
       counts.store(klass, counts[klass] + 1)
     end
