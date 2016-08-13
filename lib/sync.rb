@@ -17,13 +17,6 @@ module MFP
       super(username, password, last_sync_pointers)
     end
 
-    def response
-      request = new_request
-      HTTP
-        .headers(request.headers)
-        .post(request.url, body: request.body)
-    end
-
     def all_packets
       return @packets unless @packets.nil?
 
@@ -51,6 +44,13 @@ module MFP
     private
 
     PACKETS_PER_RESPONSE = 1_000
+
+    def response
+      request = new_request
+      HTTP
+        .headers(request.headers)
+        .post(request.url, body: request.body)
+    end
 
     def new_request
       sync_request = Binary::SyncRequest.new(
