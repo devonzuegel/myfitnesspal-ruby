@@ -36,10 +36,6 @@ RSpec.describe MFP::Sync do
     end
   end
 
-  # it 'test stubbed' do
-  #   skip
-  # end
-
   describe '#all_packets' do
     let(:fake_client) { instance_double(HTTP::Client) }
     let(:fake_results) do
