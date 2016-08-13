@@ -5,4 +5,8 @@ class LocalFile
   def self.read(path)
     ROOT.join(path).read.b
   end
+
+  def self.write_binary(path, binary_content)
+    File.open(ROOT.join(path), 'wb') { |f| f.write(binary_content) }
+  end
 end
