@@ -13,5 +13,5 @@ gem 'anima',            '0.3.0'
 gem 'rubocop',          '~> 0.41'
 gem 'rubocop-rspec',    '1.5.0'
 gem 'reek',             '~> 4.1'
-gem 'mutant-rspec', git: 'https://github.com/mbj/mutant.git'
-
+gem 'mutant-rspec',     git: 'https://github.com/mbj/mutant.git'
+gem 'webmock',          '2.1.0'
