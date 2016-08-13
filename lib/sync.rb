@@ -11,6 +11,8 @@ module MFP
   class Sync
     include Concord.new(:username, :password, :last_sync_pointers)
 
+    attr_reader :last_sync_pointers
+
     def initialize(username, password, last_sync_pointers = {})
       super(username, password, last_sync_pointers)
     end
@@ -30,7 +32,6 @@ module MFP
       loop do
         packet_count = 0
         res = response
-        # puts res
         Codec.new(res.body.to_s).each_packet do |packet|
           @packets << packet
 
