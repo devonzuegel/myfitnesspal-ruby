@@ -2,6 +2,7 @@ require 'rubygems'
 require 'bundler'
 
 Bundler.require
+Dotenv.load
 
 module API
   class App < Sinatra::Application

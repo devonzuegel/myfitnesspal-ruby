@@ -64,6 +64,7 @@ GEM
     diff-lcs (1.2.5)
     domain_name (0.5.20160615)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.1.1)
     equalizer (0.0.11)
     eventmachine (1.2.0.1)
     ffi (1.9.10)
@@ -202,6 +203,7 @@ DEPENDENCIES
   awesome_print (= 1.6.1)
   colorize (= 0.7.7)
   concord (= 0.1.5)
+  dotenv
   fuubar (= 2.0.0)
   guard (= 2.13.0)
   guard-rspec (= 4.6.4)
