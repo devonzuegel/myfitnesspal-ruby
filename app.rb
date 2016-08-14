@@ -4,6 +4,8 @@ require 'bundler'
 Bundler.require
 Dotenv.load
 
+$LOAD_PATH << File.expand_path('../', __FILE__)
+
 module API
   class App < Sinatra::Application
     configure do
@@ -18,5 +20,9 @@ module API
     end
 
     use Rack::Deflater
+  end
+
+  module Models
+    autoload :User, 'app/models/user'
   end
 end
