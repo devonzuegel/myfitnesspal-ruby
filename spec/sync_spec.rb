@@ -17,14 +17,9 @@ RSpec.describe MFP::Sync do
     }
   end
 
-  let(:credentials)  { [ENV['MFP_USERNAME'], ENV['MFP_PASSWORD']] }
+  let(:credentials)  { %w[myusername mypassword] }
   let(:sync)         { described_class.new(*credentials) }
   let(:partial_sync) { described_class.new(*credentials, ptrs) }
-
-  before do
-    fail Exception, 'MFP_USERNAME environment variable is nil' if ENV['MFP_USERNAME'].nil?
-    fail Exception, 'MFP_PASSWORD environment variable is nil' if ENV['MFP_PASSWORD'].nil?
-  end
 
   describe '#last_sync_pointers' do
     it 'initializes as empty' do
