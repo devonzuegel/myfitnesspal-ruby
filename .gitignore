@@ -1,2 +1,4 @@
 data/
 .bundle/
+.env
+Gemfile.lock

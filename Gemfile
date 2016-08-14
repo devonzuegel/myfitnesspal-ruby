@@ -15,6 +15,7 @@ gem 'guard-rspec',      '4.6.4', :require => false
 gem 'http',             '~> 2.0'
 gem 'anima',            '0.3.0'
 gem 'rubocop',          '>= 0.42'
+gem 'dotenv'
 gem 'reek',             '~> 4.1'
 gem 'webmock',          '2.1.0'
 gem 'rubocop-rspec',    git: 'https://github.com/nevir/rubocop-rspec'
