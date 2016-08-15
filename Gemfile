@@ -14,6 +14,7 @@ gem 'anima',           '0.3.0'
 gem 'dotenv',          '2.1.1'
 gem 'sequel',          '4.37.0'
 gem 'pg',              '0.18.4'
+gem 'shotgun',         '0.9.1'
 
 gem 'webmock',         '2.1.0'
 gem 'rack-test',       '0.6.3'
