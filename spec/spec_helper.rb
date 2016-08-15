@@ -7,8 +7,6 @@ DB = Sequel.connect('postgres://devonzuegel@localhost/mfp_api_test')
 require Pathname.new('.').join('app').expand_path
 
 RSpec.configure do |c|
-  c.filter_run_excluding skip: true
-
   # Tag examples with `:focus` to run them individually. When
   # nothing is tagged with `:focus`, all examples get run.
   c.filter_run focus: ENV['CI'] != 'true'
