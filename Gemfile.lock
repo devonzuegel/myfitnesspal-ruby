@@ -129,6 +129,8 @@ GEM
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
+    rack-test (0.6.3)
+      rack (>= 1.0)
     rainbow (2.1.0)
     rake (11.2.2)
     rb-fsevent (0.9.7)
@@ -203,15 +205,16 @@ DEPENDENCIES
   awesome_print (= 1.6.1)
   colorize (= 0.7.7)
   concord (= 0.1.5)
-  dotenv
+  dotenv (= 2.1.1)
   fuubar (= 2.0.0)
   guard (= 2.13.0)
   guard-rspec (= 4.6.4)
   http (~> 2.0)
   mutant-rspec!
+  rack-test (= 0.6.3)
   rake (= 11.2.2)
   reek (~> 4.1)
-  rspec (= 3.5.0)
+  rspec (~> 3.5)
   rubocop (>= 0.42)
   rubocop-rspec!
   sinatra (= 1.4.7)

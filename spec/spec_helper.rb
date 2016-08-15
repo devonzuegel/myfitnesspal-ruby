@@ -4,6 +4,9 @@ require 'awesome_print'
 require 'colorize'
 require 'webmock/rspec'
 
+require_relative '../app'
+# Dir.glob(Pathname.new('..').join('api', '**', '*.rb').expand_path) { |f| require f }
+
 RSpec.configure do |config|
   config.filter_run_excluding skip: true
 
