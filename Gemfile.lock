@@ -164,6 +164,8 @@ GEM
     safe_yaml (1.0.4)
     sequel (4.37.0)
     shellany (0.0.1)
+    shotgun (0.9.1)
+      rack (>= 1.0)
     sinatra (1.4.7)
       rack (~> 1.5)
       rack-protection (~> 1.4)
@@ -221,6 +223,7 @@ DEPENDENCIES
   rubocop (>= 0.42)
   rubocop-rspec!
   sequel (= 4.37.0)
+  shotgun (= 0.9.1)
   sinatra (= 1.4.7)
   thin (= 1.7.0)
   webmock (= 2.1.0)
