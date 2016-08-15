@@ -33,7 +33,5 @@ RSpec.describe MFP::Binary::Type do
         MFP::Binary::Type::DELETE_ITEM          => MFP::Binary::DeleteItem
       )
     end
-
-    it 'supports all types'
   end
 end
