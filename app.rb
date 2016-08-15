@@ -1,8 +1,3 @@
-require 'bundler/setup'
-
-Bundler.require
-Dotenv.load
-
 Dir.glob(Pathname.new('.').join('api', '**', '*.rb').expand_path) { |f| require f }
 
 module API
