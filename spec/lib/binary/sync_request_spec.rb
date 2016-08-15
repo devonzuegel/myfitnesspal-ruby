@@ -3,8 +3,8 @@ require 'rspec'
 require 'json'
 
 require 'binary/sync_request'
-require 'mocks/fake_codec'
-require 'mocks/packet_mocks/deserialized'
+require 'support/mocks/fake_codec'
+require 'support/mocks/packet_mocks/deserialized'
 
 RSpec.describe MFP::Binary::SyncRequest do
   let(:sync_req) { described_class.new(username: 'uname', password: 'passw0rd') }

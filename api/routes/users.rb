@@ -1,8 +1,9 @@
 module API
   module Routes
     class Users < Base
-      get '/users' do
-        json(Models::User.all)
+      get '/users/create' do
+        # TODO: Create user
+        json('not yet implemented')
       end
     end
   end

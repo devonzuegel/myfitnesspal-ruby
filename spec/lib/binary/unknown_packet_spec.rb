@@ -2,7 +2,7 @@ require 'bundler/setup'
 require 'rspec'
 
 require 'binary/unknown_packet'
-require 'mocks/fake_codec'
+require 'support/mocks/fake_codec'
 
 RSpec.describe MFP::Binary::UnknownPacket do
   # let(:packet) { Binary::UnknownPacket.new }

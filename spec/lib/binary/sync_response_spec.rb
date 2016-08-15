@@ -2,7 +2,7 @@ require 'bundler/setup'
 require 'rspec'
 
 require 'binary/sync_response'
-# require 'mocks/fake_codec'
+# require 'support/mocks/fake_codec'
 
 RSpec.describe MFP::Binary::SyncResponse do
   let(:sync_res) { described_class.new }
