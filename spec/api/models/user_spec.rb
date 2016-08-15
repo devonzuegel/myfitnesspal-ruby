@@ -3,7 +3,9 @@ RSpec.describe API::Models::User do
   let(:password) { 'pword' }
 
   it '..' do
-    skip
-    # expect(described_class.create(username, password)).to eql nil
+    DB[:users].where(username: /.*/).delete
+    described_class.create(username: username, password: password)
+    expect(DB[:users].count).to eql 1
+    DB[:users].where(username: /.*/).delete
   end
 end
