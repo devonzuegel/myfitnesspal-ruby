@@ -4,9 +4,13 @@ require 'bundler'
 Bundler.require
 Dotenv.load
 
-$LOAD_PATH << File.expand_path('../', __FILE__)
+Dir.glob(Pathname.new('api').join('**', '*.rb').expand_path) { |f| require f }
 
 module API
+  module Models
+    autoload :User, 'models/user'
+  end
+
   class App < Sinatra::Application
     configure do
       disable :method_override
@@ -20,9 +24,6 @@ module API
     end
 
     use Rack::Deflater
-  end
-
-  module Models
-    autoload :User, 'app/models/user'
+    use Routes::Users
   end
 end
