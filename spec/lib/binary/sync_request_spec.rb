@@ -36,7 +36,12 @@ RSpec.describe MFP::Binary::SyncRequest do
         .to(updated_hash)
     end
 
-    it 'should correctly read the @last_sync_pointers with the codec'
+    it 'should correctly read the @last_sync_pointers with the codec' do
+      expect { sync_req.read_body_from_codec(FakeCodec.new) }
+        .to change { sync_req.to_h[:last_sync_pointers] }
+        .from({})
+        .to('key1' => 'value1', 'key2' => 'value2')
+    end
   end
 
   describe '#packed' do
