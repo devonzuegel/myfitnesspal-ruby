@@ -1,10 +1,9 @@
-require 'rubygems'
-require 'bundler'
+require 'bundler/setup'
 
 Bundler.require
 Dotenv.load
 
-Dir.glob(Pathname.new('api').join('**', '*.rb').expand_path) { |f| require f }
+Dir.glob(Pathname.new('.').join('api', '**', '*.rb').expand_path) { |f| require f }
 
 module API
   module Models
