@@ -2,8 +2,8 @@ require 'local_file'
 require 'codec'
 require 'binary/type'
 require 'binary/packet'
-require 'mocks/packet_mocks/deserialized'
-require 'mocks/packet_mocks/raw'
+require 'support/mocks/packet_mocks/deserialized'
+require 'support/mocks/packet_mocks/raw'
 
 RSpec.describe MFP::Codec do
   let(:codec) { described_class.new(PacketMocks::Raw.sync_request_default * 2) }
@@ -72,7 +72,7 @@ RSpec.describe MFP::Codec do
   end
 
   describe 'integration test' do
-    let(:response_fixture) { LocalFile.read('spec/fixtures/response.bin') }
+    let(:response_fixture) { LocalFile.read('spec/support/fixtures/response.bin') }
 
     it 'creates the expected count of each packet type' do
       packet_type_counts = Hash.new(0)

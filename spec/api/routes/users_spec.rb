@@ -8,7 +8,7 @@ RSpec.describe API::Routes::Users do
   it 'should require the expected keys' do
     skip
 
-    get '/users'
+    get '/users/create'
     ap JSON.parse(last_response.body)
   end
 end
