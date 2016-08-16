@@ -1,8 +1,10 @@
 require 'bundler/setup'
-Bundler.require
+Bundler.require(:default, :test)
+Dotenv.load '.env.test'
 
 ENV['RACK_ENV'] = 'test'
-DB = Sequel.connect('postgres://devonzuegel@localhost/mfp_api_test')
+db = Sequel.connect(ENV['DATABASE_CONNECTION'])
+DB = db
 
 require Pathname.new('.').join('app').expand_path
 
@@ -18,8 +20,14 @@ RSpec.configure do |c|
   # Fail tests that run for longer than 1 seconds
   c.around(:each) { |t| Timeout.timeout(1, &t) }
 
-  # Rollback db transactions after each test
-  c.around(:each) { |t| DB.transaction(rollback: :always, auto_savepoint: true) { t.run } }
+  # Rollback db transactions after each test that requires the db
+  c.around(:each) do |t|
+    if t.metadata[:db]
+      DB.transaction(rollback: :always, auto_savepoint: true) { t.run }
+    else
+      t.run
+    end
+  end
 
   # Randomize order of specs
   c.order = 'random'

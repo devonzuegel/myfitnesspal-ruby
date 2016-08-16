@@ -6,9 +6,16 @@ module API
   end
 
   class App < Sinatra::Application
+    def initialize(db)
+      @db = db
+      super
+    end
+
     configure do
       disable :method_override
       disable :static
+
+      set :environment, ENV['RACK_ENV'].to_sym
 
       set :sessions,
           httponly:     true,

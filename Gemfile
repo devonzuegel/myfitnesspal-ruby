@@ -15,13 +15,17 @@ gem 'sequel',          '4.37.0'
 gem 'pg',              '0.18.4'
 gem 'shotgun',         '0.9.1'
 
-gem 'webmock',         '2.1.0'
-gem 'rack-test',       '0.6.3'
-gem 'rspec',           '~> 3.5'
-gem 'reek',            '~> 4.1'
-gem 'rubocop-rspec',   git: 'https://github.com/nevir/rubocop-rspec'
-gem 'mutant-rspec',    git: 'https://github.com/mbj/mutant.git'
+group :test do
+  gem 'webmock',         '2.1.0'
+  gem 'rack-test',       '0.6.3'
+  gem 'rspec',           '~> 3.5'
+  gem 'reek',            '~> 4.1'
+  gem 'rubocop-rspec',   git: 'https://github.com/nevir/rubocop-rspec'
+  gem 'mutant-rspec',    git: 'https://github.com/mbj/mutant.git'
+end
 
-gem 'rubocop',         '>= 0.42'
-gem 'guard',           '2.13.0'
-gem 'guard-rspec',     '4.6.4'
+group :tools do
+  gem 'rubocop',         '>= 0.42'
+  gem 'guard',           '2.13.0'
+  gem 'guard-rspec',     '4.6.4'
+end

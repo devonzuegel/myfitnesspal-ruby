@@ -1,4 +1,4 @@
-RSpec.describe API::Models::User do
+RSpec.describe API::Models::User, :db do
   describe '#create' do
     it 'adds a user to the db' do
       expect { described_class.create(username: 'uname', password: 'foo') }

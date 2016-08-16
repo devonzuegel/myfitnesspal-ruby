@@ -1,9 +1,11 @@
 require 'bundler/setup'
 
 Bundler.require
-Dotenv.load
-
-DB = Sequel.connect('postgres://devonzuegel@localhost/mfp_api_development')
+Dotenv.load '.env.dev'
 
 require './app'
-run API::App
+
+db = Sequel.connect(ENV['DATABASE_CONNECTION'])
+DB = Sequel.connect(ENV['DATABASE_CONNECTION'])
+
+run API::App.new(db)
