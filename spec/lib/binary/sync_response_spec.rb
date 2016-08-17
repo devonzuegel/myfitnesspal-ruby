@@ -4,7 +4,7 @@ require 'rspec'
 require 'binary/sync_response'
 # require 'support/mocks/fake_codec'
 
-RSpec.describe MFP::Binary::SyncResponse do
+describe MFP::Binary::SyncResponse do
   let(:sync_res) { described_class.new }
 
   # describe '#to_h' do

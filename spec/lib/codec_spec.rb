@@ -5,7 +5,7 @@ require 'binary/packet'
 require 'support/mocks/packet_mocks/deserialized'
 require 'support/mocks/packet_mocks/raw'
 
-RSpec.describe MFP::Codec do
+describe MFP::Codec do
   let(:codec) { described_class.new(PacketMocks::Raw.sync_request_default * 2) }
 
   describe '#initialize' do

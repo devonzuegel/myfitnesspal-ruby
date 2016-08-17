@@ -4,7 +4,7 @@ require 'rspec'
 require 'binary/unknown_packet'
 require 'support/mocks/fake_codec'
 
-RSpec.describe MFP::Binary::UnknownPacket do
+describe MFP::Binary::UnknownPacket do
   # let(:packet) { Binary::UnknownPacket.new }
 
   # describe '#read_body_from_codec' do

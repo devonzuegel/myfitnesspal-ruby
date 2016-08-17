@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe API::Routes::Users do
+describe API::Routes::Users do
   include Rack::Test::Methods
 
   let(:app) { described_class }

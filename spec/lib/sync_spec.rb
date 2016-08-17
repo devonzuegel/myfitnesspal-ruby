@@ -1,6 +1,6 @@
 require 'sync'
 
-RSpec.describe MFP::Sync do
+describe MFP::Sync do
   let(:ptrs) do
     {
       'deleted_item'            => '2369971689',

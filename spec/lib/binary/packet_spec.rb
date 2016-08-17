@@ -3,7 +3,7 @@ require 'rspec'
 
 require 'binary/packet'
 
-RSpec.describe MFP::Binary::Packet do
+describe MFP::Binary::Packet do
   before do
     class MyPacket < described_class
       attr_reader :packed_body

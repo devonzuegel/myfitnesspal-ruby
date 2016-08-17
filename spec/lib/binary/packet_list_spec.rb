@@ -2,7 +2,7 @@ require 'binary/packet_list'
 require 'support/mocks/packet_mocks/deserialized'
 require 'support/mocks/packet_mocks/raw'
 
-RSpec.describe MFP::Binary::PacketList do
+describe MFP::Binary::PacketList do
   let(:packet_list) { described_class.new(PacketMocks::Raw.sync_request_default * 2) }
 
   describe '#initialize' do
