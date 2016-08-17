@@ -1,8 +1,9 @@
+require_relative './support/db_context'
 require 'bundler/setup'
+
 Bundler.require(:default, :test)
 Dotenv.load '.env.test'
 
-ENV['RACK_ENV'] = 'test'
 db = Sequel.connect(ENV['DATABASE_CONNECTION'])
 DB = db
 
@@ -21,13 +22,7 @@ RSpec.configure do |c|
   c.around(:each) { |t| Timeout.timeout(1, &t) }
 
   # Rollback db transactions after each test that requires the db
-  c.around(:each) do |t|
-    if t.metadata[:db]
-      DB.transaction(rollback: :always, auto_savepoint: true) { t.run }
-    else
-      t.run
-    end
-  end
+  c.include_context 'db context', db: true
 
   # Randomize order of specs
   c.order = 'random'
