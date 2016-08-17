@@ -1,7 +1,7 @@
 require 'struct/reader'
 require 'support/mocks/packet_mocks/raw'
 
-RSpec.describe MFP::Struct::Reader do
+describe MFP::Struct::Reader do
   describe '#parse' do
     let(:extended_class) do
       class Class

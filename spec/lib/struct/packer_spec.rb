@@ -1,6 +1,6 @@
 require 'struct/packer'
 
-RSpec.describe MFP::Struct::Packer do
+describe MFP::Struct::Packer do
   let(:extended_class) do
     class Class
       extend MFP::Struct::Packer

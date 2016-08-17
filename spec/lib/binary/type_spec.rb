@@ -15,7 +15,7 @@ require 'binary/water_entry'
 require 'binary/measurement_value'
 require 'binary/delete_item'
 
-RSpec.describe MFP::Binary::Type do
+describe MFP::Binary::Type do
   describe '#supported_types' do
     it 'supports the expected types' do
       expect(described_class.supported_types).to eq(

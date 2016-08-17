@@ -1,6 +1,6 @@
 require 'http_request_params'
 
-RSpec.describe MFP::HttpRequestParams do
+describe MFP::HttpRequestParams do
   let(:dummy_boundary) { 'x' * 16 }
   let(:http_request_params) { described_class.new('DATA', dummy_boundary) }
 

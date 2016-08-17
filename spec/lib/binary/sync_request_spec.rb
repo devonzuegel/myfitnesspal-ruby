@@ -6,7 +6,7 @@ require 'binary/sync_request'
 require 'support/mocks/fake_codec'
 require 'support/mocks/packet_mocks/deserialized'
 
-RSpec.describe MFP::Binary::SyncRequest do
+describe MFP::Binary::SyncRequest do
   let(:sync_req) { described_class.new(username: 'uname', password: 'passw0rd') }
 
   let(:initial_hash) do
