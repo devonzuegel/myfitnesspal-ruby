@@ -11,7 +11,7 @@ gem 'concord',         '0.1.5'
 gem 'http',            '~> 2.0'
 gem 'anima',           '0.3.0'
 gem 'dotenv',          '2.1.1'
-gem 'sequel',          '4.37.0'
+# gem 'sequel',          '4.37.0' # TODO: remove
 gem 'pg',              '0.18.4'
 gem 'shotgun',         '0.9.1'
 gem 'dry-validation',  '0.9.5'
