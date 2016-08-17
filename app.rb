@@ -26,5 +26,9 @@ module API
 
     use Rack::Deflater
     use Routes::Users
+
+    private
+
+    attr_reader :db
   end
 end
