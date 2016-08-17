@@ -5,7 +5,10 @@ Dotenv.load '.env.dev'
 
 require './app'
 
-db = Sequel.connect(ENV['DATABASE_CONNECTION'])
-DB = Sequel.connect(ENV['DATABASE_CONNECTION'])
+env = { # Create as separate object
+  db: Sequel.connect(ENV['DATABASE_CONNECTION'])
+}
 
-run API::App.new(db)
+DB = env[:db]
+
+run API::App.new(env)
