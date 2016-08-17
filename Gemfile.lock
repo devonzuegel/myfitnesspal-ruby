@@ -187,7 +187,6 @@ GEM
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.7.5)
     safe_yaml (1.0.4)
-    sequel (4.37.0)
     shellany (0.0.1)
     shotgun (0.9.1)
       rack (>= 1.0)
@@ -247,7 +246,6 @@ DEPENDENCIES
   rspec (~> 3.5)
   rubocop (>= 0.42)
   rubocop-rspec!
-  sequel (= 4.37.0)
   shotgun (= 0.9.1)
   sinatra (= 1.4.7)
   thin (= 1.7.0)

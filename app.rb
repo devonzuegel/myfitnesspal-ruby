@@ -6,10 +6,11 @@ module API
   end
 
   class App < Sinatra::Application
-    def initialize(db)
-      @db = db
-      super
-    end
+    ## TODO
+    # def initialize(db)
+    #   @db = db
+    #   super
+    # end
 
     configure do
       disable :method_override

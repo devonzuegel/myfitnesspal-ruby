@@ -1,3 +1,4 @@
+# TODO: remove file if no longer using Sequel (replaced with ROM)
 RSpec.shared_context 'db context', shared_context: :metadata do
   let(:db) { Sequel.connect(ENV['DATABASE_CONNECTION']) }
 
