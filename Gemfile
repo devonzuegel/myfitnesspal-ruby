@@ -4,12 +4,15 @@ ruby '2.3.0'
 gem 'sinatra',         '1.4.7', :require => 'sinatra/base'
 gem 'rake',            '11.2.2'
 gem 'thin',            '1.7.0'
+
 gem 'abstract_method', '1.2.1'
+gem 'concord',         '0.1.5'
+gem 'anima',           '0.3.0'
+gem 'procto',          '0.0.3'
+
 gem 'colorize',        '0.7.7'
 gem 'awesome_print',   '1.6.1'
-gem 'concord',         '0.1.5'
 gem 'http',            '~> 2.0'
-gem 'anima',           '0.3.0'
 gem 'dotenv',          '2.1.1'
 # gem 'sequel',          '4.37.0' # TODO: remove
 gem 'pg',              '0.18.4'
