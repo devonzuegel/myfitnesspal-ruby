@@ -1,5 +1,4 @@
 data/
 .bundle/
-.env.dev
-.env.test
+.env.*
 Gemfile.lock
