@@ -240,6 +240,7 @@ DEPENDENCIES
   http (~> 2.0)
   mutant-rspec!
   pg (= 0.18.4)
+  procto (= 0.0.3)
   rack-test (= 0.6.3)
   rake (= 11.2.2)
   reek (~> 4.1)
