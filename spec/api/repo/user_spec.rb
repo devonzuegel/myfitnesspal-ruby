@@ -1,5 +1,5 @@
 describe API::Repo::User, :db do
-  let(:repo)      { described_class.new(rom) }
+  let(:repo)      { described_class.new(repository) }
   let(:attrs)     { { username: 'username', password: 'password' } }
   let(:duplicate) { { username: 'duplicate-username', password: 'password' } }
 
