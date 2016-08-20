@@ -1,5 +1,7 @@
 module DB
   class Setup
+    Sequel.extension :migration, :core_extensions
+
     include Procto.call, Concord.new(:db_connection_str, :version)
 
     DB_ROOT = Pathname.new(__FILE__).parent
