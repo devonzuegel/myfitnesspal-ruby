@@ -11,4 +11,9 @@ describe API::SqlRepo do
     described_class.new(uri)
     expect(Sequel).to have_received(:connect).with(uri)
   end
+
+  it 'connects to a sql db' do
+    expect(described_class.new(uri).db)
+      .to eql(Sequel.mock(host: 'postgres'))
+  end
 end
