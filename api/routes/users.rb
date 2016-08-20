@@ -1,14 +1,21 @@
 module API
   module Routes
     class Users < Base
-      get '/users' do
-        json([])
-        # json(::API::Models::User.all.map(&:to_hash))
-      end
+      # def initialize(x)
+      #   ap x
+      #   super
+      # end
 
       get '/users/create' do
-        json([])
-        # json(::API::Models::User.create(username: 'devon', password: 'xxxxx').to_hash)
+        validation = Schema::User::Creation.call(params.symbolize_keys)
+        if validation.success?
+          # # TODO: create user from passed-in repo
+          # result = Repo::User.new(...).create(validation.output)
+          # # TODO: check MFP login
+          json(validation.output)
+        else
+          json(errors: validation.messages)
+        end
       end
     end
   end

@@ -6,9 +6,19 @@ module API
   end
 
   class App < Sinatra::Application
-    def initialize(env)
-      @env = env
+    def initialize(environment)
+      ap environment
+      @environment = environment
       super
+    end
+
+    def self.registered(app)
+      ap app
+      puts '-------------------'.yellow
+      puts '-------------------'.yellow
+      puts '-------------------'.yellow
+      puts '-------------------'.yellow
+      puts '-------------------'.yellow
     end
 
     configure do
@@ -18,17 +28,16 @@ module API
       set :environment, ENV['RACK_ENV'].to_sym
 
       set :sessions,
-          httponly:     true,
-          secure:       production?,
-          expire_after: 31_557_600, # 1 year
-          secret:       ENV['SESSION_SECRET']
+          httponly: true,
+          secure:   production?,
+          secret:   ENV['SESSION_SECRET']
     end
 
     use Rack::Deflater
     use Routes::Users
 
-    private
+    # private
 
-    attr_reader :env
+    # attr_reader :environment
   end
 end
