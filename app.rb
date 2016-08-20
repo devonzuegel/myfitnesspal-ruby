@@ -6,11 +6,10 @@ module API
   end
 
   class App < Sinatra::Application
-    ## TODO
-    # def initialize(db)
-    #   @db = db
-    #   super
-    # end
+    def initialize(env)
+      @env = env
+      super
+    end
 
     configure do
       disable :method_override
@@ -30,6 +29,6 @@ module API
 
     private
 
-    attr_reader :db
+    attr_reader :env
   end
 end
