@@ -22,7 +22,7 @@ RSpec.configure do |c|
   c.around(:each) { |t| Timeout.timeout(1, &t) }
 
   # # Rollback db transactions after each test that requires the db
-  # c.include_context 'db context', db: true
+  c.include_context 'db context', db: true
 
   # Randomize order of specs
   c.order = 'random'
