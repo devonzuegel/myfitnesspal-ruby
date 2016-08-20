@@ -1,14 +1,13 @@
 require 'bundler/setup'
 
 Bundler.require
-Dotenv.load '.env.dev'
+Dotenv.load '.env.development'
 
 require './app'
 
-# env = { # TODO: Create as separate object
-#   db: Sequel.connect(ENV['DATABASE_CONNECTION'])
-# }
+environment =
+  API::Env.new(
+    repository: API::SqlRepo.new(ENV['DATABASE_CONNECTION'])
+  )
 
-# DB = env[:db]
-
-run API::App.new(env)
+run API::App.new(environment)
