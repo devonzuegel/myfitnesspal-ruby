@@ -4,6 +4,8 @@ ruby '2.3.0'
 gem 'sinatra',         '1.4.7', :require => 'sinatra/base'
 gem 'rake',            '11.2.2'
 gem 'thin',            '1.7.0'
+gem 'dotenv',          '2.1.1'
+gem 'shotgun',         '0.9.1'
 
 gem 'abstract_method', '1.2.1'
 gem 'concord',         '0.1.5'
@@ -12,12 +14,16 @@ gem 'procto',          '0.0.3'
 
 gem 'colorize',        '0.7.7'
 gem 'awesome_print',   '1.6.1'
-gem 'http',            '~> 2.0'
-gem 'dotenv',          '2.1.1'
-gem 'sequel',          '4.37.0'
+
 gem 'pg',              '0.18.4'
-gem 'shotgun',         '0.9.1'
+gem 'sequel',          '4.37.0'
 gem 'dry-validation',  '0.9.5'
+
+gem 'rom',             '2.0.0'
+gem 'rom-repository',  '0.3.1'
+gem 'rom-sql',         '0.8.0'
+
+gem 'http',            '~> 2.0'
 
 group :test do
   gem 'webmock',         '2.1.0'
