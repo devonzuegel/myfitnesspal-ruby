@@ -1,19 +1,18 @@
 module API
   module Routes
     class Base < Sinatra::Application
-      # def self.registered(app)
-      #   puts '-------------------'.yellow
-      #   puts '-------------------'.yellow
-      #   puts '-------------------'.yellow
-      #   puts '-------------------'.yellow
-      #   puts '-------------------'.yellow
-      # end
+      def initialize(environment)
+        @environment = environment
+        super
+      end
 
-      # private
+      private
+
+      attr_reader :environment
 
       def symbolize_keys(myhash)
         myhash.keys.each do |key|
-          myhash[(key.to_sym rescue key) || key] = myhash.delete(key)
+          myhash[key.to_sym] = myhash.delete(key)
         end
       end
 

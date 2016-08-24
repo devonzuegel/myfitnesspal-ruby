@@ -1,11 +1,6 @@
 module API
   module Routes
-    class Users < Base
-      # def initialize(x)
-      #   ap x
-      #   super
-      # end
-
+    class Users < Routes::Base
       get '/users/create' do
         validation = Schema::User::Creation.call(params.symbolize_keys)
         if validation.success?

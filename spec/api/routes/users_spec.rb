@@ -1,7 +1,7 @@
 describe API::Routes::Users do
   include Rack::Test::Methods
 
-  let(:app)          { described_class.new('abcdefg 123123123') }
+  let(:app)          { described_class.new(instance_double(API::Env)) }
   let(:valid_params) { { 'username' => 'devon', 'password' => 'x' * 6 } }
   let(:missing_keys_error) do
     {
@@ -13,7 +13,7 @@ describe API::Routes::Users do
   end
 
   describe 'get /users/create' do
-    it 'should require the expected keys' do
+    it 'requires the expected keys' do
       get '/users/create'
       expect(JSON.parse(last_response.body))
         .to eql(missing_keys_error)
