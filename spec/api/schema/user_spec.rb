@@ -16,7 +16,7 @@ describe API::Schema::User do
       end
 
       it 'succeed' do
-        expect(schema.call(valid_params).success?).to eql true
+        expect(schema.call(valid_params).success?).to be true
       end
     end
 

@@ -15,13 +15,13 @@ describe MFP::Struct::Reader do
 
     it 'reads the expected bytes from the given bytestring' do
       parsed, rest = extended_class.parse(packed, 2, 's>')
-      expect(parsed).to eql(1)
+      expect(parsed).to be(1)
       expect(rest).to eql("\x00\x00\x00\x14JUNK".b)
     end
 
     it 'reads full string and does not return a remainder at the end of a parse' do
       parsed, rest = extended_class.parse("\x00\x01".b, 2, 's>')
-      expect(parsed).to eql(1)
+      expect(parsed).to be(1)
       expect(rest).to eql('')
     end
 
