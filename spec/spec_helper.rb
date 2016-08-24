@@ -7,7 +7,7 @@ Dotenv.load '.env.test'
 # db = Sequel.connect(ENV['DATABASE_CONNECTION'])
 # DB = db
 
-require Pathname.new('.').join('app').expand_path
+require Pathname.new('.').join('api', 'app').expand_path
 
 RSpec.configure do |c|
   # Tag examples with `:focus` to run them individually. When
