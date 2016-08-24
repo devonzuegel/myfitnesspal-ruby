@@ -1,23 +1,11 @@
 Dir.glob(Pathname.new('.').join('api', '**', '*.rb').expand_path) { |f| require f }
 
 module API
-  require 'sinatra/base'
-
   module Models
     autoload :User, 'models/user'
   end
 
-  class App < Sinatra::Application
-    def initialize(environment)
-      @environment = environment
-      super
-    end
-
-    get '/' do
-      ap environment.to_h
-      'not implemented'
-    end
-
+  class App < Routes::Base
     configure do
       disable :method_override
       disable :static
@@ -31,10 +19,6 @@ module API
     end
 
     use Rack::Deflater
-    use Routes::Users
-
-    private
-
-    attr_reader :environment
+    use Routes::Users.new(environment)
   end
 end
