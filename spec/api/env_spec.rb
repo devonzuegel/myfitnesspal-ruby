@@ -1,10 +1,24 @@
 describe API::Env do
   let(:db)         { Sequel.mock(host: 'postgres') }
   let(:repository) { instance_double(API::SqlRepo, db: db, to_s: 'mockuri') }
-  let(:env)        { described_class.new(repository: repository) }
+  let(:env) do
+    described_class.new(
+      repository: repository,
+      secret:     'mocksecret',
+      rack_env:   'mockrackenv'
+    )
+  end
 
   it 'initializes with a repository' do
     expect(env.repository).to eql repository
+  end
+
+  it 'initializes with a secret' do
+    expect(env.secret).to eql 'mocksecret'
+  end
+
+  it 'initializes with a rack_env' do
+    expect(env.rack_env).to eql 'mockrackenv'
   end
 
   describe '#to_h' do
