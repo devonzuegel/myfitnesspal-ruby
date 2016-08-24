@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.3.0'
 
-gem 'sinatra',         '1.4.7', :require => 'sinatra/base'
+gem 'sinatra',         '1.4.7', require: 'sinatra/base'
 gem 'rake',            '11.2.2'
 gem 'thin',            '1.7.0'
 gem 'dotenv',          '2.1.1'

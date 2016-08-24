@@ -36,7 +36,7 @@ describe API::Repo::User, :db do
   describe '#query' do
     it '#query' do
       expect(repo.query(username: duplicate[:username]).count)
-        .to eql(1)
+        .to be(1)
     end
   end
 end
