@@ -2,6 +2,8 @@ module API
   class SqlRepo
     include Concord.new(:uri)
 
+    attr_reader :uri
+
     def initialize(uri)
       super(uri)
       ROM.container(config)
@@ -9,6 +11,10 @@ module API
 
     def db
       Sequel.connect(uri)
+    end
+
+    def to_s
+      uri
     end
 
     private
