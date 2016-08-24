@@ -3,7 +3,7 @@ require 'bundler/setup'
 Bundler.require
 Dotenv.load '.env.development'
 
-require './app'
+require './api/app'
 
 environment =
   API::Env.new(
