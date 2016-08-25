@@ -7,7 +7,7 @@ require './api/app'
 
 environment =
   API::Env.new(
-    repository: API::SqlRepo.new(ENV['DATABASE_CONNECTION']),
+    repository: API::SqlRepo.new(ENV['DATABASE_URL']),
     rack_env:   ENV['RACK_ENV'],
     secret:     ENV['SESSION_SECRET']
   )
