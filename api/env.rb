@@ -6,7 +6,9 @@ module API
 
     def to_h
       {
-        repository: repository.to_s
+        repository: repository.to_s,
+        secret:     secret,
+        rack_env:   rack_env
       }
     end
   end
