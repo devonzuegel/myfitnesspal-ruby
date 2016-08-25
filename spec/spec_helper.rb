@@ -4,9 +4,6 @@ require 'bundler/setup'
 Bundler.require(:default, :test)
 Dotenv.load '.env.test'
 
-# db = Sequel.connect(ENV['DATABASE_CONNECTION'])
-# DB = db
-
 require Pathname.new('.').join('api', 'app').expand_path
 
 RSpec.configure do |c|
