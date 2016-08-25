@@ -12,6 +12,4 @@ environment =
     secret:     ENV['SESSION_SECRET']
   )
 
-ap environment.to_h
-
 run API::App.new(API::Env::Wrapper.new(environment))
