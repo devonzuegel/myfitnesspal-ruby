@@ -7,7 +7,7 @@ Dotenv.load(env_file)
 
 namespace :db do
   require_relative 'db/setup'
-  db_connection_str = ENV.fetch('DATABASE_CONNECTION')
+  db_connection_str = ENV.fetch('DATABASE_URL')
   db_name           = db_connection_str.split('/').last
 
   task :setup, [:version] do |_, args|
