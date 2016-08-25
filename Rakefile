@@ -1,9 +1,23 @@
 require 'bundler/setup'
 Bundler.require
 
+def permission_granted?(question)
+  loop do
+    print "#{question} (Y/N)  "
+    answer = gets.chomp
+    return true  if answer.downcase == 'y'
+    return false if answer.downcase == 'n'
+    puts '  > Please respond with Y or N'
+  end
+end
+
 env_file = Pathname.new(ENV.fetch('ENV_FILE', '.env.development'))
-puts "Loading environment from #{env_file}...".gray
-Dotenv.load(env_file)
+if env_file.exist?
+  puts "Loading environment from #{env_file}...".gray
+  Dotenv.load(env_file)
+else
+  puts "WARNING: #{env_file} does not exist. Continuing without loading it into environment."
+end
 
 namespace :db do
   require_relative 'db/setup'
