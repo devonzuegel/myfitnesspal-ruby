@@ -31,5 +31,13 @@ describe API::Routes::Users, :db do
         .to change { db[:users].count }
         .by(1)
     end
+
+    it 'fails when given a duplicate username' do
+      API::Repo::User.any_instance.stub(:available?).and_return(false)
+
+      get '/users/create', valid_params
+      expect(JSON.parse(last_response.body))
+        .to eql('errors' => { 'username' => ['has already been taken'] })
+    end
   end
 end
