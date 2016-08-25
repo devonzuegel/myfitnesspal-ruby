@@ -23,7 +23,11 @@ describe API::Env do
 
   describe '#to_h' do
     it 'provides a string representation of the environment' do
-      expect(env.to_h).to eql(repository: 'mockuri')
+      expect(env.to_h).to eql(
+        repository: 'mockuri',
+        secret:     'mocksecret',
+        rack_env:   'mockrackenv'
+      )
     end
   end
 end
