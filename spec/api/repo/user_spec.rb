@@ -52,7 +52,6 @@ describe API::Repo::User, :db do
 
     it 'is true when the username does not yet exist' do
       expect(user_repo.available?(username: 'available-username')).to eql true
-      expect(user_repo.available?(username: 'available-username', x: 1)).to eql true
     end
 
     it 'handles (but ignores) keywords besides :username' do
