@@ -11,5 +11,11 @@ module API
         rack_env:   rack_env
       }
     end
+
+    class Wrapper
+      include Concord.new(:app_env)
+
+      attr_reader :app_env
+    end
   end
 end

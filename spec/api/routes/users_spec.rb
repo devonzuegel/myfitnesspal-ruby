@@ -1,7 +1,8 @@
 describe API::Routes::Users do
   include Rack::Test::Methods
 
-  let(:app)          { described_class.new(instance_double(API::Env)) }
+  let(:env)          { instance_double(API::Env, to_h: {}) }
+  let(:app)          { described_class.new(instance_double(API::Env::Wrapper, app_env: env)) }
   let(:valid_params) { { 'username' => 'devon', 'password' => 'x' * 6 } }
   let(:missing_keys_error) do
     {
