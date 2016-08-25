@@ -6,6 +6,9 @@ module API
   end
 
   class App < Routes::Base
+    get '/favicon.ico' do
+    end
+
     use Routes::Users
   end
 end
