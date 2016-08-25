@@ -6,10 +6,7 @@ module API
 
     attr_reader :uri
 
-    def_delegator :container, :gateways
-    def_delegator :container, :relations
-    def_delegator :container, :relation
-    def_delegator :container, :unique?
+    def_delegators :container, *%i[gateways relations relation unique?]
 
     def initialize(uri)
       super(uri)
