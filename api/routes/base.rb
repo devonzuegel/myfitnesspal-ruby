@@ -4,6 +4,9 @@ module API
     class Base < Sinatra::Application
       include API::Utils
 
+      set :raise_errors, true
+      set :show_exceptions, false
+
       def initialize(env_wrapper)
         @app_env = env_wrapper.app_env
         super

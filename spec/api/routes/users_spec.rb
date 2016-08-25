@@ -1,7 +1,7 @@
-describe API::Routes::Users do
+describe API::Routes::Users, :db do
   include Rack::Test::Methods
 
-  let(:env)          { instance_double(API::Env, to_h: {}) }
+  let(:env)          { instance_double(API::Env, to_h: {}, repository: repository) }
   let(:app)          { described_class.new(instance_double(API::Env::Wrapper, app_env: env)) }
   let(:valid_params) { { 'username' => 'devon', 'password' => 'x' * 6 } }
   let(:missing_keys_error) do
@@ -26,6 +26,10 @@ describe API::Routes::Users do
         .to eql(valid_params)
     end
 
-    it 'creates a new user in the repository'
+    it 'creates a new user in the repository' do
+      expect { get '/users/create', valid_params }
+        .to change { db[:users].count }
+        .by(1)
+    end
   end
 end
