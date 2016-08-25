@@ -2,7 +2,7 @@ module API
   module Routes
     class Users < Routes::Base
       get '/users/create' do
-        validation = Schema::User::Creation.call(params.symbolize_keys)
+        validation = Schema::User::Creation.call(symbolize_keys(params))
         if validation.success?
           # # TODO: create user from passed-in repo
           # result = Repo::User.new(...).create(validation.output)
