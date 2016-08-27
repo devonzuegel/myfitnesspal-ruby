@@ -1,7 +1,3 @@
-require 'bundler/setup'
-require 'rspec'
-
-require 'binary/unknown_packet'
 require 'support/mocks/fake_codec'
 
 describe MFP::Binary::UnknownPacket do

@@ -1,4 +1,3 @@
-require 'binary/packet_list'
 require 'support/mocks/packet_mocks/deserialized'
 require 'support/mocks/packet_mocks/raw'
 

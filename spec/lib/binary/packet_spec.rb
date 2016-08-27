@@ -1,8 +1,3 @@
-require 'bundler/setup'
-require 'rspec'
-
-require 'binary/packet'
-
 describe MFP::Binary::Packet do
   before do
     class MyPacket < described_class

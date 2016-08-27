@@ -1,7 +1,3 @@
-require 'local_file'
-require 'codec'
-require 'binary/type'
-require 'binary/packet'
 require 'support/mocks/packet_mocks/deserialized'
 require 'support/mocks/packet_mocks/raw'
 

@@ -1,8 +1,3 @@
-require 'bundler/setup'
-require 'rspec'
-require 'json'
-
-require 'binary/sync_request'
 require 'support/mocks/fake_codec'
 require 'support/mocks/packet_mocks/deserialized'
 

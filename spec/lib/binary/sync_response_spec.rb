@@ -1,7 +1,3 @@
-require 'bundler/setup'
-require 'rspec'
-
-require 'binary/sync_response'
 # require 'support/mocks/fake_codec'
 
 describe MFP::Binary::SyncResponse do

@@ -1,20 +1,3 @@
-require 'bundler/setup'
-require 'rspec'
-
-require 'binary/type'
-require 'binary/sync_request'
-require 'binary/sync_response'
-require 'binary/user_property_update'
-require 'binary/measurement_types'
-require 'binary/food'
-require 'binary/meal_ingredients'
-require 'binary/food_entry'
-require 'binary/exercise'
-require 'binary/exercise_entry'
-require 'binary/water_entry'
-require 'binary/measurement_value'
-require 'binary/delete_item'
-
 describe MFP::Binary::Type do
   describe '#supported_types' do
     it 'supports the expected types' do

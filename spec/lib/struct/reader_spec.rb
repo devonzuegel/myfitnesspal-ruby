@@ -1,4 +1,3 @@
-require 'struct/reader'
 require 'support/mocks/packet_mocks/raw'
 
 describe MFP::Struct::Reader do

@@ -1,5 +1,3 @@
-require 'struct/packer'
-
 describe MFP::Struct::Packer do
   let(:extended_class) do
     class Class

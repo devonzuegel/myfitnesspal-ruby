@@ -1,5 +1,3 @@
-require 'sync'
-
 describe MFP::Sync do
   let(:ptrs) do
     {
@@ -17,6 +15,7 @@ describe MFP::Sync do
     }
   end
 
+  let(:good_credentials) { [ENV['MFP_USERNAME'], ENV['MFP_PASSWORD']] }
   let(:credentials)  { %w[myusername mypassword] }
   let(:sync)         { described_class.new(*credentials) }
   let(:partial_sync) { described_class.new(*credentials, ptrs) }
@@ -58,7 +57,7 @@ describe MFP::Sync do
     end
   end
 
-  # it '............', :focus do
-  #   ap LocalFile.read_yml(fixture('packets-partial-sync.yml'))
-  # end
+  it '............', :skip do
+    ap described_class.new(*good_credentials).all_packets.first.to_h
+  end
 end
