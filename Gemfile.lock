@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/mbj/mutant.git
-  revision: cfc09e921c4ecf6ea903effb4ddd581d4ad8ea22
+  revision: fe414f99a0ec06af03cc43154fe0140b4b43783b
   specs:
     mutant (0.8.11)
       abstract_type (~> 0.0.7)
@@ -16,6 +16,7 @@ GIT
       parallel (~> 1.3)
       parser (~> 2.3.0, >= 2.3.0.2)
       procto (~> 0.0.2)
+      regexp_parser (~> 0.3.6)
       unparser (~> 0.2.5)
     mutant-rspec (0.8.11)
       mutant (~> 0.8.11)
@@ -167,6 +168,7 @@ GEM
       codeclimate-engine-rb (~> 0.3.1)
       parser (~> 2.3.1, >= 2.3.1.2)
       rainbow (~> 2.0)
+    regexp_parser (0.3.6)
     rom (2.0.0)
       concurrent-ruby (~> 1.0)
       dry-equalizer (~> 0.2)
