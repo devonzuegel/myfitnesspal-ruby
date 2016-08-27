@@ -5,7 +5,8 @@ describe API::Env do
     described_class.new(
       repository: repository,
       secret:     'mocksecret',
-      rack_env:   'mockrackenv'
+      rack_env:   'mockrackenv',
+      favicon:    'favicon_path'
     )
   end
 
@@ -26,7 +27,8 @@ describe API::Env do
       expect(env.to_h).to eql(
         repository: 'mockuri',
         secret:     'mocksecret',
-        rack_env:   'mockrackenv'
+        rack_env:   'mockrackenv',
+        favicon:    'favicon_path'
       )
     end
   end
