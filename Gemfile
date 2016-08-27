@@ -36,6 +36,6 @@ end
 
 group :tools do
   gem 'rubocop',         '>= 0.42'
-  gem 'guard',           '2.13.0'
+  gem 'guard',           '2.14.0'
   gem 'guard-rspec',     '4.6.4'
 end
