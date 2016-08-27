@@ -34,8 +34,9 @@ describe MFP::Sync do
   describe '#all_packets' do
     let(:fake_client) { instance_double(HTTP::Client) }
     let(:fake_results) do
-      fixtures = %w[spec/support/fixtures/response-1.bin spec/support/fixtures/response-2.bin]
-      fixtures.map { |f| instance_double(HTTP::Response, body: LocalFile.read(f)) }
+      %w[response-1.bin response-2.bin]
+        .map { |filename| fixture(filename) }
+        .map { |f| instance_double(HTTP::Response, body: LocalFile.read(f)) }
     end
 
     before do
@@ -56,4 +57,8 @@ describe MFP::Sync do
       )
     end
   end
+
+  # it '............', :focus do
+  #   ap LocalFile.read_yml(fixture('packets-partial-sync.yml'))
+  # end
 end

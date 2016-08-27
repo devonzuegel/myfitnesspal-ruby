@@ -72,7 +72,7 @@ describe MFP::Codec do
   end
 
   describe 'integration test' do
-    let(:response_fixture) { LocalFile.read('spec/support/fixtures/response.bin') }
+    let(:response_fixture) { LocalFile.read(fixture('response.bin')) }
 
     it 'creates the expected count of each packet type' do
       packet_type_counts = Hash.new(0)
