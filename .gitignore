@@ -3,3 +3,6 @@ data/
 .env.*
 Gemfile.lock
 tmp/
+
+spec/support/fixtures/packets-complete-sync.yml
+spec/support/fixtures/packets-partial-sync.yml
