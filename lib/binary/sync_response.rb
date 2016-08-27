@@ -15,7 +15,7 @@ module MFP
       def to_h
         super.merge(
           status_code:            @status_code,
-          status_message:         @status_message,
+          status_message:         status_message,
           error_message:          @error_message,
           optional_extra_message: @optional_extra_message,
           master_id:              @master_id,
@@ -56,26 +56,30 @@ module MFP
       end
 
       def status_message
-        status_messages[@status_code]
+        STATUS_MSGS[@status_code]
       end
 
       def status_message=(value)
-        unless status_messages.keys.include?(value)
+        unless STATUS_MSGS.keys.include?(value)
           fail ValueError "Unknown status message #{value}"
         end
       end
 
+      def success?
+        status_code.zero?
+      end
+
       private
 
-      def status_messages
-        defined_messages = {
-          0 => 'ok',
-          1 => 'invalid_registration',
-          2 => 'authentication_failed'
-        }
-        defined_messages.default = 'unknown'
-        defined_messages
-      end
+      attr_reader :status_code
+
+      STATUS_MSGS =
+        {
+          0 => 'Authenticated successfully',
+          1 => 'Invalid registration',
+          2 => 'Authentication failed'
+        }.freeze
+      private_constant(:STATUS_MSGS)
     end
   end
 end
