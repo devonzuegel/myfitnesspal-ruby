@@ -11,6 +11,7 @@ gem 'abstract_method', '1.2.1'
 gem 'concord',         '0.1.5'
 gem 'anima',           '0.3.0'
 gem 'procto',          '0.0.3'
+gem 'memoizable',      '0.4.2'
 
 gem 'colorize',        '0.7.7'
 gem 'awesome_print',   '1.6.1'

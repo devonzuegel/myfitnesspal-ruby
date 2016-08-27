@@ -266,6 +266,7 @@ DEPENDENCIES
   guard (= 2.13.0)
   guard-rspec (= 4.6.4)
   http (~> 2.0)
+  memoizable (= 0.4.2)
   mutant-rspec!
   pg (= 0.18.4)
   procto (= 0.0.3)

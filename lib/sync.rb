@@ -9,7 +9,7 @@ require 'codec'
 
 module MFP
   class Sync
-    include Concord.new(:username, :password, :last_sync_pointers)
+    include Concord.new(:username, :password, :last_sync_pointers), Memoizable
 
     attr_reader :last_sync_pointers
 
@@ -18,15 +18,13 @@ module MFP
     end
 
     def all_packets
-      return @packets unless @packets.nil?
-
-      @packets = []
+      packets = []
       first_page = true
       loop do
         packet_count = 0
         res = response
         Codec.new(res.body.to_s).each_packet do |packet|
-          @packets << packet
+          packets << packet
 
           if packet.class == Binary::SyncResponse
             @last_sync_pointers = packet.last_sync_pointers
@@ -35,11 +33,12 @@ module MFP
           end
         end
 
-        return @packets if packet_count < PACKETS_PER_RESPONSE && !first_page
+        return packets if packet_count < PACKETS_PER_RESPONSE && !first_page
         first_page = false
       end
-      @packets
+      packets
     end
+    memoize :all_packets
 
     private
 
