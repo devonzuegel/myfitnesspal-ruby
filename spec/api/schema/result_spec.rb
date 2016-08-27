@@ -34,4 +34,36 @@ describe API::Schema::Result do
       expect(result.output).to eql({})
     end
   end
+
+  describe '#<<' do
+    it 'merging identical successes has no effect' do
+      combined = successful_res << successful_res
+      expect(combined).to eql(successful_res)
+    end
+
+    it 'merging a success with a different success results in output from the first' do
+      combined = successful_res << described_class.new(no_messages, param2: 'blah')
+      expect(combined).to eql(successful_res)
+    end
+
+    it 'adding success to failure results in that same failure' do
+      combined = result << successful_res
+      expect(combined).to eql(result)
+    end
+
+    it 'adding failure to success results in messages from failure and output from success' do
+      combined = described_class.new(no_messages, param2: 'blah') << result
+      expect(combined).to eql(described_class.new(result.messages, param2: 'blah'))
+    end
+
+    it 'adding 2 failures results in a failure of combined messages' do
+      failure1      = described_class.new({ a: 'blah' }, 'output1')
+      failure2      = described_class.new({ b: 'moon' }, 'output2')
+      expected_msgs = failure1.messages.merge(failure2.messages)
+
+      expect(failure1 << failure2).to eql(described_class.new(expected_msgs, 'output1'))
+    end
+
+    it 'adding 2 failures combines their messages, including shared keywords'
+  end
 end

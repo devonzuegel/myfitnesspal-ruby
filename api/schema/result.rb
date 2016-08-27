@@ -16,6 +16,11 @@ module API
           {}
         end
       end
+
+      def <<(other)
+        new_messages = messages.merge(other.messages)
+        self.class.new(new_messages, partial_output)
+      end
     end
   end
 end

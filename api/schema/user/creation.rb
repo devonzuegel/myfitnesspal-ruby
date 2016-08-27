@@ -2,7 +2,7 @@ module API
   module Schema
     module User
       class Creation
-        include Procto.call, Concord.new(:params, :repository), Memoizable
+        include Procto.call, Concord.new(:params, :repository)
 
         def call
           Schema::Result.new(messages, dry_schema.output)
