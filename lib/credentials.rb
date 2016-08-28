@@ -13,7 +13,7 @@ module MFP
     private
 
     def response_packet
-      Codec.new(response.body).each_packet { |pkt| return pkt }
+      Codec.new(response.body.to_s).each_packet { |pkt| return pkt }
 
       fail EOFError, 'No packet of type Binary::SyncResponse found in response'
     end

@@ -15,7 +15,6 @@ describe MFP::Sync do
     }
   end
 
-  let(:good_credentials) { [ENV['MFP_USERNAME'], ENV['MFP_PASSWORD']] }
   let(:credentials)  { %w[myusername mypassword] }
   let(:sync)         { described_class.new(*credentials) }
   let(:partial_sync) { described_class.new(*credentials, ptrs) }
@@ -55,9 +54,5 @@ describe MFP::Sync do
         MFP::Binary::UserPropertyUpdate => 2
       )
     end
-  end
-
-  it '............', :skip do
-    ap described_class.new(*good_credentials).all_packets.first.to_h
   end
 end

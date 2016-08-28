@@ -1,6 +1,11 @@
 describe API::Routes::Users, :db do
   include Rack::Test::Methods
 
+  before do
+    fake_instance = instance_double(MFP::Credentials, messages: {})
+    stub_const('MFP::Credentials', class_double(MFP::Credentials, new: fake_instance))
+  end
+
   let(:env)          { instance_double(API::Env, to_h: {}, repository: repository) }
   let(:app)          { described_class.new(instance_double(API::Env::Wrapper, app_env: env)) }
   let(:valid_params) { { 'username' => 'devon', 'password' => 'x' * 6 } }

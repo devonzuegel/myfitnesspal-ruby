@@ -1,6 +1,6 @@
-require 'binary/packet'
-require 'binary/type'
-require 'binary/meal_ingredient'
+require_relative 'packet'
+require_relative 'type'
+require_relative 'meal_ingredient'
 
 module MFP
   module Binary

@@ -1,11 +1,7 @@
-require 'concord'
-require 'http'
-require 'securerandom'
-require 'local_file'
-
-require 'binary/sync_request'
-require 'http_request_params'
-require 'codec'
+require_relative 'local_file'
+require_relative 'binary/sync_request'
+require_relative 'http_request_params'
+require_relative 'codec'
 
 module MFP
   class Sync

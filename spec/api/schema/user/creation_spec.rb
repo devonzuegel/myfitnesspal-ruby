@@ -3,6 +3,11 @@ describe API::Schema::User::Creation do
   let(:valid_username) { 'bazz' }
   let(:valid_password) { 'foobar' }
 
+  before do
+    fake_instance = instance_double(MFP::Credentials, messages: {})
+    stub_const('MFP::Credentials', class_double(MFP::Credentials, new: fake_instance))
+  end
+
   context 'valid input' do
     let(:valid_params) { { username: valid_username, password: valid_password } }
 
@@ -89,7 +94,5 @@ describe API::Schema::User::Creation do
       expect(described_class.call(params, repo).messages)
         .to eql(password: ['must be filled', 'size must be within 6 - 255'])
     end
-
-    it 'fails when given the incorrect MFP password'
   end
 end

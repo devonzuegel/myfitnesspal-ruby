@@ -1,9 +1,6 @@
-require 'bundler/setup'
-require 'abstract_method'
-
-require 'binary/packet'
-require 'binary/type'
-require 'struct/packer'
+require_relative 'packet'
+require_relative 'type'
+require_relative '../struct/packer'
 
 module MFP
   module Binary

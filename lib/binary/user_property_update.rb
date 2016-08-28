@@ -1,5 +1,5 @@
-require 'binary/packet'
-require 'binary/type'
+require_relative 'packet'
+require_relative 'type'
 
 module MFP
   module Binary

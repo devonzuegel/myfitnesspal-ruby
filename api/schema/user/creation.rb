@@ -2,26 +2,15 @@ module API
   module Schema
     module User
       class Creation
-        include Procto.call, Concord.new(:params, :repository)
+        include Procto.call, Concord.new(:credentials, :repository)
 
         def call
-          Schema::Result.new(messages, dry_schema.output)
+          return dry_schema unless dry_schema.success?
+          mfp_auth = MFPAuth.call(credentials, repository, MFP::Credentials)
+          dry_schema << mfp_auth
         end
 
         private
-
-        def messages
-          if dry_schema.success?
-            username_availability
-          else
-            dry_schema.messages
-          end
-        end
-
-        def username_availability
-          return {} if repository.available?(params)
-          { username: ['has already been taken'] }
-        end
 
         def dry_schema
           schema =
@@ -30,7 +19,8 @@ module API
               required(:password).filled(:str?, size?: 6..255)
             end
 
-          schema.call(params)
+          result = schema.call(credentials)
+          Result.new(result.messages, result.output)
         end
       end
     end

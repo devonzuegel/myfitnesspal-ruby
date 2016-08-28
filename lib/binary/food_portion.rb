@@ -1,4 +1,4 @@
-require 'binary/packet'
+require_relative 'packet'
 
 module MFP
   module Binary

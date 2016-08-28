@@ -1,7 +1,7 @@
 module API
   ROOT = Pathname.new('.').expand_path
-  Dir.glob(ROOT.join('api', '**', '*.rb')) { |f| require f }
   Dir.glob(ROOT.join('lib', '**', '*.rb')) { |f| require f }
+  Dir.glob(ROOT.join('api', '**', '*.rb')) { |f| require f }
 
   module Models
     autoload :User, 'models/user'

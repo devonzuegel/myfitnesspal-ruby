@@ -63,7 +63,5 @@ describe API::Schema::Result do
 
       expect(failure1 << failure2).to eql(described_class.new(expected_msgs, 'output1'))
     end
-
-    it 'adding 2 failures combines their messages, including shared keywords'
   end
 end
