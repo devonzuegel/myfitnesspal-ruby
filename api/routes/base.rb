@@ -1,9 +1,6 @@
-require_relative '../utils'
 module API
   module Routes
     class Base < Sinatra::Application
-      include API::Utils
-
       set :raise_errors, true
       set :show_exceptions, false
 

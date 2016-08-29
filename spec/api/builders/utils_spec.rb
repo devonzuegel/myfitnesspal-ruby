@@ -1,4 +1,4 @@
-describe API::Utils do
+describe API::Builders::Utils do
   include described_class
 
   describe '#symbolize_keys' do
