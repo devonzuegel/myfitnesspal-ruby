@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.0'
+ruby '2.3.1'
 
 gem 'sinatra',         '1.4.7', require: 'sinatra/base'
 gem 'rake',            '11.2.2'
@@ -37,6 +37,6 @@ end
 
 group :tools do
   gem 'rubocop',         '>= 0.42'
-  gem 'guard',           '2.13.0'
-  gem 'guard-rspec',     '4.6.4'
+  gem 'guard',           '2.14.0'
+  gem 'guard-rspec',     '4.7.3'
 end
