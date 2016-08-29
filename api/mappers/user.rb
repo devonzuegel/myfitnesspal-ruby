@@ -1,5 +1,5 @@
 module API
-  module Repo
+  module Mappers
     class User < ROM::Repository[:users]
       commands :create
 

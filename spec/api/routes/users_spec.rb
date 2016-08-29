@@ -38,7 +38,7 @@ describe API::Routes::Users, :db do
     end
 
     it 'fails when given a duplicate username' do
-      allow_any_instance_of(API::Repo::User).to receive(:available?).and_return(false)
+      allow_any_instance_of(API::Mappers::User).to receive(:available?).and_return(false)
 
       get '/users/create', valid_params
       expect(JSON.parse(last_response.body))

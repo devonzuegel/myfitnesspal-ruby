@@ -1,6 +1,6 @@
 describe API::Schema::User::MFPAuth do
   let(:creds) { { username: 'uname', password: 'pword' } }
-  let(:repo)  { instance_double(API::Repo::User, available?: true) }
+  let(:repo)  { instance_double(API::Mappers::User, available?: true) }
 
   let(:successful_checker) do
     fake_instance = instance_double(MFP::Credentials, messages: {})
@@ -24,7 +24,7 @@ describe API::Schema::User::MFPAuth do
   end
 
   it 'fails when given a duplicate username' do
-    duplicate_repo = instance_double(API::Repo::User, available?: false)
+    duplicate_repo = instance_double(API::Mappers::User, available?: false)
     expect(described_class.call(creds, duplicate_repo, failed_checker).messages)
       .to eql(username: ['has already been taken'])
     expect(duplicate_repo).to have_received(:available?).with(creds)

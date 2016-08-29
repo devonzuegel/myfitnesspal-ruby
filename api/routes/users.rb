@@ -7,11 +7,11 @@ module API
         validation =
           Schema::User::Creation.call(
             symbolize_keys(params),
-            Repo::User.new(app_env.repository)
+            Mappers::User.new(app_env.repository)
           )
 
         if validation.success?
-          Repo::User.new(app_env.repository).create(validation.output)
+          Mappers::User.new(app_env.repository).create(validation.output)
           json(validation.output)
         else
           json(errors: validation.messages)

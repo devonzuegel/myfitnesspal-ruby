@@ -1,5 +1,5 @@
 describe API::Schema::User::Creation do
-  let(:repo)           { instance_double(API::Repo::User, available?: true) }
+  let(:repo)           { instance_double(API::Mappers::User, available?: true) }
   let(:valid_username) { 'bazz' }
   let(:valid_password) { 'foobar' }
 
@@ -56,7 +56,7 @@ describe API::Schema::User::Creation do
     end
 
     it 'fails when given a duplicate username' do
-      duplicate_repo = instance_double(API::Repo::User, available?: false)
+      duplicate_repo = instance_double(API::Mappers::User, available?: false)
       params = { username: 'aaaaaa', password: valid_password }
       expect(described_class.call(params, duplicate_repo).messages)
         .to eql(username: ['has already been taken'])

@@ -1,4 +1,4 @@
-describe API::Repo::User, :db do
+describe API::Mappers::User, :db do
   let(:user_repo) { described_class.new(repository) }
   let(:attrs)     { { username: 'username', password: 'password' } }
   let(:duplicate) { { username: 'duplicate-username', password: 'password', id: -1 } }
