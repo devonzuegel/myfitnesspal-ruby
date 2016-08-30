@@ -20,7 +20,6 @@ Sequel.migration do
   end
 
   down do
-    extension(:constraint_validations)
     drop_table(:users)
   end
 end
