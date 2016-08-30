@@ -1,7 +1,7 @@
 describe API::Schema::FoodEntry::Creation do
   let(:valid_input) do
     {
-      date:       '2016-08-21',
+      date:       DateTime.parse('2016-08-21'),
       meal_name:  'dummy name',
       quantity:   1.25,
       serialized: 'x' * 50,
@@ -27,10 +27,11 @@ describe API::Schema::FoodEntry::Creation do
   end
 
   context 'invalid valid_input' do
-    let(:str_keys) { %i[date meal_name serialized] }
-    let(:flt_keys) { %i[quantity] }
-    let(:int_keys) { %i[food_id portion_id] }
-    let(:required) { str_keys + flt_keys + int_keys }
+    let(:date_keys) { %i[date] }
+    let(:str_keys)  { %i[meal_name serialized] }
+    let(:flt_keys)  { %i[quantity] }
+    let(:int_keys)  { %i[food_id portion_id] }
+    let(:required)  { date_keys + str_keys + flt_keys + int_keys }
 
     def without(hash, key_to_remove)
       valid_input.reject { |k,v| k == key_to_remove }
@@ -51,7 +52,7 @@ describe API::Schema::FoodEntry::Creation do
     end
 
     it 'requires keys to be of expected types' do
-      str_keys.each do |key|
+      (date_keys + str_keys).each do |key|
         input = valid_input.merge(key => 123)
         expect(described_class.call(input).success?).to eql(false)
       end

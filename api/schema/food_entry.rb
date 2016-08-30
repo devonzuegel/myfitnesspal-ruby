@@ -13,7 +13,7 @@ module API
         def dry_schema
           schema =
             Dry::Validation.Schema do
-              required(:date).filled(:str?, format?: /\d\d\d\d\-\d\d\-\d\d/)
+              required(:date).filled(:date_time?)
               required(:meal_name).filled(:str?)
               required(:quantity).filled(:float?)
               required(:serialized).filled(:str?, min_size?: 50)
