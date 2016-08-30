@@ -1,4 +1,3 @@
-# Retrieve contents of local file
 class LocalFile
   ROOT = Pathname.new(__dir__).parent.expand_path.freeze
 
