@@ -1,0 +1,29 @@
+module API
+  module Schema
+    module FoodEntry
+      class Creation
+        include Procto.call, Concord.new(:params)
+
+        def call
+          Result.new(dry_schema.messages, dry_schema.output)
+        end
+
+        private
+
+        def dry_schema
+          schema =
+            Dry::Validation.Schema do
+              required(:date).filled(:str?, format?: /\d\d\d\d\-\d\d\-\d\d/)
+              required(:meal_name).filled(:str?)
+              required(:quantity).filled(:float?)
+              required(:serialized).filled(:str?, min_size?: 50)
+              required(:food_id).filled(:int?)
+              required(:portion_id).filled(:int?)
+            end
+
+          schema.call(params)
+        end
+      end
+    end
+  end
+end
