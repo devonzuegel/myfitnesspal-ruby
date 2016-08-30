@@ -9,7 +9,7 @@ Sequel.migration do
       String  :brand,          null: false
       Float   :calories,       null: false
       Float   :grams,          null: false
-      Text    :serialized,     null: false # TODO text or string????????????????? YAML?????????????
+      Text    :serialized,     null: false
 
       validate do
         min_length 50, :serialized
