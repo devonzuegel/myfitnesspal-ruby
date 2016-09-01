@@ -4,10 +4,11 @@ Sequel.migration do
     create_table(:food_entries) do
       primary_key :id
 
-      Date   :date,       null: false
-      String :meal_name,  null: false
-      Float  :quantity,   null: false
-      Text   :serialized, null: false
+      Date    :date,       null: false
+      String  :meal_name,  null: false
+      Float   :quantity,   null: false
+      Text    :serialized, null: false
+      Integer :portion_id, null: false
 
       validate do
         min_length 50, :serialized
