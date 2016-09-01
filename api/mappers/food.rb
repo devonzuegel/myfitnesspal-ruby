@@ -1,10 +1,10 @@
 module API
   module Mappers
-    class Food < ROM::Repository[:food]
+    class Food < ROM::Repository[:foods]
       commands :create
 
       def query(conditions)
-        food
+        foods
           .where(conditions)
           .as(Models::Food)
           .to_ary

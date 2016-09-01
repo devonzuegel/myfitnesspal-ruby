@@ -1,7 +1,7 @@
 Sequel.migration do
   up do
     extension(:constraint_validations)
-    create_table(:food_portion) do
+    create_table(:food_portions) do
       primary_key :id
 
       Integer :options_index, null: false
@@ -18,6 +18,6 @@ Sequel.migration do
   end
 
   down do
-    drop_table(:food)
+    drop_table(:food_portions)
   end
 end

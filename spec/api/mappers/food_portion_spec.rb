@@ -20,7 +20,7 @@ describe API::Mappers::FoodPortion, :db do
     end
 
     context 'portion inserted' do
-      before { db[:food_portion].insert(attrs) }
+      before { db[:food_portions].insert(attrs) }
 
       it 'returns the portion inserted into the db' do
         expect(portion_repo.query({})).to eql [API::Models::FoodPortion.new(attrs)]
@@ -36,7 +36,7 @@ describe API::Mappers::FoodPortion, :db do
   describe '#create' do
     it 'adds a portion to the db' do
       expect { portion_repo.create(attrs) }
-        .to change { db[:food_portion].count }
+        .to change { db[:food_portions].count }
         .by(1)
     end
   end
