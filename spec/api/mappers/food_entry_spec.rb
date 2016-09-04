@@ -18,6 +18,11 @@ describe API::Mappers::FoodEntry, :db do
       serialized:    'x' * 50,
       food_id:       3
     )
+    db[:users].insert(
+      id:       5,
+      username: 'dummy-username',
+      password: 'dummy-password'
+    )
   end
   let(:entries_repo) { described_class.new(repository) }
   let(:attrs) do
@@ -27,7 +32,8 @@ describe API::Mappers::FoodEntry, :db do
       meal_name:       'dummy meal name',
       quantity:        1.0,
       serialized:      'x' * 50,
-      food_portion_id: 2
+      food_portion_id: 2,
+      user_id:         5
     }
   end
 

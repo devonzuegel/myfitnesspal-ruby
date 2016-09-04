@@ -7,7 +7,8 @@ module API
         :meal_name,
         :quantity,
         :serialized,
-        :food_portion_id
+        :food_portion_id,
+        :user_id
       )
     end
   end
