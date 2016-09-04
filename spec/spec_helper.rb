@@ -1,4 +1,5 @@
 require_relative './support/db_context'
+require_relative './support/food_entry_packet_context'
 require_relative './support/fixture_helpers'
 require 'bundler/setup'
 
@@ -19,8 +20,8 @@ RSpec.configure do |c|
   # Fail tests that run for longer than 1 seconds
   c.around(:each) { |t| Timeout.timeout(1, &t) }
 
-  # # Rollback db transactions after each test that requires the db
   c.include_context 'db context', db: true
+  c.include_context 'food entry packet', food_entry_packet: true
 
   c.include FixtureHelpers
 
