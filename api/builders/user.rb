@@ -1,28 +1,21 @@
 require_relative 'utils'
+require_relative '../schema/user/creation'
+require_relative '../mappers/user'
 
 module API
   module Builders
-    class User
-      include Utils, Procto.call, Concord.new(:params, :validation, :mapper), Memoizable
+    class User < Base
+      VALIDATION_CLASS = Schema::User::Creation
+      MAPPER_CLASS     = Mappers::User
 
-      def call
-        return error_messages unless validation_result.success?
-
-        mapper.create(validation_result.output)
-        validation_result.output
+      def initialize(params, repo)
+        super(params, VALIDATION_CLASS, MAPPER_CLASS.new(repo))
       end
 
       private
 
-      def validation_result
-        validation.call(symbolize_keys(params), mapper)
-      end
-      memoize :validation_result
-
-      def error_messages
-        {
-          errors: validation_result.messages
-        }
+      def validation_arguments
+        super << mapper
       end
     end
   end

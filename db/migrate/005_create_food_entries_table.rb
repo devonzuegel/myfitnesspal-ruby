@@ -4,6 +4,7 @@ Sequel.migration do
     create_table(:food_entries) do
       primary_key :id
       foreign_key :food_portion_id, :food_portions, null: false
+      foreign_key :user_id,         :users,         null: false
 
       Date    :date,       null: false
       String  :meal_name,  null: false

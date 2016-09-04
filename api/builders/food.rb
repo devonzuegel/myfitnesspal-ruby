@@ -1,27 +1,16 @@
+require_relative 'utils'
+require_relative '../schema/food'
+require_relative '../mappers/food'
+
 module API
   module Builders
-    class Food
-      # include Procto.call, Concord.new(:params, :validation, :mapper)
+    class Food < Base
+      VALIDATION_CLASS = Schema::Food::Creation
+      MAPPER_CLASS     = Mappers::Food
 
-      # def call
-      #   return error_messages unless validation_result.success?
-
-      #   mapper.create(validation_result.output)
-      #   validation_result.output
-      # end
-
-      # private
-
-      # def validation_result
-      #   validation.call(symbolize_keys(params), mapper)
-      # end
-      # memoize :validation_result
-
-      # def error_messages
-      #   {
-      #     errors: validation_result.messages
-      #   }
-      # end
+      def initialize(params, repo)
+        super(params, VALIDATION_CLASS, MAPPER_CLASS.new(repo))
+      end
     end
   end
 end

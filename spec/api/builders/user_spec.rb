@@ -1,34 +1,37 @@
-describe API::Builders::User do
-  let(:user_mapper)    { instance_double(API::Mappers::User) }
-  let(:raw_params)     { { 'username' => 'blah', 'password' => 'foobar' } }
-  let(:params)         { { username: 'blah', password: 'foobar' } }
-  let(:failure_msgs)   { { message1: 'baz' } }
-  let(:successful_val) { API::Schema::Result.new({}, params) }
-  let(:failed_val)     { API::Schema::Result.new(failure_msgs, params) }
-
-  context 'failed validation' do
-    let(:validtn_klass) { class_double(API::Schema::User::Creation, call: failed_val) }
-
-    it 'calls the provided validation & returns its errors' do
-      expect(described_class.call(raw_params, validtn_klass, user_mapper))
-        .to eql(errors: failure_msgs)
-    end
+describe API::Builders::User, :db do
+  it 'has the expected VALIDATION_CLASS' do
+    expect(described_class::VALIDATION_CLASS).to eql(API::Schema::User::Creation)
   end
 
-  context 'successful validation' do
-    let(:validtn_klass) { class_double(API::Schema::User::Creation, call: successful_val) }
-    before do
-      expect(validtn_klass).to receive(:call).with(params, user_mapper)
-      expect(user_mapper).to receive(:create).with(params)
-    end
+  it 'has the expected MAPPER_CLASS' do
+    expect(described_class::MAPPER_CLASS).to eql(API::Mappers:: User)
+  end
 
-    it 'calls the provided validation & returns its output upon success' do
-      expect(described_class.call(raw_params, validtn_klass, user_mapper))
-        .to eql(params)
-    end
+  it 'inherits from Base' do
+    expect(described_class).to be < API::Builders::Base
+  end
 
-    it 'creates a new user with validation output upon success' do
-      described_class.call(raw_params, validtn_klass, user_mapper)
-    end
+  it 'returns errors when given no username or password' do
+    expect(described_class.call({}, repository)).to eql(
+      errors: {
+        password: [
+          'is missing',
+          'size must be within 6 - 255'
+        ],
+        username: [
+          'is missing',
+          'size must be within 4 - 30'
+        ]
+      }
+    )
+  end
+
+  it 'fails on authentication' do
+    params = { username: 'dummy-username', password: 'dummy-password' }
+    expect(described_class.call(params, repository)).to eql(
+      errors: {
+        credentials: 'Authentication failed'
+      }
+    )
   end
 end

@@ -1,13 +1,13 @@
 describe API::Mappers::FoodPortion, :db do
   before do
     db[:foods].insert(
+      id:             3,
       master_food_id: 123,
       description:    'dummy description',
       brand:          'dummy brand',
       calories:       1.0,
       grams:          1.0,
-      serialized:     'x' * 50,
-      id:             3
+      serialized:     'x' * 50
     )
   end
 

@@ -1,4 +1,4 @@
-describe API::Builders::Food do
+describe API::Builders::Food, :db do
   let(:nutrients) do
     {
       'calcium'             => 1.600000023841858,
@@ -82,13 +82,15 @@ describe API::Builders::Food do
 
   end
 
-  it 'validates params, which should be a hash containing Food details' # do
+  it 'validates params, which should be a hash containing Food details' do
+    # ap described_class.call({ key1: 1 }, repository)
     # ap packet_hash
+
     # LocalFile.read_yml(fixture('packets-partial-sync.yml')).each do |packet|
     #   next unless packet.class == MFP::Binary::FoodEntry
     #   next unless packet.to_h[:food][:description] == 'Strawberries, raw'
     #   ap packet.to_h#.delete_if {|k, v| k == :food }
     #   break
     # end
-  # end
+  end
 end
