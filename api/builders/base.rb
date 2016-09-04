@@ -6,7 +6,7 @@ module API
       include Utils, Procto.call, Concord.new(:params, :validation, :mapper), Memoizable
 
       def call
-        return error_messages unless validation_result.success?
+        return { errors: validation_result.messages } unless validation_result.success?
 
         mapper.create(validation_result.output)
         validation_result.output
@@ -19,14 +19,12 @@ module API
       end
       memoize :validation_result
 
-      def error_messages
-        {
-          errors: validation_result.messages
-        }
+      def validation_arguments
+        [transformed_params]
       end
 
-      def validation_arguments
-        [symbolize_keys(params)]
+      def transformed_params
+        symbolize_keys(params)
       end
     end
   end

@@ -15,7 +15,7 @@ module API
             Dry::Validation.Schema do
               required(:master_food_id).filled(:int?)
               required(:description).filled(:str?)
-              required(:brand).filled(:str?)
+              required(:brand).value(:str?)
               required(:calories).filled(:float?)
               required(:grams).filled(:float?)
               required(:serialized).filled(:str?, min_size?: 50)
