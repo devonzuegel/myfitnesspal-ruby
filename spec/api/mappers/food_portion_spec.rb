@@ -1,4 +1,16 @@
 describe API::Mappers::FoodPortion, :db do
+  before do
+    db[:foods].insert(
+      master_food_id: 123,
+      description:    'dummy description',
+      brand:          'dummy brand',
+      calories:       1.0,
+      grams:          1.0,
+      serialized:     'x' * 50,
+      id:             3
+    )
+  end
+
   let(:portion_repo) { described_class.new(repository) }
   let(:attrs) do
     {
@@ -8,7 +20,7 @@ describe API::Mappers::FoodPortion, :db do
       amount:        1.0,
       gram_weight:   1.0,
       serialized:    'x' * 50,
-      food_id:       1
+      food_id:       3
     }
   end
 

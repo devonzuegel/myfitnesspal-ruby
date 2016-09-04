@@ -71,16 +71,16 @@ describe API::Builders::Food do
         packet_type:            3,
         portions:               portions,
         type:                   0
-        },
-        date: "2016-08-12",
-        master_food_id: 5655946676,
-        meal_name:      "21 to 24",
-        packet_type:    5,
-        quantity:       15.0,
-        weight_index:   2
-      }
+      },
+      date: "2016-08-12",
+      master_food_id: 5655946676,
+      meal_name:      "21 to 24",
+      packet_type:    5,
+      quantity:       15.0,
+      weight_index:   2
+    }
 
-    end
+  end
 
   it 'validates params, which should be a hash containing Food details' # do
     # ap packet_hash
