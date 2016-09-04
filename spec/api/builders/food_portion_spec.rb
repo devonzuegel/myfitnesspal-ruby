@@ -16,7 +16,7 @@ describe API::Builders::FoodPortion, :db, :food_entry_packet do
     )
   end
 
-  it 'validates params, which should be a hash containing Food details' do
+  it 'inserts the portion into the db' do
     expect { described_class.call(portion_hash, options_index, food_id, repository) }
       .to change { db[:food_portions].count }
       .by 1
