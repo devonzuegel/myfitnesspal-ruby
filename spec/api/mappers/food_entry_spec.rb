@@ -27,13 +27,13 @@ describe API::Mappers::FoodEntry, :db do
   let(:entries_repo) { described_class.new(repository) }
   let(:attrs) do
     {
-      id:              -1,
-      date:            DateTime.parse('2016-08-21'),
-      meal_name:       'dummy meal name',
-      quantity:        1.0,
-      serialized:      'x' * 50,
-      food_portion_id: 2,
-      user_id:         5
+      id:         -1,
+      date:       DateTime.parse('2016-08-21'),
+      meal_name:  'dummy meal name',
+      quantity:   1.0,
+      serialized: 'x' * 50,
+      portion_id: 2,
+      user_id:    5
     }
   end
 
