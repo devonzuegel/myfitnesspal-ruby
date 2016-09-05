@@ -56,7 +56,7 @@ RSpec.shared_context 'food entry packet', shared_context: :metadata do
 
   let(:food_entry_pkt_hash) do
     {
-      food:           {
+      food: {
         brand:                '',
         description:          'Strawberries, raw',
         flags:                3,
