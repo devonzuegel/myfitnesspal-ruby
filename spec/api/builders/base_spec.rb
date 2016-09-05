@@ -1,7 +1,13 @@
 describe API::Builders::Base do
   let(:raw_params)     { { 'key1' => 'blah', 'key2' => 'foobar' } }
   let(:params)         { { key1: 'blah', key2: 'foobar' } }
-  let(:mapper)         { instance_double(API::Mappers::User) }
+  let(:successful_val) { API::Schema::Result.new({}, params) }
+  let(:mapper) do
+    instance_double(
+      API::Mappers::User,
+      create: successful_val.output.merge(id: 3)
+    )
+  end
 
   context 'failed validation' do
     let(:failure_msgs)  { { message1: 'baz' } }
@@ -15,7 +21,6 @@ describe API::Builders::Base do
   end
 
   context 'successful validation' do
-    let(:successful_val) { API::Schema::Result.new({}, params) }
     let(:validtn_klass)  { class_double(API::Schema::Food::Creation, call: successful_val) }
 
     before do
@@ -24,7 +29,7 @@ describe API::Builders::Base do
     end
 
     it 'calls the provided validation & returns its output upon success' do
-      expect(described_class.call(raw_params, validtn_klass, mapper)).to eql(params)
+      expect(described_class.call(raw_params, validtn_klass, mapper)).to eql(params.merge(id: 3))
     end
 
     it 'creates a new user with validation output upon success' do

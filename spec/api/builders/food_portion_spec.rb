@@ -23,8 +23,12 @@ describe API::Builders::FoodPortion, :db, :food_entry_packet do
   end
 
   it 'is has the expected output' do
-    expect(described_class.call(portion_hash, options_index, food_id, repository))
-      .to eql(
+    output =
+      described_class
+        .call(portion_hash, options_index, food_id, repository)
+        .reject { |k| k == :id }
+
+    expected_output = {
         amount:        1.0,
         description:   'extra large (1-5/8" dia)',
         food_id:       3,
@@ -33,6 +37,8 @@ describe API::Builders::FoodPortion, :db, :food_entry_packet do
         serialized:    "---\n:amount: 1.0\n:description: extra large (1-5/8\" dia)\n:"         \
                        "fraction_int: 0\n:gram_weight: 27.0\n:is_fraction: 0\n:options_index:" \
                        " 0\n:food_id: 3\n"
-      )
+    }
+
+    expect(output).to eql(expected_output)
   end
 end

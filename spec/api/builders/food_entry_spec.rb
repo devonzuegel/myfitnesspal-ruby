@@ -36,11 +36,13 @@ describe API::Builders::FoodEntry, :db, :food_entry_packet do
   end
 
   it 'is has the expected output' do
-    expect(described_class.call(food_entry_pkt_hash, portion_id, user_id, repository))
+    built_food_entry = described_class.call(food_entry_pkt_hash, portion_id, user_id, repository)
+    expect(built_food_entry)
       .to eql(
-        date:       DateTime.parse('2016-08-12'),
+        date:       Date.parse('2016-08-12'),
         meal_name:  '21 to 24',
         portion_id: 2,
+        id:         built_food_entry.fetch(:id),
         quantity:   15.0,
         user_id:    2,
         serialized: "---\n:food:\n  :brand: ''\n  :description: Strawberries, raw\n  :flags:"   \

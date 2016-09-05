@@ -8,7 +8,7 @@ describe API::Builders::Food, :db, :food_entry_packet do
   end
 
   it 'is has the expected output' do
-    expect(described_class.call(food_hash, repository))
+    expect(described_class.call(food_hash, repository).reject { |k| k == :id })
       .to eql(
         brand:          '',
         calories:       32.0,

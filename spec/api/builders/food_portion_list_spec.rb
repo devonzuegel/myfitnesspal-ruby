@@ -21,7 +21,7 @@ describe API::Builders::FoodPortionList, :db, :food_entry_packet do
       .by(portion_list.length)
   end
 
-  let(:results_list) do
+  let(:expected_results_list) do
     [
       {
         amount:        1.0,
@@ -35,8 +35,8 @@ describe API::Builders::FoodPortionList, :db, :food_entry_packet do
       },
       {
         errors: {
-          amount:      ['is missing'],
           description: ['is missing'],
+          amount:      ['is missing'],
           gram_weight: ['is missing'],
           serialized:  ['size cannot be less than 50']
         }
@@ -45,7 +45,11 @@ describe API::Builders::FoodPortionList, :db, :food_entry_packet do
   end
 
   it 'returns the results of each individual portion build' do
-    expect(described_class.call([portion_list.first, { a: 'b' }], food_id, repository))
-      .to eql(results_list)
+    results_list =
+      described_class
+        .call([portion_list.first, { a: 'b' }], food_id, repository)
+        .map { |p| p.reject { |k| k == :id } }
+
+    expect(results_list).to eql(expected_results_list)
   end
 end

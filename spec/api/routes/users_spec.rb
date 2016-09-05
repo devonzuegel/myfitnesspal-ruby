@@ -18,31 +18,31 @@ describe API::Routes::Users, :db do
     }
   end
 
+  def response
+    JSON.parse(last_response.body)
+  end
+
   describe 'get /users/create' do
     it 'requires the expected keys' do
       get '/users/create'
-      expect(JSON.parse(last_response.body))
-        .to eql(missing_keys_error)
+      expect(response).to eql(missing_keys_error)
     end
 
     it 'returns the successfully created user' do
       get '/users/create', valid_params
-      expect(JSON.parse(last_response.body))
-        .to eql(valid_params)
+      expect(response.reject { |x| x == 'id' }).to eql(valid_params)
+      expect(response['id']).to_not be nil
     end
 
     it 'creates a new user in the repository' do
-      expect { get '/users/create', valid_params }
-        .to change { db[:users].count }
-        .by(1)
+      expect { get '/users/create', valid_params }.to change { db[:users].count }.by(1)
     end
 
     it 'fails when given a duplicate username' do
       allow_any_instance_of(API::Mappers::User).to receive(:available?).and_return(false)
 
       get '/users/create', valid_params
-      expect(JSON.parse(last_response.body))
-        .to eql('errors' => { 'username' => ['has already been taken'] })
+      expect(response).to eql('errors' => { 'username' => ['has already been taken'] })
     end
   end
 end
