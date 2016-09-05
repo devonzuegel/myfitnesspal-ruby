@@ -6,6 +6,8 @@ module MFP
     class FoodEntry < Binary::Packet
       PACKET_TYPE = Binary::Type::FOOD_ENTRY
 
+      attr_reader :food
+
       def initialize
         super(PACKET_TYPE)
       end

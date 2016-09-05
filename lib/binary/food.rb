@@ -5,6 +5,8 @@ require_relative 'food_portion'
 module MFP
   module Binary
     class Food < Binary::Packet
+      attr_reader :portions
+
       PACKET_TYPE = Binary::Type::FOOD
 
       NUTRIENT_NAMES = %w[
