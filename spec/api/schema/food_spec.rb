@@ -1,7 +1,7 @@
 describe API::Schema::Food::Creation do
   let(:valid_input) do
     {
-      master_food_id: 5656990538,
+      master_food_id: 5_656_990_538,
       description:    'dummy description',
       brand:          'dummy brand',
       calories:       1.0,
@@ -14,7 +14,7 @@ describe API::Schema::Food::Creation do
     let(:result) { described_class.call(valid_input) }
 
     it 'is successful' do
-      expect(result.success?).to eql(true)
+      expect(result.success?).to be(true)
     end
 
     it 'has no messages' do
@@ -32,14 +32,14 @@ describe API::Schema::Food::Creation do
     let(:int_keys) { %i[master_food_id] }
     let(:required) { str_keys + flt_keys + int_keys }
 
-    def without(hash, key_to_remove)
-      valid_input.reject { |k,v| k == key_to_remove }
+    def without(_hash, key_to_remove)
+      valid_input.reject { |k, _v| k == key_to_remove }
     end
 
     it 'requires all keys' do
       required.each do |key|
         input = without(valid_input, key)
-        expect(described_class.call(input).success?).to eql(false)
+        expect(described_class.call(input).success?).to be(false)
         expect(described_class.call(input).output).to eql({})
       end
     end
@@ -53,23 +53,23 @@ describe API::Schema::Food::Creation do
     it 'requires keys to be of expected types' do
       str_keys.each do |key|
         input = valid_input.merge(key => 123)
-        expect(described_class.call(input).success?).to eql(false)
+        expect(described_class.call(input).success?).to be(false)
       end
 
       flt_keys.each do |key|
         input = valid_input.merge(key => 'asdfasdf')
-        expect(described_class.call(input).success?).to eql(false)
+        expect(described_class.call(input).success?).to be(false)
       end
 
       int_keys.each do |key|
         input = valid_input.merge(key => 'xxx')
-        expect(described_class.call(input).success?).to eql(false)
+        expect(described_class.call(input).success?).to be(false)
       end
     end
 
     it 'enforces minimum length of 50 for :serialized' do
       input = valid_input.merge(serialized: 'abcd')
-      expect(described_class.call(input).success?).to eql(false)
+      expect(described_class.call(input).success?).to be(false)
     end
 
     it 'enforces minimum length of 50 AND str? for :serialized' do

@@ -26,7 +26,7 @@ describe API::Builders::FoodPortion, :db, :food_entry_packet do
     expect(described_class.call(portion_hash, options_index, food_id, repository))
       .to eql(
         amount:        1.0,
-        description:   "extra large (1-5/8\" dia)",
+        description:   'extra large (1-5/8" dia)',
         food_id:       3,
         gram_weight:   27.0,
         options_index: 0,

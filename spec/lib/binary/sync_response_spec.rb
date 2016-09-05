@@ -4,7 +4,7 @@ describe MFP::Binary::SyncResponse do
   let(:sync_res) { described_class.new }
 
   describe '#to_h' do
-    it 'should serialize the starting attributes' do
+    it 'serializes the starting attributes' do
       expect(sync_res.to_h).to eql(
         error_message:          '',
         expected_packet_count:  0,

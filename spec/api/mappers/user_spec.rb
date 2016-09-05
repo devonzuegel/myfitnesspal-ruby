@@ -47,15 +47,15 @@ describe API::Mappers::User, :db do
 
   describe '#available?' do
     it 'is false when the username is taken' do
-      expect(user_repo.available?(username: 'duplicate-username')).to eql false
+      expect(user_repo.available?(username: 'duplicate-username')).to be false
     end
 
     it 'is true when the username does not yet exist' do
-      expect(user_repo.available?(username: 'available-username')).to eql true
+      expect(user_repo.available?(username: 'available-username')).to be true
     end
 
     it 'handles (but ignores) keywords besides :username' do
-      expect(user_repo.available?(username: 'available-username', x: 1)).to eql true
+      expect(user_repo.available?(username: 'available-username', x: 1)).to be true
     end
 
     it 'fails if :username is not provided' do

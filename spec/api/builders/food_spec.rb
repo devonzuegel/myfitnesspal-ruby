@@ -10,11 +10,11 @@ describe API::Builders::Food, :db, :food_entry_packet do
   it 'is has the expected output' do
     expect(described_class.call(food_hash, repository))
       .to eql(
-        brand:          "",
+        brand:          '',
         calories:       32.0,
-        description:    "Strawberries, raw",
+        description:    'Strawberries, raw',
         grams:          100.0,
-        master_food_id: 295758538,
+        master_food_id: 295_758_538,
         serialized:     "---\n:brand: ''\n:description: Strawberries, raw\n:flags: 3\n:"         \
                         "grams: 100.0\n:is_deleted: \n:is_meal: \n:is_public: \n:"               \
                         "master_food_id: 295758538\n:nutrients:\n  calcium: 1.600000023841858"   \

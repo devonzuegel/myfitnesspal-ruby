@@ -17,8 +17,8 @@ module API
               required(:meal_name).filled(:str?)
               required(:quantity).filled(:float?)
               required(:serialized).filled(:str?, min_size?: 50)
-              required(:food_id).filled(:int?)
               required(:portion_id).filled(:int?)
+              required(:user_id).filled(:int?)
             end
 
           schema.call(params)
