@@ -1,0 +1,394 @@
+---
+- !ruby/object:MFP::Binary::SyncResponse
+  status_code: 0
+  error_message: ''
+  optional_extra_message: ''
+  master_id: 2607616
+  flags: 1
+  expected_packet_count: 1000
+  last_sync_pointers:
+    deleted_item: '2413366949'
+    deleted_most_used_foods: '0'
+    diary_note: 2016-08-27 18:42:05 UTC
+    exercise: '1018692'
+    exercise_entry: '2194687492'
+    food: '318556366'
+    food_entry: '5678295276'
+    measurement: 2016-08-27 18:30:36 UTC
+    user_property: 2016-07-03 22:20:44 UTC
+    water_entry: 2014-12-25 01:20:59 UTC
+    user_status: ''
+  more_data_to_sync: 1
+  upgrade_available: 2
+  packet_type: 2
+- !ruby/object:MFP::Binary::UserPropertyUpdate
+  properties:
+    valid_email: 'yes'
+    email: devonzuegel@gmail.com
+    enews_subscription_enabled: 'no'
+    timezone_name: Pacific Time (US & Canada)
+    timezone_identifier: America/Los_Angeles
+    use_metric: 'no'
+    country_name: United States
+    postal_code: ''
+    city: ''
+    state: California
+    date_of_birth: '1994-07-12 00:00:00'
+    gender: Female
+    height_in_inches: '63.0'
+    lifestyle_name: Sedentary
+    goal_weight_in_pounds: '115.0'
+    current_weight_in_pounds: '114.4'
+    diary_privacy_setting: public
+    diary_password: ''
+    display_diary_meal_macros: 'true'
+    meal_goals_enabled: 'false'
+    default_food_search_tab_name: Recent
+    auto_reminder_opt_out: 'no'
+    meal_names: '"04 to 09","09 to 12","12 to 15","15 to 18","18 to 21","21 to 24"'
+    goal_loss_per_week: '1.50'
+    workouts_per_week: '3'
+    minutes_per_workout: '30'
+    goal_calories_per_day: '1200.0'
+    goal_carbs_per_day: '150.0'
+    goal_protein_per_day: '60.0'
+    goal_fat_per_day: '40.0'
+    goal_saturated_fat_per_day: '13.0'
+    goal_cholesterol_per_day: '300.0'
+    goal_sodium_per_day: '2300.0'
+    goal_potassium_per_day: '3500.0'
+    goal_fiber_per_day: '25.0'
+    goal_trans_fat_per_day: '0.0'
+    goal_sugar_per_day: '45.0'
+    goal_vitamin_a_per_day: '100.0'
+    goal_vitamin_c_per_day: '100.0'
+    goal_iron_per_day: '100.0'
+    goal_calcium_per_day: '100.0'
+    goal_polyunsaturated_fat_per_day: '0.0'
+    goal_monounsaturated_fat_per_day: '0.0'
+    last_goals_recalculation_date: '2016-08-27'
+    create_status_on_new_friends: 'true'
+    create_status_on_replied_to_topic: 'true'
+    create_status_on_created_topic: 'true'
+    create_status_on_status_comments: 'true'
+    create_status_on_hasnt_logged_in: 'true'
+    create_status_on_consecutive_logins: 'true'
+    create_status_on_lost_weight: 'true'
+    create_status_on_completed_diary: 'true'
+    create_status_on_wall_posts: 'true'
+    create_status_on_blog_posts: 'true'
+    create_status_on_performed_exercise: 'true'
+    notify_of_new_messages: 'true'
+    notify_of_wall_posts: 'true'
+    notify_of_friend_requests: 'true'
+    notify_of_new_comments: 'true'
+    notify_of_status_likes: 'true'
+    notify_of_status_comment_likes: 'true'
+    notify_of_status_thread_comments: 'true'
+    notify_of_steps_progress: 'true'
+    enable_quiet_time: 'false'
+    notify_of_friend_logged_workout: 'true'
+    notify_of_friend_steps_progress: 'true'
+    notify_of_friend_joined: 'true'
+    notify_of_friend_hit_login_streak: 'true'
+    notify_of_a_new_challenge_available: 'true'
+    notify_of_earned_achievement: 'true'
+    notify_of_friend_joined_challenge: 'true'
+    notify_of_friend_challenge_invite: 'true'
+    notify_of_friend_completes_challenge: 'true'
+    notify_of_user_completes_challenge: 'true'
+    quiet_time_begin_offset_from_midnight_utc: '57600'
+    quiet_time_end_offset_from_midnight_utc: '14400'
+    send_email_for_messages: 'false'
+    send_email_for_friend_requests: 'false'
+    send_email_for_group_invites: 'false'
+    send_email_for_accepted_friend_requests: 'false'
+    send_email_for_accepted_group_invites: 'false'
+    send_email_for_profile_comments: 'false'
+    send_email_for_blog_comments: 'false'
+    send_email_for_status_comments: 'false'
+    send_email_for_challenge_available: 'true'
+    send_email_for_earn_challenge_achievement: 'true'
+    send_email_for_friend_joined_challenge: 'true'
+    send_email_for_friend_challenge_invite: 'true'
+    send_email_for_friend_completes_challenge: 'true'
+    send_email_for_user_completes_challenge: 'true'
+    send_email_for_status_likes: 'false'
+    send_email_for_status_comment_likes: 'false'
+    send_email_for_status_thread_comments: 'false'
+    requires_start_time_for_exercise_entries: 'yes'
+    body_weight_unit_preference: '1'
+    height_unit_preference: '11'
+    distance_unit_preference: '9'
+    energy_unit_preference: '2'
+    water_unit_preference: '14'
+    terms_of_service_current_version: '2'
+    terms_of_service_accepted_version: '2'
+    accepted_terms_and_privacy: 'true'
+    should_update_goals: 'false'
+  packet_type: 13
+- !ruby/object:MFP::Binary::MeasurementTypes
+  descriptions:
+    1: Weight
+    7738470: Neck
+    7738471: Waist
+    7738472: Hips
+    84305523: At belly button
+    96973602: Body Fat %
+    98063605: Fitbit steps
+    98063606: Fitbit tracked sleep minutes
+    98076444: Fitbit body fat %
+  packet_type: 9
+- !ruby/object:MFP::Binary::FoodEntry
+  master_food_id: 5655946676
+  food: !ruby/object:MFP::Binary::Food
+    master_food_id: 295758538
+    owner_user_master_id: 0
+    original_master_id: 9316
+    description: Strawberries, raw
+    brand: ''
+    flags: 3
+    nutrients:
+      calories: 32.0
+      fat: 0.30000001192092896
+      saturated_fat: 0.014999999664723873
+      polyunsaturated_fat: 0.1550000011920929
+      monounsaturated_fat: 0.0430000014603138
+      trans_fat: 0.0
+      cholesterol: 0.0
+      sodium: 1.0
+      potassium: 153.0
+      carbohydrates: 7.679999828338623
+      fiber: 2.0
+      sugar: 4.889999866485596
+      protein: 0.6700000166893005
+      vitamin_a: 0.23999999463558197
+      vitamin_c: 98.0
+      calcium: 1.600000023841858
+      iron: 2.277780055999756
+    grams: 100.0
+    type: 0
+    portions:
+    - !ruby/object:MFP::Binary::FoodPortion
+      amount: 1.0
+      gram_weight: 27.0
+      description: extra large (1-5/8" dia)
+      is_fraction: 0
+      fraction_int: 0
+    - !ruby/object:MFP::Binary::FoodPortion
+      amount: 1.0
+      gram_weight: 15200.0
+      description: cup(s)
+      is_fraction: 0
+      fraction_int: 0
+    - !ruby/object:MFP::Binary::FoodPortion
+      amount: 1.0
+      gram_weight: 18.0
+      description: large (1-3/8" dia)
+      is_fraction: 0
+      fraction_int: 0
+    - !ruby/object:MFP::Binary::FoodPortion
+      amount: 1.0
+      gram_weight: 7.0
+      description: small (1" dia)
+      is_fraction: 0
+      fraction_int: 0
+    - !ruby/object:MFP::Binary::FoodPortion
+      amount: 1.0
+      gram_weight: 28.34950065612793
+      description: oz(s)
+      is_fraction: 0
+      fraction_int: 0
+    - !ruby/object:MFP::Binary::FoodPortion
+      amount: 1.0
+      gram_weight: 152.0
+      description: cup, halves
+      is_fraction: 0
+      fraction_int: 0
+    - !ruby/object:MFP::Binary::FoodPortion
+      amount: 100.0
+      gram_weight: 100.0
+      description: g
+      is_fraction: 0
+      fraction_int: 0
+    - !ruby/object:MFP::Binary::FoodPortion
+      amount: 1.0
+      gram_weight: 147.0
+      description: NLEA serving
+      is_fraction: 0
+      fraction_int: 0
+    - !ruby/object:MFP::Binary::FoodPortion
+      amount: 1.0
+      gram_weight: 144.0
+      description: cup, whole
+      is_fraction: 0
+      fraction_int: 0
+    - !ruby/object:MFP::Binary::FoodPortion
+      amount: 1.0
+      gram_weight: 232.0
+      description: cup, pureed
+      is_fraction: 0
+      fraction_int: 0
+    - !ruby/object:MFP::Binary::FoodPortion
+      amount: 1.0
+      gram_weight: 357.0
+      description: pint as purchased, yields
+      is_fraction: 0
+      fraction_int: 0
+    - !ruby/object:MFP::Binary::FoodPortion
+      amount: 1.0
+      gram_weight: 12.0
+      description: medium (1-1/4" dia)
+      is_fraction: 0
+      fraction_int: 0
+    - !ruby/object:MFP::Binary::FoodPortion
+      amount: 1.0
+      gram_weight: 453.5920104980469
+      description: lb(s)
+      is_fraction: 0
+      fraction_int: 0
+    - !ruby/object:MFP::Binary::FoodPortion
+      amount: 1.0
+      gram_weight: 166.0
+      description: cup, sliced
+      is_fraction: 0
+      fraction_int: 0
+    - !ruby/object:MFP::Binary::FoodPortion
+      amount: 1.0
+      gram_weight: 950.0
+      description: tbsp(s)
+      is_fraction: 0
+      fraction_int: 0
+    packet_type: 3
+  date: 2016-08-12
+  meal_name: 21 to 24
+  quantity: 15.0
+  weight_index: 2
+  packet_type: 5
+
+# - !ruby/object:MFP::Binary::FoodEntry
+#   master_food_id: 5655946676
+#   food: !ruby/object:MFP::Binary::Food
+#     master_food_id: 295758538
+#     owner_user_master_id: 0
+#     original_master_id: 9316
+#     description: Strawberries, raw
+#     brand: ''
+#     flags: 3
+#     nutrients:
+#       calories: 32.0
+#       fat: 0.30000001192092896
+#       saturated_fat: 0.014999999664723873
+#       polyunsaturated_fat: 0.1550000011920929
+#       monounsaturated_fat: 0.0430000014603138
+#       trans_fat: 0.0
+#       cholesterol: 0.0
+#       sodium: 1.0
+#       potassium: 153.0
+#       carbohydrates: 7.679999828338623
+#       fiber: 2.0
+#       sugar: 4.889999866485596
+#       protein: 0.6700000166893005
+#       vitamin_a: 0.23999999463558197
+#       vitamin_c: 98.0
+#       calcium: 1.600000023841858
+#       iron: 2.277780055999756
+#     grams: 100.0
+#     type: 0
+#     portions:
+#     - !ruby/object:MFP::Binary::FoodPortion
+#       amount: 1.0
+#       gram_weight: 27.0
+#       description: extra large (1-5/8" dia)
+#       is_fraction: 0
+#       fraction_int: 0
+#     - !ruby/object:MFP::Binary::FoodPortion
+#       amount: 1.0
+#       gram_weight: 15200.0
+#       description: cup(s)
+#       is_fraction: 0
+#       fraction_int: 0
+#     - !ruby/object:MFP::Binary::FoodPortion
+#       amount: 1.0
+#       gram_weight: 18.0
+#       description: large (1-3/8" dia)
+#       is_fraction: 0
+#       fraction_int: 0
+#     - !ruby/object:MFP::Binary::FoodPortion
+#       amount: 1.0
+#       gram_weight: 7.0
+#       description: small (1" dia)
+#       is_fraction: 0
+#       fraction_int: 0
+#     - !ruby/object:MFP::Binary::FoodPortion
+#       amount: 1.0
+#       gram_weight: 28.34950065612793
+#       description: oz(s)
+#       is_fraction: 0
+#       fraction_int: 0
+#     - !ruby/object:MFP::Binary::FoodPortion
+#       amount: 1.0
+#       gram_weight: 152.0
+#       description: cup, halves
+#       is_fraction: 0
+#       fraction_int: 0
+#     - !ruby/object:MFP::Binary::FoodPortion
+#       amount: 100.0
+#       gram_weight: 100.0
+#       description: g
+#       is_fraction: 0
+#       fraction_int: 0
+#     - !ruby/object:MFP::Binary::FoodPortion
+#       amount: 1.0
+#       gram_weight: 147.0
+#       description: NLEA serving
+#       is_fraction: 0
+#       fraction_int: 0
+#     - !ruby/object:MFP::Binary::FoodPortion
+#       amount: 1.0
+#       gram_weight: 144.0
+#       description: cup, whole
+#       is_fraction: 0
+#       fraction_int: 0
+#     - !ruby/object:MFP::Binary::FoodPortion
+#       amount: 1.0
+#       gram_weight: 232.0
+#       description: cup, pureed
+#       is_fraction: 0
+#       fraction_int: 0
+#     - !ruby/object:MFP::Binary::FoodPortion
+#       amount: 1.0
+#       gram_weight: 357.0
+#       description: pint as purchased, yields
+#       is_fraction: 0
+#       fraction_int: 0
+#     - !ruby/object:MFP::Binary::FoodPortion
+#       amount: 1.0
+#       gram_weight: 12.0
+#       description: medium (1-1/4" dia)
+#       is_fraction: 0
+#       fraction_int: 0
+#     - !ruby/object:MFP::Binary::FoodPortion
+#       amount: 1.0
+#       gram_weight: 453.5920104980469
+#       description: lb(s)
+#       is_fraction: 0
+#       fraction_int: 0
+#     - !ruby/object:MFP::Binary::FoodPortion
+#       amount: 1.0
+#       gram_weight: 166.0
+#       description: cup, sliced
+#       is_fraction: 0
+#       fraction_int: 0
+#     - !ruby/object:MFP::Binary::FoodPortion
+#       amount: 1.0
+#       gram_weight: 950.0
+#       description: tbsp(s)
+#       is_fraction: 0
+#       fraction_int: 0
+#     packet_type: 3
+#   date: 2016-08-12
+#   meal_name: 21 to 24
+#   quantity: 15.0
+#   weight_index: 2
+#   packet_type: 5
