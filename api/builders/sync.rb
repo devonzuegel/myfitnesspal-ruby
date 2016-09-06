@@ -16,10 +16,14 @@ module API
       end
 
       class BuildFoodEntry
+        extend Forwardable
+
         include Concord.new(:packet, :repo, :user_id), Procto.call
 
+        def_delegator :packet, :food
+
         def call
-          portion_list = Builders::FoodPortionList.call(packet.food.portions, food_id, repo)
+          portion_list = Builders::FoodPortionList.call(food.portions, food_id, repo)
           portion_id   = portion_list[hash_packet[:weight_index]][:id]
 
           Builders::FoodEntry.call(hash_packet, portion_id, user_id, repo)
@@ -35,10 +39,10 @@ module API
 
         def food_id
           food_repo = Mappers::Food.new(repo)
-          if food_repo.available?(master_food_id: packet.food.master_food_id)
-            Builders::Food.call(packet.food, repo)[:id]
+          if food_repo.available?(master_food_id: food.master_food_id)
+            Builders::Food.call(food, repo)[:id]
           else
-            food_repo.query(master_food_id: packet.food.master_food_id).first.id
+            food_repo.query(master_food_id: food.master_food_id).first.id
           end
         end
       end
