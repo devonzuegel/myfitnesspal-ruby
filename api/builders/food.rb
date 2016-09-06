@@ -12,6 +12,16 @@ module API
         super(params.to_h, VALIDATION_CLASS, MAPPER_CLASS.new(repo))
       end
 
+      def first_or_create
+        conditions = { master_food_id: params.fetch(:master_food_id) }
+
+        if mapper.available?(conditions)
+          call
+        else
+          mapper.query(conditions).first.to_h
+        end
+      end
+
       private
 
       def transformed_params

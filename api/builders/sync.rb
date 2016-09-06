@@ -23,6 +23,7 @@ module API
         def_delegator :packet, :food
 
         def call
+          food_id      = Builders::Food.new(food.to_h, repo).first_or_create.fetch(:id)
           portion_list = Builders::FoodPortionList.call(food.portions, food_id, repo)
           portion_id   = portion_list[hash_packet[:weight_index]][:id]
 
@@ -35,15 +36,6 @@ module API
 
         def hash_packet
           packet.to_h
-        end
-
-        def food_id
-          food_repo = Mappers::Food.new(repo)
-          if food_repo.available?(master_food_id: food.master_food_id)
-            Builders::Food.call(food, repo)[:id]
-          else
-            food_repo.query(master_food_id: food.master_food_id).first.id
-          end
         end
       end
     end

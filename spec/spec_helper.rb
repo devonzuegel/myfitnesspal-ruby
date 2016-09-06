@@ -17,7 +17,6 @@ RSpec.configure do |c|
   # Disable external requests
   WebMock.disable_net_connect!(allow_localhost: true)
 
-  # Fail tests that run for longer than 1 seconds
   c.around(:each) { |t| Timeout.timeout(1, &t) }
 
   c.include_context 'db context', db: true

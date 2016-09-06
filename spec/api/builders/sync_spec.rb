@@ -9,8 +9,9 @@ describe API::Builders::Sync, :db, :food_entry_packet do
     )
   end
 
-  let(:contents)     { LocalFile.read_yml(fixture('packets-tiny-sync.yml')) }
-  let(:sync_builder) { described_class.new(contents, repository, user_id) }
+  let(:contents)            { LocalFile.read_yml(fixture('packets-tiny-sync.yml')) }
+  let(:simple_sync_builder) { described_class.new(contents, repository, user_id) }
+  let(:dup_sync_builder)    { described_class.new(contents * 2, repository, user_id) }
 
   describe '.SUPPORTED_PACKETS' do
     it 'supports the expected packets and corresponding builders' do
@@ -21,7 +22,7 @@ describe API::Builders::Sync, :db, :food_entry_packet do
   end
 
   describe '#packets' do
-    let(:packets) { sync_builder.packets }
+    let(:packets) { simple_sync_builder.packets }
 
     it 'is a list of MFP::Binary::Packets' do
       packets.each { |p| expect(p.class).to be < MFP::Binary::Packet }
@@ -34,22 +35,44 @@ describe API::Builders::Sync, :db, :food_entry_packet do
   end
 
   describe '#call' do
-    it 'builds food portions' do
-      expect { sync_builder.call }
-        .to change { db[:food_portions].count }
-        .by 15
+    context 'simple sync' do
+      it 'builds food portions' do
+        expect { simple_sync_builder.call }
+          .to change { db[:food_portions].count }
+          .by 15
+      end
+
+      it 'builds food' do
+        expect { simple_sync_builder.call }
+          .to change { db[:foods].count }
+          .by 1
+      end
+
+      it 'builds food entry' do
+        expect { simple_sync_builder.call }
+          .to change { db[:food_entries].count }
+          .by 1
+      end
     end
 
-    it 'builds food' do
-      expect { sync_builder.call }
-        .to change { db[:foods].count }
-        .by 1
-    end
+    context 'duplicate sync' do
+      it 'does not build duplicate foods' do
+        expect { dup_sync_builder.call }
+          .to change { db[:foods].count }
+          .by 1
+      end
 
-    it 'builds food entry' do
-      expect { sync_builder.call }
-        .to change { db[:food_entries].count }
-        .by 1
+      it 'builds food portions' do
+        expect { dup_sync_builder.call }
+          .to change { db[:food_portions].count }
+          .by 30
+      end
+
+      it 'builds food entry' do
+        expect { dup_sync_builder.call }
+          .to change { db[:food_entries].count }
+          .by 2
+      end
     end
   end
 end
