@@ -14,7 +14,7 @@ describe API::Mappers::FoodPortion, :db do
   let(:portion_repo) { described_class.new(repository) }
   let(:attrs) do
     {
-      id:            -1,
+      id:            3,
       options_index: 1,
       description:   'dummy description',
       amount:        1.0,
@@ -50,6 +50,27 @@ describe API::Mappers::FoodPortion, :db do
       expect { portion_repo.create(attrs) }
         .to change { db[:food_portions].count }
         .by(1)
+    end
+  end
+
+  describe '#available?' do
+    before { db[:food_portions].insert(attrs) }
+
+    it 'is false when the food_id AND options_index are taken' do
+      expect(portion_repo.available?(attrs)).to be false
+    end
+
+    it 'is true when the food_id is not taken' do
+      expect(portion_repo.available?(attrs.merge(food_id: 123))).to be true
+    end
+
+    it 'is true when the options_index is not taken' do
+      expect(portion_repo.available?(attrs.merge(options_index: 123))).to be true
+    end
+
+    it 'is true when the food_id AND options_index are not taken' do
+      portion = attrs.merge(options_index: 123, food_id: 123)
+      expect(portion_repo.available?(portion)).to be true
     end
   end
 end

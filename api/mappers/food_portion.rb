@@ -9,6 +9,14 @@ module API
           .as(Models::FoodPortion)
           .to_ary
       end
+
+      def available?(conditions)
+        food_portions
+          .unique?(
+            food_id:       conditions.fetch(:food_id),
+            options_index: conditions.fetch(:options_index)
+          )
+      end
     end
   end
 end
