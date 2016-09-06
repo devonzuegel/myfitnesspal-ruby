@@ -5,7 +5,7 @@ require_relative 'food_portion'
 module MFP
   module Binary
     class Food < Binary::Packet
-      attr_reader :portions
+      attr_reader :portions, :master_food_id
 
       PACKET_TYPE = Binary::Type::FOOD
 

@@ -10,6 +10,8 @@ module API
         :grams,
         :serialized
       )
+
+      attr_reader :id
     end
   end
 end
