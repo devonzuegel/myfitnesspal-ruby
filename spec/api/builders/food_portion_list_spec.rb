@@ -52,4 +52,16 @@ describe API::Builders::FoodPortionList, :db, :food_entry_packet do
 
     expect(results_list).to eql(expected_results_list)
   end
+
+  context 'portion already inserted' do
+    before do
+      described_class.call([portion_list.first], food_id, repository)
+    end
+
+    it 'skips duplicate portions' do
+      expect { described_class.call([portion_list.first], food_id, repository) }
+        .to change { db[:food_portions].count }
+        .by 0
+    end
+  end
 end

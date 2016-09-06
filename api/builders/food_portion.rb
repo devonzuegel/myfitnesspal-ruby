@@ -16,6 +16,19 @@ module API
         )
       end
 
+      def first_or_create
+        conditions = {
+          food_id:       params.fetch(:food_id),
+          options_index: params.fetch(:options_index)
+        }
+
+        if mapper.available?(conditions)
+          call
+        else
+          mapper.query(conditions).first.to_h
+        end
+      end
+
       private
 
       def transformed_params

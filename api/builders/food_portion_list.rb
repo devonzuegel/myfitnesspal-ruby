@@ -9,7 +9,7 @@ module API
 
       def call
         list.each_with_index.map do |portion, i|
-          FoodPortion.call(portion, i, food_id, repo)
+          FoodPortion.new(portion, i, food_id, repo).first_or_create
         end
       end
     end

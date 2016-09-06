@@ -65,7 +65,7 @@ describe API::Builders::Sync, :db, :food_entry_packet do
       it 'builds food portions' do
         expect { dup_sync_builder.call }
           .to change { db[:food_portions].count }
-          .by 30
+          .by 15
       end
 
       it 'builds food entry' do
