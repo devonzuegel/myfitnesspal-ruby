@@ -29,7 +29,7 @@ module API
         }
       end
 
-      def consolidated_params(params, user_id, portion_id)
+      def consolidated_params(params, portion_id, user_id)
         params.to_h.merge(
           user_id:    user_id,
           portion_id: portion_id
