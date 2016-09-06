@@ -40,4 +40,20 @@ describe API::Mappers::Food, :db do
         .by(1)
     end
   end
+
+  describe '#available?' do
+    before { db[:foods].insert(attrs) }
+
+    it 'is false when the master_food_id is taken' do
+      expect(food_repo.available?(master_food_id: 123)).to be false
+    end
+
+    it 'is true when the master_food_id does not yet exist' do
+      expect(food_repo.available?(master_food_id: 11111)).to be true
+    end
+
+    it 'handles (but ignores) keywords besides :master_food_id' do
+      expect(food_repo.available?(master_food_id: 11111, x: 1)).to be true
+    end
+  end
 end

@@ -9,6 +9,11 @@ module API
           .as(Models::Food)
           .to_ary
       end
+
+      def available?(conditions)
+        foods
+          .unique?(master_food_id: conditions.fetch(:master_food_id))
+      end
     end
   end
 end
