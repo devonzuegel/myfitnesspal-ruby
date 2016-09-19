@@ -1,7 +1,11 @@
 module API
   module Services
     class UserSignup
-      include Procto.call, Concord.new(:params, :repo), Memoizable
+      include Procto.call, Concord.new(:params, :repo), Memoizable, Builders::Utils
+
+      def initialize(params, repo)
+        super(symbolize_keys(params), repo)
+      end
 
       def call
         unless built_user.key?(:errors)
