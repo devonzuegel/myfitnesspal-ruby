@@ -12,11 +12,11 @@ $ bundle install
 $ ENV_FILE='.env.development' rake db:setup && ENV_FILE='.env.test' rake db:setup
 ```
 
+## Starting the server for local development
+
 ```shell
 $ bundle exec shotgun
 ```
-
-## Starting the server for local development
 
 ## Running specs
 
