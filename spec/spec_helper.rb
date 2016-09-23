@@ -14,7 +14,9 @@ RSpec.configure do |c|
   c.filter_run focus: ENV['CI'] != 'true'
   c.run_all_when_everything_filtered = true
 
-  # Disable external requests
+  c.before(:each) { Sidekiq::Worker.clear_all }
+
+
   WebMock.disable_net_connect!(allow_localhost: true)
 
   c.around(:each) { |t| Timeout.timeout(1, &t) }
@@ -24,6 +26,5 @@ RSpec.configure do |c|
 
   c.include FixtureHelpers
 
-  # Randomize order of specs
   c.order = 'random'
 end
