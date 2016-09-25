@@ -1,5 +1,3 @@
-require 'bundler/setup'
-
 Bundler.require
 Dotenv.load '.env.development'
 
@@ -13,4 +11,11 @@ environment =
     favicon:    Pathname.new('.').expand_path.join('public', 'favicon-production.ico')
   )
 
-run API::App.new(API::Env::Wrapper.new(environment))
+Sidekiq.configure_client do |c|
+  c.redis = { size: 1 }
+end
+
+run Rack::URLMap.new(
+  '/'      => API::App.new(API::Env::Wrapper.new(environment)),
+  '/admin' => Sidekiq::Web
+)

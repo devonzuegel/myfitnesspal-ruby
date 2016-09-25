@@ -26,6 +26,8 @@ gem 'rom-sql',         '0.8.0'
 
 gem 'http',            '~> 2.0'
 
+gem 'sidekiq',         '4.2.1', require: ['sidekiq/api', 'sidekiq/web']
+
 group :test do
   gem 'webmock',         '2.1.0'
   gem 'rack-test',       '0.6.3'
