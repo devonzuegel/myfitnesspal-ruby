@@ -1,6 +1,4 @@
-describe API::Env do
-  let(:db)         { Sequel.mock(host: 'postgres') }
-  let(:repository) { instance_double(API::SqlRepo, db: db, to_s: 'mockuri') }
+describe API::Env, :mock_db do
   let(:env) do
     described_class.new(
       repository: repository,

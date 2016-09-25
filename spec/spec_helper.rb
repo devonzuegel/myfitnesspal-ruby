@@ -1,4 +1,5 @@
 require_relative './support/db_context'
+require_relative './support/mock_db_context'
 require_relative './support/food_entry_packet_context'
 require_relative './support/fixture_helpers'
 require 'bundler/setup'
@@ -22,6 +23,7 @@ RSpec.configure do |c|
   c.around(:each) { |t| Timeout.timeout(1, &t) }
 
   c.include_context 'db context', db: true
+  c.include_context 'mock db context', mock_db: true
   c.include_context 'food entry packet', food_entry_packet: true
 
   c.include FixtureHelpers
