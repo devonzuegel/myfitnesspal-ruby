@@ -11,9 +11,8 @@ module API
 
       get '/users' do
         json(
-          Mappers::User.new(app_env.repository)
-            .query({})
-            .map &:to_h
+          users: Mappers::User.new(app_env.repository).query({}).map(&:to_h),
+          foods: Mappers::Food.new(app_env.repository).query({}).map(&:to_h)
         )
       end
     end

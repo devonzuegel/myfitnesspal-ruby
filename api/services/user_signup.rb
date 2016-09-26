@@ -9,7 +9,7 @@ module API
 
       def call
         unless built_user.key?(:errors)
-          Builders::Sync.call(packets, repo, built_user.fetch(:id))
+          Workers::Sync.perform_async(packets, repo, built_user.fetch(:id))
         end
         built_user
       end
