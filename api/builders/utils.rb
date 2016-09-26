@@ -2,7 +2,11 @@ module API
   module Builders
     module Utils
       def symbolize_keys(myhash)
-        Hash[myhash.map { |k, v| [k.to_sym, v] }]
+        JSON.parse(JSON[myhash], symbolize_names: true)
+      end
+
+      def stringify_keys(myhash)
+        JSON.parse(JSON[myhash])
       end
     end
   end
