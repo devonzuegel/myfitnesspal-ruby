@@ -31,9 +31,5 @@ describe API::Builders::Base do
     it 'calls the provided validation & returns its output upon success' do
       expect(described_class.call(raw_params, validtn_klass, mapper)).to eql(params.merge(id: 3))
     end
-
-    it 'creates a new user with validation output upon success' do
-      described_class.call(raw_params, validtn_klass, mapper)
-    end
   end
 end

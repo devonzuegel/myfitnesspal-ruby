@@ -8,6 +8,14 @@ module API
 
         json(result)
       end
+
+      get '/users' do
+        json(
+          Mappers::User.new(app_env.repository)
+            .query({})
+            .map &:to_h
+        )
+      end
     end
   end
 end

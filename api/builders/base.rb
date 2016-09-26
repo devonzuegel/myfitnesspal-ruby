@@ -5,6 +5,10 @@ module API
     class Base
       include Utils, Procto.call, Concord.new(:params, :validation, :mapper), Memoizable
 
+      def initialize(params, validation, mapper)
+        super(symbolize_keys(params), validation, mapper)
+      end
+
       def call
         if validation_result.success?
           mapper.create(validation_result.output).to_h
@@ -25,7 +29,7 @@ module API
       end
 
       def transformed_params
-        symbolize_keys(params)
+        params
       end
     end
   end
