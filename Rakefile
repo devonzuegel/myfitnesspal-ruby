@@ -12,7 +12,7 @@ end
 namespace :db do
   require_relative 'db/setup'
   db_connection_str = ENV.fetch('DATABASE_URL')
-  db_name           = db_connection_str.split('/').last
+  db_name           = ENV.fetch('DATABASE_NAME')  # = db_connection_str.split('/').last
 
   task :setup, [:version] do |_, args|
     puts "Setting up database... [#{db_name}]".gray
