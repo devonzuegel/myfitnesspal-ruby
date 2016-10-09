@@ -30,13 +30,8 @@ describe API::Services::UserSignup, :mock_db do
       expect(described_class.call(params, repository)).to eql stubbed_user
     end
 
-    it 'retrieves the packets from MFP' do
-      expect(MFP::Sync).to receive(:new).once.with(params[:username], params[:password])
-      described_class.call(params, repository)
-    end
-
     it 'persists the retrieved packets' do
-      expected_args = [[], 'mockuri', 2]
+      expected_args = [{'password'=>'password', 'username'=>'username'}, 'mockuri', 2]
       expect { described_class.call(params, repository) }
         .to change { Sidekiq::Queues['default'].map { |q| q['args'] } }
         .from([])

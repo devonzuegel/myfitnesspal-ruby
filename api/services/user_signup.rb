@@ -9,19 +9,12 @@ module API
 
       def call
         unless built_user.key?(:errors)
-          Workers::Sync.perform_async(packets, repo, built_user.fetch(:id))
+          Workers::Sync.perform_async(params, repo, built_user.fetch(:id))
         end
         built_user
       end
 
       private
-
-      def packets
-        MFP::Sync
-          .new(params.fetch(:username), params.fetch(:password))
-          .all_packets
-      end
-      memoize :packets
 
       def built_user
         Builders::User.call(params, repo)

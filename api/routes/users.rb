@@ -3,10 +3,19 @@ require_relative 'base'
 module API
   module Routes
     class Users < Routes::Base
+
       get '/users/create' do
         result = Services::UserSignup.call(params, app_env.repository)
 
         json(result)
+      end
+
+      get '/users/sync' do
+        Workers::FetchPackets.perform_async(
+          params.fetch('username'),
+          params.fetch('password')
+        )
+        json(messages: 'Beginning sync')
       end
 
       get '/users' do
