@@ -10,22 +10,3 @@ module API
     end
   end
 end
-
-module API
-  module Workers
-    class FetchPackets
-      include Sidekiq::Worker
-
-      def self.perform_async(*args)
-        new.perform(*args)
-      end
-
-      def perform(username, password)
-        MFP::Sync
-          .new(username, password)
-          .all_packets
-      end
-    end
-  end
-end
-
