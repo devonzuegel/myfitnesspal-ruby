@@ -35,7 +35,11 @@ $ ENV_FILE='.env.development' rake db:clean && ENV_FILE='.env.test' rake db:clea
 
 ```shell
 $ bundle exec shotgun
+$ rerun 'bundle exec sidekiq -r ./sidekiq.rb -c 2'
+$ brew services restart redis
+$ redis-cli flushdb
 ```
+
 
 ## Running specs
 
