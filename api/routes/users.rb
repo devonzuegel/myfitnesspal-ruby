@@ -9,14 +9,6 @@ module API
         json(result)
       end
 
-      get '/users/sync' do
-        Workers::FetchPackets.perform_async(
-          params.fetch('username'),
-          params.fetch('password')
-        )
-        json(messages: 'Beginning sync')
-      end
-
       get '/users' do
         json(
           users: Mappers::User.new(app_env.repository).query({}).map(&:to_h),
@@ -32,7 +24,7 @@ module API
           'username' => user.username,
           'password' => user.password,
         }, user.id)
-        json('Syncing')
+        json(messages: 'Beginning sync')
       end
     end
   end

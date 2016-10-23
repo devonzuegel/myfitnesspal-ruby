@@ -3,6 +3,10 @@ module API
     class Food < ROM::Repository[:foods]
       commands :create
 
+      def initialize(args)
+        super(args)
+      end
+
       def query(conditions)
         foods
           .where(conditions)

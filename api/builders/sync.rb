@@ -14,7 +14,6 @@ module API
       def call
         packets.each_with_index do |pkt, i|
           Workers::BuildFoodEntry.perform_async(pkt.to_h, user_id)
-          break if i > 10
         end
       end
 

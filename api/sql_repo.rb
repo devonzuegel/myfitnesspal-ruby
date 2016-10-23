@@ -2,7 +2,7 @@ module API
   class SqlRepo
     extend Forwardable
 
-    include Concord.new(:uri)
+    include Concord.new(:uri), Memoizable
 
     attr_reader :uri
 
@@ -27,5 +27,6 @@ module API
       config = ROM::Configuration.new(:sql, db)
       ROM.container(config)
     end
+    memoize :container
   end
 end
