@@ -1,6 +1,4 @@
 describe API::Builders::Sync, :mock_db, :food_entry_packet do
-  before { stub_const('SIDEKIQ_REPO', repository) }
-
   let(:user_id)      { 9 }
   let(:contents)     { LocalFile.read_yml(fixture('packets-tiny-sync.yml')) }
   let(:sync_builder) { described_class.new(contents, user_id) }

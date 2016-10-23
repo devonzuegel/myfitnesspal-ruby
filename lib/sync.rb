@@ -26,7 +26,7 @@ module MFP
             @last_sync_pointers = packet.last_sync_pointers
           else
             packet_count += 1
-            return packets if packet_count == 10
+            # return packets if packet_count == 10
           end
         end
 

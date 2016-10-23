@@ -3,6 +3,7 @@ require_relative './support/mock_db_context'
 require_relative './support/food_entry_packet_context'
 require_relative './support/fixture_helpers'
 require 'bundler/setup'
+require 'sidekiq/testing'
 
 Bundler.require(:default, :test)
 Dotenv.load '.env.test'

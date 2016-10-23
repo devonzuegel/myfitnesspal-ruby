@@ -5,7 +5,6 @@ describe API::Services::UserSignup, :mock_db do
 
   before do
     fake_sync_instance = instance_double(MFP::Sync, all_packets: [])
-    stub_const('SIDEKIQ_REPO', repository)
     stub_const('MFP::Sync', class_double(MFP::Sync, new: fake_sync_instance))
     stub_const('API::Builders::Sync', class_double(API::Builders::Sync, call: nil))
   end
