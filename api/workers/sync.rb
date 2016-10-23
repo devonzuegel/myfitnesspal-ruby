@@ -5,6 +5,7 @@ module API
 
       def perform(params, user_id, repo_uri = nil)
         packets = get_packets(params)
+        puts "Calling Builders::Sync with...: packets.length = #{packets.length}".gray
         Builders::Sync.call(packets, repo(repo_uri), user_id)
       end
 

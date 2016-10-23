@@ -4,7 +4,7 @@ module API
       include Concord.new(:all_packets, :user_id, :db_uri), Procto.call
 
       SUPPORTED_PACKETS = {
-        MFP::Binary::FoodEntry => API::Builders::FoodEntry
+        MFP::Binary::FoodEntry => API::Builders::FoodEntry,
       }.freeze
 
       def initialize(all_packets, user_id, db_uri = nil)
@@ -12,8 +12,9 @@ module API
       end
 
       def call
-        packets.each do |pkt|
+        packets.each_with_index do |pkt, i|
           Workers::BuildFoodEntry.perform_async(pkt.to_h, user_id)
+          break if i > 10
         end
       end
 
