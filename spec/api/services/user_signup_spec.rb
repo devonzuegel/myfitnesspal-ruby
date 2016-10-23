@@ -5,6 +5,7 @@ describe API::Services::UserSignup, :mock_db do
 
   before do
     fake_sync_instance = instance_double(MFP::Sync, all_packets: [])
+    stub_const('SIDEKIQ_REPO', repository)
     stub_const('MFP::Sync', class_double(MFP::Sync, new: fake_sync_instance))
     stub_const('API::Builders::Sync', class_double(API::Builders::Sync, call: nil))
   end
@@ -31,7 +32,7 @@ describe API::Services::UserSignup, :mock_db do
     end
 
     it 'persists the retrieved packets' do
-      expected_args = [{'password'=>'password', 'username'=>'username'}, 'mockuri', 2]
+      expected_args = [{'password'=>'password', 'username'=>'username'}, 2]
       expect { described_class.call(params, repository) }
         .to change { Sidekiq::Queues['default'].map { |q| q['args'] } }
         .from([])

@@ -3,7 +3,6 @@ require_relative 'base'
 module API
   module Routes
     class Users < Routes::Base
-
       get '/users/create' do
         result = Services::UserSignup.call(params, app_env.repository)
 
@@ -23,6 +22,15 @@ module API
           users: Mappers::User.new(app_env.repository).query({}).map(&:to_h),
           foods: Mappers::Food.new(app_env.repository).query({}).map(&:to_h)
         )
+      end
+
+      get '/sync' do
+        user = Mappers::User.new(app_env.repository).query({}).first
+        Workers::Sync.perform_async({
+          'username' => user.username,
+          'password' => user.password,
+        }, user.id)
+        json('Syncing')
       end
     end
   end

@@ -1,7 +1,9 @@
 describe API::Builders::Sync, :mock_db, :food_entry_packet do
+  before { stub_const('SIDEKIQ_REPO', repository) }
+
   let(:user_id)      { 9 }
   let(:contents)     { LocalFile.read_yml(fixture('packets-tiny-sync.yml')) }
-  let(:sync_builder) { described_class.new(contents, repository, user_id) }
+  let(:sync_builder) { described_class.new(contents, user_id) }
 
   describe '.SUPPORTED_PACKETS' do
     it 'supports the expected packets and corresponding builders' do
@@ -37,7 +39,6 @@ describe API::Builders::Sync, :mock_db, :food_entry_packet do
       workers_args = Sidekiq::Queues['default'].map { |q| q['args'] }
       expect(workers_args.first).to eql([
         JSON.parse(JSON[sync_builder.packets.first.to_h]),
-        repository.to_s,
         user_id
       ])
     end

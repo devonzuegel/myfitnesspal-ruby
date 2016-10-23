@@ -1,15 +1,19 @@
 module API
   module Builders
     class Sync
-      include Concord.new(:all_packets, :repo, :user_id), Procto.call
+      include Concord.new(:all_packets, :user_id, :db_uri), Procto.call
 
       SUPPORTED_PACKETS = {
         MFP::Binary::FoodEntry => API::Builders::FoodEntry
       }.freeze
 
+      def initialize(all_packets, user_id, db_uri = nil)
+        super(all_packets, user_id, db_uri)
+      end
+
       def call
         packets.each do |pkt|
-          Workers::BuildFoodEntry.perform_async(pkt.to_h, repo, user_id)
+          Workers::BuildFoodEntry.perform_async(pkt.to_h, user_id)
         end
       end
 

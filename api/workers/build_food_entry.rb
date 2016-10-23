@@ -1,11 +1,14 @@
 module API
   module Workers
-    class BuildFoodEntry
+    class BuildFoodEntry < Base
       include Sidekiq::Worker
 
-      def perform(hash_packet, db_uri, user_id)
-        Builders::FoodOrchestrator
-          .call(hash_packet, SqlRepo.new(db_uri), user_id)
+      def perform(hash_packet, user_id, repo_uri = nil)
+        Builders::FoodOrchestrator.call(
+          hash_packet,
+          repo(repo_uri),
+          user_id
+        )
       end
     end
   end

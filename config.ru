@@ -11,8 +11,8 @@ environment =
     favicon:    Pathname.new('.').expand_path.join('public', 'favicon-production.ico')
   )
 
-Sidekiq.configure_client do |c|
-  c.redis = { size: 1 }
+Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
+   [user, password] == %w[u p]
 end
 
 run Rack::URLMap.new(
