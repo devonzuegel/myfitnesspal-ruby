@@ -10,16 +10,16 @@ describe API::Workers::BuildFoodEntry do
       .to receive(:connect)
       .and_return(Sequel.mock(host: 'postgres'))
 
-    Sidekiq::Testing.inline!
-
     stub_const('API::Builders::FoodOrchestrator', food_orchestrator)
   end
 
   it 'calls the food orchestrator' do
-    expect(food_orchestrator)
-      .to receive(:call)
-      .with(hash_packet, API::SqlRepo.new(mock_uri), user_id)
+    Sidekiq::Testing.inline! do
+      expect(food_orchestrator)
+        .to receive(:call)
+        .with(hash_packet, API::SqlRepo.new(mock_uri), user_id)
 
-    described_class.perform_async(hash_packet, user_id, mock_uri)
+      described_class.perform_async(hash_packet, user_id, mock_uri)
+    end
   end
 end
