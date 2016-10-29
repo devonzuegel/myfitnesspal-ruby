@@ -12,21 +12,28 @@ environment =
   )
 
 Sidekiq.configure_client do |c|
-  c.redis = {
-    # namespace: 'devonsnamespace',
-    size: 2,
-  }
+  c.redis = { size: 1024 }
 end
 
-# Sidekiq.configure_server do |config|
-#   config.redis = { namespace: 'devonsnamespace' }
-# end
+Sidekiq::Web.set :session_secret, environment.secret
 
-Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
-   [user, password] == %w[u p]
+map '/' do
+  run API::App.new(API::Env::Wrapper.new(environment))
 end
 
-run Rack::URLMap.new(
-  '/'      => API::App.new(API::Env::Wrapper.new(environment)),
-  '/admin' => Sidekiq::Web
-)
+map '/admin' do
+  use Rack::Auth::Basic, "Protected Area" do |username, password|
+    # Protect against timing attacks: (https://codahale.com/a-lesson-in-timing-attacks/)
+    # - Use & (do not use &&) so that it doesn't short circuit.
+    # - Use digests to stop length information leaking
+    Rack::Utils.secure_compare(
+      ::Digest::SHA256.hexdigest(username),
+      ::Digest::SHA256.hexdigest(ENV['SIDEKIQ_USERNAME'])
+    ) & Rack::Utils.secure_compare(
+      ::Digest::SHA256.hexdigest(password),
+      ::Digest::SHA256.hexdigest(ENV['SIDEKIQ_PASSWORD'])
+    )
+  end
+
+  run Sidekiq::Web
+end

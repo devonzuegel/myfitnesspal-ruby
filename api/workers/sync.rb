@@ -4,15 +4,9 @@ module API
       include Sidekiq::Worker
 
       def perform(params, user_id, repo_uri = nil)
-        Builders::Sync.call(get_packets(params).reverse, user_id, repo(repo_uri))
-      end
+        sync = MFP::Sync.new(params.fetch('username'), params.fetch('password'))
 
-      private
-
-      def get_packets(params)
-        MFP::Sync
-          .new(params.fetch('username'), params.fetch('password'))
-          .all_packets
+        Builders::Sync.call(sync.all_packets.reverse, user_id, repo(repo_uri))
       end
     end
   end
