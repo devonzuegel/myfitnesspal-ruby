@@ -10,11 +10,20 @@ module API
       end
 
       get '/users' do
+        foods         = Mappers::Food.new(app_env.repository).query({}).map(&:to_h)
+        food_entries  = Mappers::FoodEntry.new(app_env.repository).query({}).map(&:to_h)
+        food_portions = Mappers::FoodPortion.new(app_env.repository).query({}).map(&:to_h)
+
         json(
           users: Mappers::User.new(app_env.repository).query({}).map(&:to_h),
-          foods: Mappers::Food.new(app_env.repository).query({}).map(&:to_h),
-          food_entries: Mappers::FoodEntry.new(app_env.repository).query({}).map(&:to_h),
-          food_portions: Mappers::FoodPortion.new(app_env.repository).query({}).map(&:to_h),
+          counts: {
+            foods:         foods.length,
+            food_entries:  food_entries.length,
+            food_portions: food_portions.length,
+          },
+          # foods:         foods,
+          # food_entries:  food_entries,
+          # food_portions: food_portions,
         )
       end
 
