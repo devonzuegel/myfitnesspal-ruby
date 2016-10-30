@@ -7,6 +7,8 @@ module API
         sync = MFP::Sync.new(params.fetch('username'), params.fetch('password'))
 
         Builders::Sync.call(sync.all_packets.reverse, user_id, repo(repo_uri))
+
+        # ap sync.last_sync_pointers
       end
     end
   end

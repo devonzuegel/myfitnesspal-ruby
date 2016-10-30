@@ -1,10 +1,4 @@
 describe API::Builders::User, :db do
-  before do
-    allow(Sequel)
-      .to receive(:connect)
-      .and_return(Sequel.mock(host: 'postgres'))
-  end
-
   it 'has the expected VALIDATION_CLASS' do
     expect(described_class::VALIDATION_CLASS).to eql(API::Schema::User::Creation)
   end

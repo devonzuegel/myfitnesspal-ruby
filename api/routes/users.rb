@@ -21,9 +21,6 @@ module API
             food_entries:  food_entries.length,
             food_portions: food_portions.length,
           },
-          # foods:         foods,
-          # food_entries:  food_entries,
-          # food_portions: food_portions,
         )
       end
 
