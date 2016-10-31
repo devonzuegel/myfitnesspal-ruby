@@ -4,11 +4,24 @@ module API
       include Sidekiq::Worker
 
       def perform(params, user_id, repo_uri = nil)
-        sync = MFP::Sync.new(params.fetch('username'), params.fetch('password'))
+        # TODO retrieve user's most recent last_sync_ptrs to pass to MFP::Sync
 
-        Builders::Sync.call(sync.all_packets.reverse, user_id, repo(repo_uri))
+        sync = MFP::Sync.new(
+          params.fetch('username'),
+          params.fetch('password')
+        )
 
-        # ap sync.last_sync_pointers
+        Builders::Sync.call(
+          sync.all_packets.reverse,
+          user_id,
+          repo(repo_uri)
+        )
+
+        Builders::LastSyncInfo.call({
+          user_id: user_id,
+          date:    DateTime.now,
+          ptrs:    sync.last_sync_pointers,
+        }, repo(repo_uri))
       end
     end
   end
