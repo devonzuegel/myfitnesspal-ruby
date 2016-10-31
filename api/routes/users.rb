@@ -21,6 +21,7 @@ module API
             food_entries:  food_entries.length,
             food_portions: food_portions.length,
           },
+          last_sync_info: Mappers::LastSyncInfo.new(app_env.repository).query({}).map(&:to_h)
         )
       end
 
