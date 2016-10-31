@@ -5,7 +5,7 @@ module API
         :id,
         :user_id,
         :serialized_ptrs,
-        :date
+        :date,
       )
     end
   end

@@ -4,7 +4,7 @@ describe API::Builders::User, :db do
   end
 
   it 'has the expected MAPPER_CLASS' do
-    expect(described_class::MAPPER_CLASS).to eql(API::Mappers:: User)
+    expect(described_class::MAPPER_CLASS).to eql(API::Mappers::User)
   end
 
   it 'inherits from Base' do
