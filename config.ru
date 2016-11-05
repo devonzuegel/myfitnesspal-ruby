@@ -13,8 +13,7 @@ environment =
 
 Sidekiq.configure_client do |c|
   c.redis = {
-    size: 1024,
-    url: ENV['REDIS_URL']
+    size: 10
   }
 end
 
