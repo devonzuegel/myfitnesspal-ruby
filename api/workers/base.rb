@@ -1,6 +1,10 @@
 module API
   module Workers
     class Base
+      include Sidekiq::Worker
+
+      sidekiq_options retry: false
+
       private
 
       def repo(repo_uri = nil)
