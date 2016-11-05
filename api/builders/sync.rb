@@ -1,3 +1,6 @@
+require_relative './food_entry'
+require_relative '../workers/build_food_entry'
+
 module API
   module Builders
     class Sync

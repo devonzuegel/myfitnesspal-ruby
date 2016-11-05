@@ -1,4 +1,5 @@
 require_relative 'utils'
+require_relative './base'
 require_relative '../schema/food'
 require_relative '../mappers/food'
 

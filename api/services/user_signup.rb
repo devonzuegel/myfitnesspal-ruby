@@ -1,3 +1,5 @@
+require_relative '../builders/utils'
+
 module API
   module Services
     class UserSignup

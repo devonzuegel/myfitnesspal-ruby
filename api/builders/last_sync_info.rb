@@ -1,4 +1,5 @@
 require_relative 'utils'
+require_relative './base'
 require_relative '../schema/last_sync_info'
 require_relative '../mappers/last_sync_info'
 

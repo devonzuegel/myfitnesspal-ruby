@@ -1,3 +1,7 @@
+require_relative './base'
+require_relative '../builders/last_sync_info'
+require_relative '../builders/sync'
+
 module API
   module Workers
     class Sync < Base

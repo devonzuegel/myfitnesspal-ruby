@@ -1,3 +1,5 @@
+require_relative './base'
+
 module API
   module Workers
     class BuildFoodEntry < Base
