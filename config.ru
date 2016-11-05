@@ -12,7 +12,10 @@ environment =
   )
 
 Sidekiq.configure_client do |c|
-  c.redis = { size: 1024 }
+  c.redis = {
+    size: 1024,
+    url: ENV['REDIS_URL']
+  }
 end
 
 Sidekiq::Web.set :session_secret, environment.secret
