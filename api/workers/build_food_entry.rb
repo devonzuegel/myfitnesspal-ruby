@@ -5,6 +5,8 @@ module API
     class BuildFoodEntry < Base
       include Sidekiq::Worker
 
+      sidekiq_options retry: false
+
       def perform(hash_packet, user_id, repo_uri = nil)
         Builders::FoodOrchestrator.call(
           hash_packet,

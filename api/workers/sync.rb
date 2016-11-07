@@ -7,6 +7,8 @@ module API
     class Sync < Base
       include Sidekiq::Worker
 
+      sidekiq_options retry: false
+
       def perform(params, user_id, repo_uri = nil)
         # TODO retrieve user's most recent last_sync_ptrs to pass to MFP::Sync
 
