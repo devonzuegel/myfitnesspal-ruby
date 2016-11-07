@@ -1,7 +1,9 @@
 Bundler.require
 Dotenv.load '.env.development'
 
-require './api/app'
+ROOT = Pathname.new('.').expand_path
+Dir.glob(ROOT.join('lib', '**', '*.rb')) { |f| require f }
+Dir.glob(ROOT.join('api', '**', '*.rb')) { |f| require f }
 
 environment =
   API::Env.new(
@@ -11,16 +13,14 @@ environment =
     favicon:    Pathname.new('.').expand_path.join('public', 'favicon-production.ico')
   )
 
-Sidekiq.configure_client do |c|
-  c.redis = {
-    size: 10
-  }
-end
-
 Sidekiq::Web.set :session_secret, environment.secret
 
-map '/' do
-  run API::App.new(API::Env::Wrapper.new(environment))
+map '/users' do
+  run API::Routes::Users.new(API::Env::Wrapper.new(environment))
+end
+
+map '/entries' do
+  run API::Routes::Entries.new(API::Env::Wrapper.new(environment))
 end
 
 map '/admin' do

@@ -3,15 +3,18 @@ module API
   Dir.glob(ROOT.join('lib', '**', '*.rb')) { |f| require f }
   Dir.glob(ROOT.join('api', '**', '*.rb')) { |f| require f }
 
-  module Models
-    autoload :User, 'models/user'
-  end
-
   class App < Routes::Base
     get '/favicon.ico' do
       send_file(ROOT.join('public', app_env.favicon))
     end
 
-    use Routes::Users
+    get '/sync' do
+      user = Mappers::User.new(app_env.repository).query({}).first
+      Workers::Sync.perform_async({
+        'username' => user.username,
+        'password' => user.password,
+      }, user.id)
+      json(messages: 'Beginning sync')
+    end
   end
 end
