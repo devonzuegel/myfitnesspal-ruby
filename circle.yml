@@ -1,0 +1,5 @@
+database:
+  override:
+    - echo 'DATABASE_URL=postgres://localhost/mfp-test' > .env.test
+    - createdb mfp-test
+    - ENV_FILE='.env.test' bundle exec rake db:setup
