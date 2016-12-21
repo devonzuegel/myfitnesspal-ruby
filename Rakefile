@@ -30,6 +30,11 @@ namespace :db do
     pg_connection.exec("CREATE DATABASE #{db_name}")
   end
 
+  desc 'Dump the current schema to db/schema.sql'
+  task :dump do
+    sh(%Q( pg_dump --no-owner --schema-only --file "db/schema.sql" #{db_name}))
+  end
+
   task :drop do
     fail ArgumentError, "You may not drop #{db_name}" unless db_name =~ /^mfp\_api_.*/
 
