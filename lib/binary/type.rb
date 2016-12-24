@@ -38,7 +38,7 @@ module MFP
             ExerciseEntry,
             WaterEntry,
             MeasurementValue,
-            DeleteItem
+            DeleteItem,
           ].map { |klass| [klass::PACKET_TYPE, klass] }
         Hash[type_name_pairs]
       end

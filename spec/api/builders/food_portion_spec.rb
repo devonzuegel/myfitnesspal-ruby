@@ -32,7 +32,7 @@ describe API::Builders::FoodPortion, :db, :food_entry_packet do
         description:   'extra large (1-5/8" dia)',
         food_id:       3,
         gram_weight:   27.0,
-        options_index: 0
+        options_index: 0,
     }
 
     expect(output).to eql(expected_output)

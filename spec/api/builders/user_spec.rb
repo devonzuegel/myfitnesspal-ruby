@@ -16,12 +16,12 @@ describe API::Builders::User, :db do
       errors: {
         password: [
           'is missing',
-          'size must be within 6 - 255'
+          'size must be within 6 - 255',
         ],
         username: [
           'is missing',
-          'size must be within 4 - 30'
-        ]
+          'size must be within 4 - 30',
+        ],
       }
     )
   end

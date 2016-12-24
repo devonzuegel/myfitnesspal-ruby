@@ -9,7 +9,7 @@ module API
         repository: repository.to_s,
         secret:     secret,
         rack_env:   rack_env,
-        favicon:    favicon
+        favicon:    favicon,
       }
     end
 

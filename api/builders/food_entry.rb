@@ -25,7 +25,7 @@ module API
           meal_name:  params.fetch(:meal_name),
           quantity:   params.fetch(:quantity),
           user_id:    params.fetch(:user_id),
-          portion_id: params.fetch(:portion_id)
+          portion_id: params.fetch(:portion_id),
         }
       end
 

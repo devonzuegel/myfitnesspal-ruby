@@ -19,7 +19,7 @@ class FakeCodec
   def read_map(_int)
     {
       'key1' => 'value1',
-      'key2' => 'value2'
+      'key2' => 'value2',
     }
   end
 end

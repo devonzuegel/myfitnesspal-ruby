@@ -31,7 +31,7 @@ module API
           brand:          params.fetch(:brand),
           description:    params.fetch(:description),
           grams:          params.fetch(:grams),
-          calories:       params.fetch(:nutrients).fetch(:calories)
+          calories:       params.fetch(:nutrients).fetch(:calories),
         }
       end
     end

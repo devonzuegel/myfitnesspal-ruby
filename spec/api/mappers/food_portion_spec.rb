@@ -18,7 +18,7 @@ describe API::Mappers::FoodPortion, :db do
       description:   'dummy description',
       amount:        1.0,
       gram_weight:   1.0,
-      food_id:       3
+      food_id:       3,
     }
   end
 

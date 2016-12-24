@@ -37,7 +37,7 @@ describe API::Builders::Sync, :mock_db, :food_entry_packet do
       workers_args = Sidekiq::Queues['default'].map { |q| q['args'] }
       expect(workers_args.first).to eql([
         JSON.parse(JSON[sync_builder.packets.first.to_h]),
-        user_id
+        user_id,
       ])
     end
   end
