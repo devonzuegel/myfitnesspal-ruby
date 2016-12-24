@@ -15,6 +15,10 @@ environment =
 
 Sidekiq::Web.set :session_secret, environment.secret
 
+map '/summary' do
+  run API::Routes::Summary.new(API::Env::Wrapper.new(environment))
+end
+
 map '/users' do
   run API::Routes::Users.new(API::Env::Wrapper.new(environment))
 end
