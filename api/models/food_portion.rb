@@ -7,7 +7,6 @@ module API
         :description,
         :amount,
         :gram_weight,
-        :serialized,
         :food_id
       )
     end

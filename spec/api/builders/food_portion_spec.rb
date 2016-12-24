@@ -11,8 +11,7 @@ describe API::Builders::FoodPortion, :db, :food_entry_packet do
       description:    'dummy description',
       brand:          'dummy brand',
       calories:       1.0,
-      grams:          1.0,
-      serialized:     'x' * 50
+      grams:          1.0
     )
   end
 
@@ -33,10 +32,7 @@ describe API::Builders::FoodPortion, :db, :food_entry_packet do
         description:   'extra large (1-5/8" dia)',
         food_id:       3,
         gram_weight:   27.0,
-        options_index: 0,
-        serialized:    "---\n:amount: 1.0\n:description: extra large (1-5/8\" dia)\n:"         \
-                       "fraction_int: 0\n:gram_weight: 27.0\n:is_fraction: 0\n:options_index:" \
-                       " 0\n:food_id: 3\n"
+        options_index: 0
     }
 
     expect(output).to eql(expected_output)

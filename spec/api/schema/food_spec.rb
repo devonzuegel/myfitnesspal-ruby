@@ -5,8 +5,7 @@ describe API::Schema::Food::Creation do
       description:    'dummy description',
       brand:          'dummy brand',
       calories:       1.0,
-      grams:          1.0,
-      serialized:     'x' * 50
+      grams:          1.0
     }
   end
 
@@ -27,7 +26,7 @@ describe API::Schema::Food::Creation do
   end
 
   context 'invalid valid_input' do
-    let(:str_keys) { %i[description brand serialized] }
+    let(:str_keys) { %i[description brand] }
     let(:flt_keys) { %i[calories grams] }
     let(:int_keys) { %i[master_food_id] }
     let(:required) { str_keys + flt_keys + int_keys }
@@ -42,12 +41,6 @@ describe API::Schema::Food::Creation do
         expect(described_class.call(input).success?).to be(false)
         expect(described_class.call(input).output).to eql({})
       end
-    end
-
-    it 'enforces minimum length of 50 for :serialized' do
-      input = without(valid_input, :serialized)
-      expect(described_class.call(input).messages)
-        .to eql(serialized: ['is missing', 'size cannot be less than 50'])
     end
 
     it 'requires keys to be of expected types' do
@@ -65,17 +58,6 @@ describe API::Schema::Food::Creation do
         input = valid_input.merge(key => 'xxx')
         expect(described_class.call(input).success?).to be(false)
       end
-    end
-
-    it 'enforces minimum length of 50 for :serialized' do
-      input = valid_input.merge(serialized: 'abcd')
-      expect(described_class.call(input).success?).to be(false)
-    end
-
-    it 'enforces minimum length of 50 AND str? for :serialized' do
-      input = valid_input.merge(serialized: 123)
-      expect(described_class.call(input).messages)
-        .to eql(serialized: ['must be a string', 'size cannot be less than 50'])
     end
   end
 end

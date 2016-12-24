@@ -6,8 +6,7 @@ describe API::Mappers::FoodPortion, :db do
       description:    'dummy description',
       brand:          'dummy brand',
       calories:       1.0,
-      grams:          1.0,
-      serialized:     'x' * 50
+      grams:          1.0
     )
   end
 
@@ -19,7 +18,6 @@ describe API::Mappers::FoodPortion, :db do
       description:   'dummy description',
       amount:        1.0,
       gram_weight:   1.0,
-      serialized:    'x' * 50,
       food_id:       3
     }
   end
