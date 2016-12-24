@@ -7,8 +7,7 @@ module API
         :description,
         :brand,
         :calories,
-        :grams,
-        :serialized
+        :grams
       )
 
       attr_reader :id

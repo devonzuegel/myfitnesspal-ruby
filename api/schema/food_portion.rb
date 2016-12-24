@@ -17,7 +17,6 @@ module API
               required(:description).filled(:str?)
               required(:amount).filled(:float?)
               required(:gram_weight).filled(:float?)
-              required(:serialized).filled(:str?, min_size?: 50)
               required(:food_id).filled(:int?)
             end
 

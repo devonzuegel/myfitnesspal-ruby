@@ -6,7 +6,6 @@ describe API::Mappers::FoodEntry, :db do
       brand:          'dummy brand',
       calories:       1.0,
       grams:          1.0,
-      serialized:     'x' * 50,
       id:             3
     )
     db[:food_portions].insert(
@@ -15,7 +14,6 @@ describe API::Mappers::FoodEntry, :db do
       description:   'dummy description',
       amount:        1.0,
       gram_weight:   1.0,
-      serialized:    'x' * 50,
       food_id:       3
     )
     db[:users].insert(
@@ -31,7 +29,6 @@ describe API::Mappers::FoodEntry, :db do
       date:       DateTime.parse('2016-08-21'),
       meal_name:  'dummy meal name',
       quantity:   1.0,
-      serialized: 'x' * 50,
       portion_id: 2,
       user_id:    5
     }

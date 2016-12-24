@@ -6,7 +6,6 @@ module API
         :date,
         :meal_name,
         :quantity,
-        :serialized,
         :portion_id,
         :user_id
       )

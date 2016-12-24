@@ -4,7 +4,6 @@ describe API::Schema::FoodEntry::Creation do
       date:       DateTime.parse('2016-08-21'),
       meal_name:  'dummy name',
       quantity:   1.25,
-      serialized: 'x' * 50,
       portion_id: 1,
       user_id:    1
     }
@@ -28,7 +27,7 @@ describe API::Schema::FoodEntry::Creation do
 
   context 'invalid valid_input' do
     let(:date_keys) { %i[date] }
-    let(:str_keys)  { %i[meal_name serialized] }
+    let(:str_keys)  { %i[meal_name] }
     let(:flt_keys)  { %i[quantity] }
     let(:int_keys)  { %i[user_id portion_id] }
     let(:required)  { date_keys + str_keys + flt_keys + int_keys }
@@ -43,12 +42,6 @@ describe API::Schema::FoodEntry::Creation do
         expect(described_class.call(input).success?).to be(false)
         expect(described_class.call(input).output).to eql({})
       end
-    end
-
-    it 'enforces minimum length of 50 for :serialized' do
-      input = without(valid_input, :serialized)
-      expect(described_class.call(input).messages)
-        .to eql(serialized: ['is missing', 'size cannot be less than 50'])
     end
 
     it 'requires keys to be of expected types' do
@@ -71,17 +64,6 @@ describe API::Schema::FoodEntry::Creation do
     it 'enforces date format' do
       input = valid_input.merge(date: 'incorrect date format')
       expect(described_class.call(input).success?).to be(false)
-    end
-
-    it 'enforces minimum length of 50 for :serialized' do
-      input = valid_input.merge(serialized: 'abcd')
-      expect(described_class.call(input).success?).to be(false)
-    end
-
-    it 'enforces minimum length of 50 AND str? for :serialized' do
-      input = valid_input.merge(serialized: 123)
-      expect(described_class.call(input).messages)
-        .to eql(serialized: ['must be a string', 'size cannot be less than 50'])
     end
   end
 end

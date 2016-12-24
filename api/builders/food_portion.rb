@@ -33,9 +33,7 @@ module API
       private
 
       def transformed_params
-        params
-          .merge(serialized: YAML.dump(params))
-          .reject { |k| %i[fraction_int is_fraction].include?(k) }
+        params.reject { |k| %i[fraction_int is_fraction].include?(k) }
       end
 
       def consolidated_params(params, options_index, food_id)

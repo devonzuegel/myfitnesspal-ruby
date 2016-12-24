@@ -18,7 +18,6 @@ module API
               required(:brand).value(:str?)
               required(:calories).filled(:float?)
               required(:grams).filled(:float?)
-              required(:serialized).filled(:str?, min_size?: 50)
             end
 
           schema.call(params)
