@@ -60,3 +60,62 @@ $ redis-cli flushdb  # Clear Redis db
 ```bash
 $ bundle exec guard
 ```
+
+## Calculating actual calories in a food entry ##
+
+```
+actual_calories = amount * gram_weight * quantity * calories / grams
+```
+
+For example, given the following `Rice` food entry, the actual calories of this entry are `1 * 195 * 2.5 * 111 / 100 = 541.125`.
+
+```js
+[
+  {
+    "type": "FoodEntry",
+    "data": {
+      "food": {
+        "type": "Food",
+        "data": {
+          "description": "Rice - Brown, long-grain, cooked",
+          "nutrients": {
+            "calories": 111,
+            // ...
+          },
+          "portions": [
+            {
+              "type": "FoodPortion",
+              "data": {
+                "amount": 1,
+                "gram_weight": 195,
+                // ...
+              }
+            },
+            {
+              "type": "FoodPortion",
+              "data": {
+                "amount": 100,
+                "gram_weight": 100
+                // ...
+              }
+            },
+            {
+              "type": "FoodPortion",
+              "data": {
+                "amount": 1,
+                "gram_weight": 28.34950065612793
+                // ...
+              }
+            }
+          ],
+          // ...
+          "grams": 100
+        }
+      },
+      "weight_index": 0,
+      "quantity": 2.5,
+      // ...
+    }
+  }
+]
+```
