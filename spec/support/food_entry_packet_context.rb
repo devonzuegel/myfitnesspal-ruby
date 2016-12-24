@@ -17,7 +17,7 @@ RSpec.shared_context 'food entry packet', shared_context: :metadata do
       'sugar'               => 4.889999866485596,
       'trans_fat'           => 0.0,
       'vitamin_a'           => 0.23999999463558197,
-      'vitamin_c'           => 98.0
+      'vitamin_c'           => 98.0,
     }
   end
 
@@ -28,29 +28,29 @@ RSpec.shared_context 'food entry packet', shared_context: :metadata do
         description:  'extra large (1-5/8" dia)',
         fraction_int: 0,
         gram_weight:  27.0,
-        is_fraction:  0
+        is_fraction:  0,
       },
       {
         amount:       1.0,
         description:  'cup(s)',
         fraction_int: 0,
         gram_weight:  15_200.0,
-        is_fraction:  0
+        is_fraction:  0,
       },
       {
         amount:       1.0,
         description:  'large (1-3/8" dia)',
         fraction_int: 0,
         gram_weight:  18.0,
-        is_fraction:  0
+        is_fraction:  0,
       },
       {
         amount:       1.0,
         description:  'small (1" dia)',
         fraction_int: 0,
         gram_weight:  7.0,
-        is_fraction:  0
-      }
+        is_fraction:  0,
+      },
     ]
   end
 
@@ -70,14 +70,14 @@ RSpec.shared_context 'food entry packet', shared_context: :metadata do
         owner_user_master_id: 0,
         packet_type:          3,
         portions:             portions,
-        type:                 0
+        type:                 0,
       },
       date:           '2016-08-12',
       master_food_id: 5_655_946_676,
       meal_name:      '21 to 24',
       packet_type:    5,
       quantity:       15.0,
-      weight_index:   2
+      weight_index:   2,
     }
   end
 end

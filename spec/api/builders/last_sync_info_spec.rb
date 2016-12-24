@@ -84,7 +84,7 @@ describe API::Builders::LastSyncInfo, :db do
           user_property:  ['is missing'],
           user_status:    ['is missing'],
           water_entry:    ['is missing'],
-        }
+        },
       },
     )
   end

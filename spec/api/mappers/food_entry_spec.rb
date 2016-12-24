@@ -30,7 +30,7 @@ describe API::Mappers::FoodEntry, :db do
       meal_name:  'dummy meal name',
       quantity:   1.0,
       portion_id: 2,
-      user_id:    5
+      user_id:    5,
     }
   end
 

@@ -86,11 +86,5 @@ Style/SignalException:
   EnforcedStyle: semantic
 Style/SingleLineBlockParams:
   Enabled: false
-# RSpec/DescribeClass:
-#   Exclude:
-#   # In integration tests we want to describe a route not a class
-#   - spec/integration/requests/**/*.rb
-# RSpec/ExampleLength:
-#   Enabled: false
-# RSpec/VerifiedDoubles:
-#   IgnoreSymbolicNames: true
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: consistent_comma

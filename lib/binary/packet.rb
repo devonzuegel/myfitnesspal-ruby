@@ -31,7 +31,7 @@ module MFP
 
       def to_h
         {
-          packet_type: packet_type
+          packet_type: packet_type,
         }
       end
 
@@ -46,7 +46,7 @@ module MFP
           pack_short(MAGIC),
           pack_long(packed_body.length + HEADER_SIZE),
           pack_short(1), # Unknown
-          pack_short(packet_type)
+          pack_short(packet_type),
         ].join
       end
     end

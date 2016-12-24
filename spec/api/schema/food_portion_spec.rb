@@ -5,7 +5,7 @@ describe API::Schema::FoodPortion::Creation do
       description:   'dummy description',
       amount:        1.0,
       gram_weight:   1.0,
-      food_id:       1
+      food_id:       1,
     }
   end
 

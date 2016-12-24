@@ -13,8 +13,8 @@ describe API::Routes::Users, :db do
     {
       'errors' => {
         'password' => ['is missing', 'size must be within 6 - 255'],
-        'username' => ['is missing', 'size must be within 4 - 30']
-      }
+        'username' => ['is missing', 'size must be within 4 - 30'],
+      },
     }
   end
 

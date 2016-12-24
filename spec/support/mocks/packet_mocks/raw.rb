@@ -10,7 +10,7 @@ module PacketMocks
       [1].pack('s>'),
       [500].pack('l>'),
       [1].pack('s>'),
-      [1].pack('s>')
+      [1].pack('s>'),
     ].join
 
     PACKED_MAGIC = [MFP::Binary::Packet::MAGIC].pack('s>')
@@ -20,7 +20,7 @@ module PacketMocks
       "\x00\x01", # sync_pointer_count = 1
       "\x00\x02", # key = 2
       "\x00\x06", # String length = 6
-      'foobar'
+      'foobar',
     ].join
 
     def self.from_hash(json)
@@ -46,7 +46,7 @@ module PacketMocks
         pack_string(attrs.fetch(:password)),
         pack_short(attrs.fetch(:flags)),
         attrs.fetch(:installation_uuid),
-        pack_hash(attrs[:last_sync_pointers])
+        pack_hash(attrs[:last_sync_pointers]),
       ].join
     end
     private_class_method(:body_from_hash)
@@ -56,7 +56,7 @@ module PacketMocks
         PACKED_MAGIC,
         pack_long(body_length + MFP::Binary::Packet::HEADER_SIZE),
         pack_short(attrs.fetch(:unknown1)),
-        pack_short(attrs.fetch(:packet_type))
+        pack_short(attrs.fetch(:packet_type)),
       ].join
     end
     private_class_method(:headers_from_hash)

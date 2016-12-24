@@ -20,7 +20,7 @@ module MFP
           flags:                       @flags,
           is_public:                   @is_public,
           is_deleted:                  @is_deleted,
-          mets:                        @mets
+          mets:                        @mets,
         }
       end
 

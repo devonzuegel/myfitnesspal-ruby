@@ -7,7 +7,7 @@ describe API::Mappers::Food, :db do
       brand:          'dummy brand',
       calories:       1.0,
       grams:          1.0,
-      id:             -1
+      id:             -1,
     }
   end
 

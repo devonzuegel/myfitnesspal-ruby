@@ -56,7 +56,7 @@ module MFP
       def split(str, str1_len)
         [
           str.slice(0, str1_len),
-          str.slice(str1_len, str.length) || ''
+          str.slice(str1_len, str.length) || '',
         ]
       end
     end

@@ -5,7 +5,7 @@ describe API::Schema::Food::Creation do
       description:    'dummy description',
       brand:          'dummy brand',
       calories:       1.0,
-      grams:          1.0
+      grams:          1.0,
     }
   end
 

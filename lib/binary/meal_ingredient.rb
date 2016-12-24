@@ -14,7 +14,7 @@ module MFP
           fraction_int:         @fraction_int,
           is_fraction:          @is_fraction,
           quantity:             @quantity,
-          weight_index:         @weight_index
+          weight_index:         @weight_index,
         }
       end
 

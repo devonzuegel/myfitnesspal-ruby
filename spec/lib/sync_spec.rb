@@ -11,7 +11,7 @@ describe MFP::Sync do
       'measurement'             => '2016-08-13 01:10:27 UTC',
       'user_property'           => '2016-07-03 22:20:44 UTC',
       'user_status'             => '',
-      'water_entry'             => '2014-12-25 01:20:59 UTC'
+      'water_entry'             => '2014-12-25 01:20:59 UTC',
     }
   end
 

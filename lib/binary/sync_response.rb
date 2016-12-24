@@ -77,7 +77,7 @@ module MFP
         {
           0 => 'Authenticated successfully',
           1 => 'Invalid registration',
-          2 => 'Authentication failed'
+          2 => 'Authentication failed',
         }.freeze
       private_constant(:STATUS_MSGS)
     end

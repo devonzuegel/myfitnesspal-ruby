@@ -13,7 +13,7 @@ module PacketMocks
       password:           'passw0rd',
       flags:              0x5,
       installation_uuid:  MFP::Binary::Packet.generate_uuid,
-      last_sync_pointers: {}
+      last_sync_pointers: {},
     }.freeze
 
     SYNC_REQUEST_UPDATED = SYNC_REQUEST_DEFAULT.merge(
@@ -25,7 +25,7 @@ module PacketMocks
       password:           'hello_world',
       last_sync_pointers: {
         'key1' => 'value1',
-        'key2' => 'value2'
+        'key2' => 'value2',
       }
     )
   end

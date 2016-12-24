@@ -13,7 +13,7 @@ module MFP
           gram_weight:  @gram_weight,
           description:  @description,
           fraction_int: @fraction_int,
-          is_fraction:  @is_fraction
+          is_fraction:  @is_fraction,
         }
       end
 

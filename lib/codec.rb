@@ -65,7 +65,7 @@ module MFP
         magic_number: read_magic_number,
         length:       read_4_byte_int,
         unknown1:     read_2_byte_int,
-        type:         read_2_byte_int
+        type:         read_2_byte_int,
       }
     end
 

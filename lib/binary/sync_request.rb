@@ -64,7 +64,7 @@ module MFP
           pack_string(@password),
           pack_short(@flags),
           ("\x00" * 16).b, # Any uuid of 16 arbitrary bytes will work
-          pack_hash(@last_sync_pointers, pack_key: -> (str) { pack_string(str) })
+          pack_hash(@last_sync_pointers, pack_key: -> (str) { pack_string(str) }),
         ].join.b
       end
     end
