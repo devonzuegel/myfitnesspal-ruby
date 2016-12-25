@@ -36,6 +36,8 @@ group :test do
   gem 'reek',            '~> 4.1'
   gem 'rubocop-rspec',   git: 'https://github.com/nevir/rubocop-rspec'
   gem 'mutant-rspec',    git: 'https://github.com/mbj/mutant.git'
+  gem 'pry'
+  gem 'pry-byebug'
 end
 
 group :tools do
