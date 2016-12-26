@@ -19,6 +19,7 @@ gem 'awesome_print',   '1.6.1'
 gem 'pg',              '0.18.4'
 gem 'sequel',          '4.37.0'
 gem 'dry-validation',  '0.9.5'
+gem 'i18n'
 
 gem 'rom',             '2.0.0'
 gem 'rom-repository',  '0.3.1'
