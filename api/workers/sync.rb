@@ -19,17 +19,17 @@ module API
 
         packets = sync.all_packets
 
-        Builders::LastSyncInfo.call({
-          user_id: user_id,
-          date:    DateTime.now,
-          ptrs:    sync.last_sync_pointers,
-        }, repo(repo_uri))
-
         Builders::Sync.call(
           packets.reverse,
           user_id,
           repo(repo_uri)
         )
+
+        Builders::LastSyncInfo.call({
+          user_id: user_id,
+          date:    DateTime.now,
+          ptrs:    sync.last_sync_pointers,
+        }, repo(repo_uri))
       end
     end
   end
